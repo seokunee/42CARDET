@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 14:56:05 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/04/21 18:47:39 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/04/21 18:43:58 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/04/21 18:45:14 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+static void	ft_print_number(int n)
+{
+	char	left;
 
-# define ERR -1
-# define TRUE 1
-# define FALSE 0
+	if (n > 9)
+		ft_print_number(n / 10);
+	left = '0' + n % 10;
+	write(1, &left, 1);
+}
 
-int		ft_strlen(const char *s);
-void	ft_putnbr(int n);
-
-
-#endif
+void	ft_putnbr(int n)
+{
+	if (n == -2147483648)
+		write(1, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			n *= -1;
+			write(1, "-", 1);
+		}
+		ft_print_number(n);
+	}
+}

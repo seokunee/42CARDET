@@ -6,52 +6,32 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:26:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/04/19 19:10:45 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:36:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_find_percent(const char *format)
+void	parse_version(va_list ap, char *format, int idx)
 {
-	int count;
-	int	i;
+	
+	if (format[idx + 1] == 'c')
+		ft_putchar(va_arg(ap, char));
+	else if (format[idx + 1] == 's')
+		ft_putstr(va_arg(ap, (char *)));
+	else if (format[idx + 1] == 'p')
 
-	i = 0;
-	count = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			count++;
-			if (format[i + 1])
-				i += 2;
-		}
-		else
-			i++;
-	}
-	return (count);
-}
+	else if (format[idx + 1] == 'd')
 
-void	parse_version(va_list ap, char *format)
-{
-	if (format[i + 1] == 'c')
+	else if (format[idx + 1] == 'idx')
+		ft_putnbr(va_arg(ap, int))
+	else if (format[idx + 1] == 'u')
+		ft_putnbr(va_arg(ap, int))
+	else if (format[idx + 1] == 'x')
 
-	else if (format[i + 1] == 's')
+	else if (format[idx + 1] == 'X')
 
-	else if (format[i + 1] == 'p')
-
-	else if (format[i + 1] == 'd')
-
-	else if (format[i + 1] == 'i')
-
-	else if (format[i + 1] == 'u')
-
-	else if (format[i + 1] == 'x')
-
-	else if (format[i + 1] == 'X')
-
-	else if (format[i + 1] == '%')
+	else if (format[idx + 1] == '%')
 
 }
 
@@ -68,24 +48,23 @@ int ft_printf(const char *format, ...)
 	va_start(ap, count);
 	while (format[i])
 	{
-		if (format[i] == '%')
-		{
-			len = parse_version(ap, &format[i]);
-			i += len;
-		}
+		if (format == '%')
+			parse_version(format, ap, i);
 		else
-		{
 			write(1, &format[i], 1);
-			i++;
-		}
+		i++;
 	}
 	va_end(ap);
+	return (1)
 }
 
 #include <stdio.h>
 int main(void)
 {
 	char str[] = "hello %s nice % to m%e%et you!";
-	
-	printf("%d\n", ft_find_percent(str));
+	int	n;
+
+	n = printf("%d%s\n", 1234, "4567");
+	printf("%d\n", n);
+	// n = ft_printf("안녕하세요 제 나이는 %d", 10, 10);
 }
