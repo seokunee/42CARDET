@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:37:31 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/05/24 13:56:42 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/05/30 20:38:01 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putstr_fd(char *s)
+void	ft_putstr(char *s)
 {
 	unsigned int	i;
 
@@ -61,7 +61,7 @@ void	ft_putnbr(int n)
 	}
 }
 
-void	ft_putchar(char c)
+void	ft_putchar(unsigned char c)
 {
 	write(1, &c, 1);
 }
