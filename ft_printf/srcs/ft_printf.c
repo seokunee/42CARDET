@@ -6,61 +6,62 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:26:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/05/30 20:29:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:44:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	parse_version(va_list ap, char *format, int *idx)
-{	
+void	parse_version(va_list ap, const char *format, int *idx, unsigned int *len)
+{
 	if (format[*idx + 1] == 'c')
-		ft_putchar(va_arg(ap, int));
+		ft_putchar(va_arg(ap, int), len);
 	else if (format[*idx + 1] == 's')
-		ft_putstr(va_arg(ap, unsigned long));
+		ft_putstr((char *)va_arg(ap, unsigned long), len);
 	else if (format[*idx + 1] == 'p')
-		hex_lower_printf(va_arg(ap, unsigned long));
+	{
+		hex_address_printf(va_arg(ap, unsigned long), len);
+		(*len) += 2;
+	}
 	else if (format[*idx + 1] == 'd')
 		ft_putnbr(va_arg(ap, int));
 	else if (format[*idx + 1] == 'i')
 		ft_putnbr(va_arg(ap, int));
 	else if (format[*idx + 1] == 'u')
-		ft_putunnbr(va_arg(ap, unsigned int));
+		ft_putunnbr(va_arg(ap, unsigned int), len);
 	else if (format[*idx + 1] == 'x')
-		(va_arg(ap, unsigned int));
+		hex_x_printf(va_arg(ap, unsigned int), len);
 	else if (format[*idx + 1] == 'X')
-		(va_arg(ap, unsigned int));
+		hex_X_printf(va_arg(ap, unsigned int), len);
 	else if (format[*idx + 1] == '%')
 		write(1, "%", 1);
+	else
+		return ;
+	(*idx)++;
 }
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	ap;
-	int		i;
+	va_list			ap;
+	int				i;
+	unsigned int	len;
 
 	i = 0;
+	len = 0;
+	if (format == NULL)
+        return (-1);
 	va_start(ap, format);
 	while (format[i])
 	{
-		if (format == '%')
-			parse_version(format, ap, &i);
+		if (format[i] == '%')
+			parse_version(ap, format, &i, &len);
 		else
+		{
 			write(1, &format[i], 1);
+			len++;
+		}
 		i++;
 	}
 	va_end(ap);
-	return (1);
-}
-
-#include <stdio.h>
-int main(void)
-{
-	char str[] = "hello %s nice to meet you! i am %d years old!";
-	int	n;
-
-	n = printf("%d%s\n", "seokchoi", 26);
-	printf("%d\n", n);
-	// n = ft_printf("안녕하세요 제 나이는 %d", 10, 10);
-	return (0);
+	return (len);
 }

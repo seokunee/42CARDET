@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:56:05 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/05/30 20:37:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:46:19 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # define TRUE 1
 # define FALSE 0
 
-int		ft_strlen(const char *s);
+void	ft_putchar(unsigned char c, unsigned int *len);
 void	ft_putnbr(int n);
-void	ft_putchar(unsigned char c);
-void	ft_putstr(char *s);
-void	ft_putunnbr(unsigned int n);
-void	hex_lower_printf(unsigned long address);
-void	hex_upper_printf(unsigned long address);
+void	ft_putstr(char *s, unsigned int *len);
+void	ft_putunnbr(unsigned int n, unsigned int *len);
+void	hex_address_printf(unsigned long address, unsigned int *len);
+void	hex_X_printf(unsigned int address, unsigned int *len);
+void	hex_x_printf(unsigned int address, unsigned int *len);
 
 #endif

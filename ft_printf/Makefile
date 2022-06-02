@@ -6,40 +6,32 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/05/30 18:54:37 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/06/03 00:33:20 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = ft_printf.c functions.c
+SRCS    = ft_printf.c flag_c.c flag_di.c flag_p.c flag_u.c flag_x.c flag_xx.c
+SOURCE	= srcs/
 OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = libftprintf.a
 HEAD	= includes
 
-ifdef WITH_B
-	OBJECTS = $(OBJS) $(OBJS_BONUS)
-else
-	OBJECTS = $(OBJS)
-endif
-
 all :		${NAME}
 
-.c.o:		${SRCS} $(SRCS_BONUS)
-			${CC} ${CFLAGS} -I ${HEAD} -c $^
+.c.o:		${SRCS}
+			${CC} ${CFLAGS} -I ${HEAD} -c $^ -o ${^:.c=.o}
 
-${NAME}:	${OBJECTS}
-			ar -rcs $@ ${OBJECTS}
-
-bonus:
-			@make WITH_B=1 all
+${NAME}:	${OBJS}
+			ar -rcs $@ ${OBJS}
 
 clean:
-			rm -f ${OBJS} ${OBJS_BONUS}
+			rm -f ${OBJS}
 
 fclean:		clean
 			rm -f ${NAME}
 
 re:			fclean all
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re
