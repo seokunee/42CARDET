@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/06/03 00:33:20 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/06/03 20:02:21 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = ft_printf.c flag_c.c flag_di.c flag_p.c flag_u.c flag_x.c flag_xx.c
+SRCS    = ft_printf.c flag_c.c flag_s.c flag_di.c flag_p.c flag_u.c flag_x.c flag_xx.c ft_strchar.c
 SOURCE	= srcs/
 OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}}
 CC		= gcc

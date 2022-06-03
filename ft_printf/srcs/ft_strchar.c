@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_c.c                                           :+:      :+:    :+:   */
+/*   ft_strchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/03 00:49:29 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 20:14:50 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/06/03 19:12:44 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/06/03 19:14:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	ft_putchar(unsigned char c, unsigned int *len)
+char	*ft_strchr(const char *s, int c)
 {
-	write(1, &c, 1);
-	(*len)++;
+	unsigned int	i;
+	unsigned char	a;
+
+	a = (unsigned char)c;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == a)
+			return ((char *)(s + i));
+		i++;
+	}
+	if (!c)
+		return ((char *)(s + i));
+	return (0);
 }

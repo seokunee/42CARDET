@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 00:31:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 00:34:18 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 01:21:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@ void	hex_address_printf(unsigned long address, unsigned int *len)
 		hex_address_printf(address / 16, len);
 	write(1, &hex[address % 16], 1);
 	(*len)++;
+}
+
+void	ft_putaddress(unsigned long address, unsigned int *len)
+{
+	write(1, "0x", 2);
+	hex_address_printf(address, len);
 }

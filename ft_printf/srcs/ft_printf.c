@@ -6,38 +6,35 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:26:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 15:44:55 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 01:21:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	parse_version(va_list ap, const char *format, int *idx, unsigned int *len)
+void	parse_version(va_list *ap, const char *format, int *idx, unsigned int *len)
 {
-	if (format[*idx + 1] == 'c')
-		ft_putchar(va_arg(ap, int), len);
-	else if (format[*idx + 1] == 's')
-		ft_putstr((char *)va_arg(ap, unsigned long), len);
-	else if (format[*idx + 1] == 'p')
+	if (format[*idx] == 'c')
+		ft_putchar(va_arg(*ap, int), len);
+	else if (format[*idx] == 's')
+		ft_putstr((char *)va_arg(*ap, unsigned long), len);
+	else if (format[*idx] == 'p')
 	{
-		hex_address_printf(va_arg(ap, unsigned long), len);
+		ft_putaddress(va_arg(*ap, unsigned long), len);
 		(*len) += 2;
 	}
-	else if (format[*idx + 1] == 'd')
-		ft_putnbr(va_arg(ap, int));
-	else if (format[*idx + 1] == 'i')
-		ft_putnbr(va_arg(ap, int));
-	else if (format[*idx + 1] == 'u')
-		ft_putunnbr(va_arg(ap, unsigned int), len);
-	else if (format[*idx + 1] == 'x')
-		hex_x_printf(va_arg(ap, unsigned int), len);
-	else if (format[*idx + 1] == 'X')
-		hex_X_printf(va_arg(ap, unsigned int), len);
-	else if (format[*idx + 1] == '%')
+	else if (format[*idx] == 'd')
+		ft_putnbr(va_arg(*ap, int));
+	else if (format[*idx] == 'i')
+		ft_putnbr(va_arg(*ap, int));
+	else if (format[*idx] == 'u')
+		ft_putunnbr(va_arg(*ap, unsigned int), len);
+	else if (format[*idx] == 'x')
+		hex_x_printf(va_arg(*ap, unsigned int), len);
+	else if (format[*idx] == 'X')
+		hex_X_printf(va_arg(*ap, unsigned int), len);
+	else if (format[*idx] == '%')
 		write(1, "%", 1);
-	else
-		return ;
-	(*idx)++;
 }
 
 int	ft_printf(const char *format, ...)
@@ -53,8 +50,11 @@ int	ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
-			parse_version(ap, format, &i, &len);
+		if (format[i] == '%'  && ft_strchr("cspdiuxX%", format[i + 1]) != 0)
+		{
+			i++;
+			parse_version(&ap, format, &i, &len);
+		}
 		else
 		{
 			write(1, &format[i], 1);
