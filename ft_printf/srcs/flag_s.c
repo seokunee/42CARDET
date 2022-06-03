@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_di.c                                          :+:      :+:    :+:   */
+/*   flag_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 15:37:31 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 01:27:57 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/06/02 15:45:21 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/06/04 01:18:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_print_number(int n, unsigned int *len)
+void	ft_putstr(char *s, unsigned int *len)
 {
-	char	left;
+	unsigned int	i;
 
-	if (n > 9)
-		ft_print_number(n / 10, len);
-	left = '0' + n % 10;
-	write(1, &left, 1);
-	(*len)++;
-}
-
-void	ft_putnbr(int n, unsigned int *len)
-{
-	if (n == -2147483648)
+	i = 0;
+	if (!s)
 	{
-		write(1, "-2147483648", 11);
-		*len += 11; 
+		write(1, "(null)", 6);
+		*len += 6;
+		return ;
 	}
-	else
+	while (s[i])
 	{
-		if (n < 0)
-		{
-			n *= -1;
-			write(1, "-", 1);
-			(*len)++;
-		}
-		ft_print_number(n, len);
+		write(1, &s[i], 1);
+		i++;
 	}
+	*len += i;
 }

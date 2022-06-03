@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:26:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 01:21:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 01:29:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	parse_version(va_list *ap, const char *format, int *idx, unsigned int *len)
 		ft_putaddress(va_arg(*ap, unsigned long), len);
 		(*len) += 2;
 	}
-	else if (format[*idx] == 'd')
-		ft_putnbr(va_arg(*ap, int));
-	else if (format[*idx] == 'i')
-		ft_putnbr(va_arg(*ap, int));
+	else if (format[*idx] == 'd' || format[*idx] == 'i')
+		ft_putnbr(va_arg(*ap, int), len);
 	else if (format[*idx] == 'u')
 		ft_putunnbr(va_arg(*ap, unsigned int), len);
 	else if (format[*idx] == 'x')
@@ -34,7 +32,7 @@ void	parse_version(va_list *ap, const char *format, int *idx, unsigned int *len)
 	else if (format[*idx] == 'X')
 		hex_X_printf(va_arg(*ap, unsigned int), len);
 	else if (format[*idx] == '%')
-		write(1, "%", 1);
+		ft_putchar('%', len);
 }
 
 int	ft_printf(const char *format, ...)
