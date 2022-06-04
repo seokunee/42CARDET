@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:37:31 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 01:27:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 20:40:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_putnbr(int n, unsigned int *len)
 	if (n == -2147483648)
 	{
 		write(1, "-2147483648", 11);
-		*len += 11; 
+		*len += 11;
 	}
 	else
 	{
