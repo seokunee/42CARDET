@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:12:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/29 17:36:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:39:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../mlx/mlx.h" /* MiniLibX */
 # include "../libft/libft.h" /* libft */
+# include "get_next_line.h"
 # include <stdlib.h> /* exit, malloc, free */
 # include <unistd.h>  /* write, close, read*/
 # include <fcntl.h> /* open */
@@ -29,6 +30,13 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+
+typedef struct		game_s
+{
+	int		width;
+	int		height;
+	char	*map;
+}					game_t;
 
 // typedef struct		mlx_ptr_s
 // {

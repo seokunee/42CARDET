@@ -6,46 +6,11 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/29 21:35:11 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:15:59 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
-# include "get_next_line.h"
-# include "../mlx/mlx.h" /* MiniLibX */
-// void	key_press()
-// {
-// 	if ()
-// 	{
-		
-// 	}
-// }
-
-
-static void	ft_print_number(int n, int fd)
-{
-	char	left;
-
-	if (n > 9)
-		ft_print_number(n / 10, fd);
-	left = '0' + n % 10;
-	write(fd, &left, 1);
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
-	{
-		if (n < 0)
-		{
-			n *= -1;
-			write(fd, "-", 1);
-		}
-		ft_print_number(n, fd);
-	}
-}
 
 int	press(int key, void *params)
 {
@@ -55,18 +20,64 @@ int	press(int key, void *params)
 	return (0);
 }
 
-void	read_map(char *filename)
+char	*ft_strjoin_without_nl(char const *s1, char const *s2)
 {
-	int	fd;
-	
-	fd = open(filename, O_RDONLY);
-	get_next_line(fd);
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
+		return (0);
+	i = 0;
+	j = 0;
+	while (j < s1_len && s1[j] != '\n')
+		str[i++] = s1[j++];
+	j = 0;
+	while (j < s2_len && s2[j] != '\n')
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
 }
 
-int	main()
+void	read_map(char *filename, game_t *game)
 {
-	void *mlx;
-	void *win;
+	int		fd;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	if (!line)
+	{
+		game->map = NULL;
+		return ;
+	}
+	game->height = 0;
+	game->width = ft_strlen(line) - 1;
+	game->map = ft_strdup(line);
+	free(line);
+	while (line)
+	{
+		// printf("%s\n", game->map);
+		line = get_next_line(fd);
+		game->height++;
+		if (line)
+		{
+			game->map = ft_strjoin(game->map , line);
+			free(line);
+		}
+	}
+	close(fd);
+}
+
+void	image_to_map(void *mlx, void*win)
+{
 	void *img_collectible;
 	void *img_empty;
 	void *img_exit;
@@ -74,20 +85,39 @@ int	main()
 	void *img_wall;
 	int img_width;
 	int img_height;
-	
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "my_mlx");
+
+	img_width = 128;
+	img_height = 128;
+
 	img_collectible = mlx_xpm_file_to_image(mlx, "./images/collectible.xpm", &img_width, &img_height);
 	img_empty = mlx_xpm_file_to_image(mlx, "./images/empty.xpm", &img_width, &img_height);
 	img_exit = mlx_xpm_file_to_image(mlx, "./images/exit.xpm", &img_width, &img_height);
 	img_player = mlx_xpm_file_to_image(mlx, "./images/player.xpm", &img_width, &img_height);
 	img_wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_width, &img_height);
+
 	mlx_put_image_to_window(mlx, win, img_collectible, 0, 0);
-	mlx_put_image_to_window(mlx, win, img_empty, 64, 0);
-	mlx_put_image_to_window(mlx, win, img_exit, 128, 0);
-	mlx_put_image_to_window(mlx, win, img_player, 192, 64);
-	mlx_put_image_to_window(mlx, win, img_wall, 0, 64);
-	// // mlx_key_hook(win_ptr, press, (void *)0);
+	mlx_put_image_to_window(mlx, win, img_empty, 16, 0);
+	mlx_put_image_to_window(mlx, win, img_exit, 32, 0);
+	mlx_put_image_to_window(mlx, win, img_player, 48, 32);
+	mlx_put_image_to_window(mlx, win, img_wall, 0, 32);
+}
+
+int	main(int ac, char **av)
+{
+	void *mlx;
+	void *win;
+	
+	game_t game;
+
+	if (ac != 2)
+		return (0);
+	read_map(av[1], &game);
+	
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 500, 500, "my_mlx");
+
+	// image_to_map(mlx, win);
+	// mlx_key_hook(win_ptr, press, (void *)0);
 	mlx_loop(mlx);
 	return (0);
 }

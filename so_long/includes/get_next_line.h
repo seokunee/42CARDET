@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:41:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 01:25:31 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:52:50 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>

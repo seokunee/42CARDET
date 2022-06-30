@@ -6,13 +6,14 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/06/29 22:07:13 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/06/30 19:50:17 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = so_long.c
+SRCS    = so_long.c get_next_line.c
 SOURCE	= srcs/
 OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}}
+ADDSRCS = ${addprefix ${SOURCE},${SRCS}}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = so_long
@@ -24,14 +25,13 @@ all:		${NAME}
 # all:
 # 			arch -x86_64 gcc -L./mlx -lmlx -framework OpenGL -framework AppKit srcs/so_long.c
 # 			./a.out
-#			-Llibft -lft
 
 .c.o:		${SRCS}
 			${CC} ${CFLAGS} -I ${HEAD} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-#			arch -x86_64 make all -C ${LIBFT}/ -L./libft -lft
-			arch -x86_64 $(CC) -o $(NAME) $(OBJS) -L./mlx -lmlx -framework OpenGL -framework AppKit 
+			arch -x86_64 make all -C ${LIBFT}/ 
+			arch -x86_64 $(CC) -I $(HEAD) -o $(NAME) ${ADDSRCS} -L ./libft -lft -L./mlx -lmlx -framework OpenGL -framework AppKit 
 			
 clean:
 			make clean -C ${LIBFT}/
