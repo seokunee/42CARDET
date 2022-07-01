@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 21:15:59 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:37:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	read_map(char *filename, game_t *game)
 	free(line);
 	while (line)
 	{
-		// printf("%s\n", game->map);
 		line = get_next_line(fd);
 		game->height++;
 		if (line)
@@ -86,12 +85,9 @@ void	image_to_map(void *mlx, void*win)
 	int img_width;
 	int img_height;
 
-	img_width = 128;
-	img_height = 128;
-
 	img_collectible = mlx_xpm_file_to_image(mlx, "./images/collectible.xpm", &img_width, &img_height);
 	img_empty = mlx_xpm_file_to_image(mlx, "./images/empty.xpm", &img_width, &img_height);
-	img_exit = mlx_xpm_file_to_image(mlx, "./images/exit.xpm", &img_width, &img_height);
+	img_exit = mlx_xpm_file_to_image(mlx, "./images/exit2.xpm", &img_width, &img_height);
 	img_player = mlx_xpm_file_to_image(mlx, "./images/player.xpm", &img_width, &img_height);
 	img_wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_width, &img_height);
 
@@ -112,11 +108,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	read_map(av[1], &game);
-	
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 500, 500, "my_mlx");
 
-	// image_to_map(mlx, win);
+	image_to_map(mlx, win);
 	// mlx_key_hook(win_ptr, press, (void *)0);
 	mlx_loop(mlx);
 	return (0);
