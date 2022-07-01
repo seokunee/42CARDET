@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 23:37:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/01 19:11:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ char	*ft_strjoin_without_nl(char const *s1, char const *s2)
 void	read_map(char *filename, game_t *game)
 {
 	int		fd;
+
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	line = get_next_line(fd);
-	if (!line)
+	if (!line) // norm 걸리면
 	{
 		game->map = NULL;
 		return ;
@@ -96,6 +97,37 @@ void	image_to_map(void *mlx, void*win)
 	mlx_put_image_to_window(mlx, win, img_exit, 32, 0);
 	mlx_put_image_to_window(mlx, win, img_player, 48, 32);
 	mlx_put_image_to_window(mlx, win, img_wall, 0, 32);
+}
+
+int	filename_check(char *filename)
+{
+	if (!filename)
+		return (0);
+	if (ft_strlen(filename) < 5)
+		return (0);
+	if (filename[ft_strlen(filename) -4] != '.' || filename[ft_strlen(filename) -3] != 'b' || \
+					filename[ft_strlen(filename) -2] != 'e' ||filename[ft_strlen(filename) -1] != 'r')
+		return (0);
+	return (1);
+}
+
+int	check_map(game_t *game)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(game->map);
+
+	// 길이 체크
+
+	// 벽 모두 1인지 체크
+
+	//
+	while ((game->map)[i])
+	{
+
+	}
 }
 
 int	main(int ac, char **av)
