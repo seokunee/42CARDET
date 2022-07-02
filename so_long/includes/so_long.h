@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:12:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 20:39:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/02 18:16:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ typedef struct		game_s
 	int		width;
 	int		height;
 	char	*map;
+	int		collectible;
+	int		exit;
+	int		player;
+	int		empty;
 }					game_t;
 
 // typedef struct		mlx_ptr_s
