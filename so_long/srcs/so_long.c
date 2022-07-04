@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/03 17:00:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 14:37:06 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	throw_error(char *message)
 void	check_filename(const char *filename)
 {
 	if (!filename)
-		throw_error("The file does not exist.");
-	if (ft_strlen(filename) < 5)
-		throw_error("Not a valid file");
+		throw_error("The file does not exist.\n");
+	if (ft_strlen(filename) < 5) // 근데 이건 집고 넘어가야할 부분임. 그냥 파일 이름이 .ber 이면 어떡하나.
+		throw_error("Not a valid file.n");
 	if (filename[ft_strlen(filename) - 4] != '.' || filename[ft_strlen(filename) - 3] != 'b' || \
 					filename[ft_strlen(filename) - 2] != 'e' ||filename[ft_strlen(filename) - 1] != 'r')
-		throw_error("Not a valid file type.");
+		throw_error("Not a valid file type.\n");
 }
 
-int	press(int key, void *params)
+int	key_press(int key, void *params)
 {
 	int *a;
 	a = (int *)params;
@@ -68,10 +68,14 @@ void	count_element(game_t *game, char c)
 {
 	if (c == 'P')
 		game->player++;
-	if (c == 'E')
+	else if (c == 'E')
 		game->exit++;
-	if (c == 'C')
+	else if (c == 'C')
 		game->collectible++;
+	else if (c == '1' || c == '0')
+		;
+	else
+		throw_error("The map is invalid.\n");
 }
 
 void	read_map(const char *filename, game_t *game)
@@ -97,36 +101,40 @@ void	read_map(const char *filename, game_t *game)
 			game->map = ft_strjoin_without_nl(game->map , line);
 			if (((int)ft_strlen(line) - 1 != game->width && ft_strchr(line, '\n')) \
 					|| ((int)ft_strlen(line) != game->width && !ft_strchr(line, '\n'))) // 길이 체크
-				throw_error("Invalid map.7");
+				throw_error("The map is not rectangular.\n");
 			free(line);
 		}
 	}
 	close(fd);
 }
 
-void	image_to_map(void *mlx, void*win)
+void	draw_map(void *mlx, void *win, game_t *game, img_t *image)
 {
-	void *img_collectible;
-	void *img_empty;
-	void *img_exit;
-	void *img_player;
-	void *img_wall;
-	int img_width;
-	int img_height;
+	int	i;
+	int	x;
+	int	y;
 
-	img_collectible = mlx_xpm_file_to_image(mlx, "./images/collectible.xpm", &img_width, &img_height);
-	img_empty = mlx_xpm_file_to_image(mlx, "./images/empty.xpm", &img_width, &img_height);
-	img_exit = mlx_xpm_file_to_image(mlx, "./images/exit2.xpm", &img_width, &img_height);
-	img_player = mlx_xpm_file_to_image(mlx, "./images/player.xpm", &img_width, &img_height);
-	img_wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_width, &img_height);
-
-	mlx_put_image_to_window(mlx, win, img_collectible, 0, 0);
-	mlx_put_image_to_window(mlx, win, img_empty, IMAGE_SIZE, 0);
-	mlx_put_image_to_window(mlx, win, img_exit, 2* IMAGE_SIZE, 0);
-	mlx_put_image_to_window(mlx, win, img_player, 3 * IMAGE_SIZE, 2* IMAGE_SIZE);
-	mlx_put_image_to_window(mlx, win, img_wall, 0, 2* IMAGE_SIZE);
+	i = -1;
+	while ((game->map)[++i])
+	{
+		x = (i % game->width) * IMAGE_SIZE;
+		y = (i / game->width) * IMAGE_SIZE;
+		if ((game->map)[i] == '0')
+			mlx_put_image_to_window(mlx, win, image->img_empty, x, y);
+		else 
+		{
+			mlx_put_image_to_window(mlx, win, image->img_empty, x, y);
+			if((game->map)[i] == '1')
+				mlx_put_image_to_window(mlx, win, image->img_wall, x, y);
+			else if ((game->map)[i] == 'P')
+				mlx_put_image_to_window(mlx, win, image->img_player, x, y);
+			else if ((game->map)[i] == 'C')
+				mlx_put_image_to_window(mlx, win, image->img_collectible, x, y);
+			else if ((game->map)[i] == 'E')
+				mlx_put_image_to_window(mlx, win, image->img_exit, x, y);
+		}
+	}
 }
-
 void	check_map_round(game_t *game)
 {
 	int	i;
@@ -135,16 +143,16 @@ void	check_map_round(game_t *game)
 	while ((game->map)[i])
 	{
 		if (i / game->width == 0 && (game->map)[i] != '1') // 첫줄이 모두 1인지
-			throw_error("Invalid map.1");
+			throw_error("The top side of the map is not one\n");
 		if (i / game->width > 0 && i / game->width < game->height - 1) // 양쪽이 1인지 
 		{
 			if (i % game->width == 0 && (game->map)[i] != '1')
-				throw_error("Invalid map.2");
+				throw_error("The left side of the map is not one\n");
 			if (i % game->width == game->width - 1 && (game->map)[i] != '1')
-				throw_error("Invalid map.3");
+				throw_error("The right side of the map is not one");
 		}
 		if (i / game->width == game->height - 1 && (game->map)[i] != '1') // 마지막 줄이 모두 1인지
-			throw_error("Invalid map.4");
+			throw_error("The bottom side of the map is not one\n");
 		i++;
 	}
 }
@@ -165,10 +173,12 @@ void	check_element(game_t *game)
 	init_element(game);
 	while ((game->map)[++i])
 		count_element(game, (game->map)[i]);
-	if (game->exit != 1)
-		throw_error("Invalid map.5");
+	if (game->exit == 0)
+		throw_error("The map must have at least one exit\n");
 	if (game->player != 1)
-		throw_error("Invalid map.6");
+		throw_error("The map must have one player\n");
+	if (game->collectible == 0)
+		throw_error("The map must have at least one collectible\n");
 }
 
 void	check_map(game_t *game)
@@ -177,23 +187,36 @@ void	check_map(game_t *game)
 	check_element(game); // 장애물, 보물, 플레이어의 수가 적정한가?
 }
 
+void	init_image(void *mlx, img_t *image)
+{
+	int img_width;
+	int img_height;
+
+	image->img_collectible = mlx_xpm_file_to_image(mlx, "./images/collectible.xpm", &img_width, &img_height);
+	image->img_empty = mlx_xpm_file_to_image(mlx, "./images/empty.xpm", &img_width, &img_height);
+	image->img_exit = mlx_xpm_file_to_image(mlx, "./images/exit2.xpm", &img_width, &img_height);
+	image->img_player = mlx_xpm_file_to_image(mlx, "./images/player.xpm", &img_width, &img_height);
+	image->img_wall = mlx_xpm_file_to_image(mlx, "./images/wall.xpm", &img_width, &img_height);
+}
+
 int	main(int ac, char **av)
 {
-	void *mlx;
-	void *win;
+	void	*mlx;
+	void	*win;
 	
 	game_t	game;
 	img_t	image;
 	if (ac != 2)
-		return (0);
+		throw_error("It's not a proper argument.\n");
 	(void) av;
 	read_map(av[1], &game);
 	check_map(&game);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, game.width *64, game.height * 64, "so_long");
+	init_image(mlx, &image);
+	draw_map(mlx, win, &game, &image);
 
-	image_to_map(mlx, win);
-	// mlx_key_hook(win_ptr, press, (void *)0);
+	// mlx_key_hook(win, key_press, (void *)0);
 	mlx_loop(mlx);
 	return (0);
 }

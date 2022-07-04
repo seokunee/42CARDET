@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:12:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/02 18:16:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/03 17:00:09 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
-
+# define IMAGE_SIZE		64
 # define KEY_ESC		53
 # define KEY_W			13
 # define KEY_A			0
@@ -41,6 +41,16 @@ typedef struct		game_s
 	int		player;
 	int		empty;
 }					game_t;
+
+typedef	struct		img_s
+{
+	void *img_collectible;
+	void *img_empty;
+	void *img_exit;
+	void *img_player;
+	void *img_wall;
+}		img_t;
+
 
 // typedef struct		mlx_ptr_s
 // {
