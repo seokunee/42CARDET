@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/06/30 21:20:14 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/07/05 00:11:30 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = so_long.c get_next_line.c
+SRCS    = so_long.c get_next_line.c image.c map.c so_long_ft.c element.c move.c
 SOURCE	= srcs/
 OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}}
 ADDSRCS = ${addprefix ${SOURCE},${SRCS}}
