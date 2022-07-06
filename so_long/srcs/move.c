@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 21:57:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 02:04:18 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 03:21:41 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
-void	move_player_to_point(game_t *game, int x, int y)
+void	move_player_to_point(t_game *game, int x, int y)
 {
 	if (game->map[x + y * game->width] == 'C')
 		game->collectible--;
@@ -29,7 +29,7 @@ void	move_player_to_point(game_t *game, int x, int y)
 	write(1, "\n", 1);
 }
 
-void	move_w(game_t *game)
+void	move_w(t_game *game)
 {
 	int	x;
 	int	y;
@@ -44,12 +44,12 @@ void	move_w(game_t *game)
 		move_player_to_point(game, x, y);
 }
 
-void	move_a(game_t *game)
+void	move_a(t_game *game)
 {
 	int	x;
 	int	y;
 	int	pass;
-	
+
 	x = game->x - 1;
 	y = game->y;
 	pass = 0;
@@ -59,7 +59,7 @@ void	move_a(game_t *game)
 		move_player_to_point(game, x, y);
 }
 
-void	move_s(game_t *game)
+void	move_s(t_game *game)
 {
 	int	x;
 	int	y;
@@ -74,7 +74,7 @@ void	move_s(game_t *game)
 		move_player_to_point(game, x, y);
 }
 
-void	move_d(game_t *game)
+void	move_d(t_game *game)
 {
 	int	x;
 	int	y;

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_libft.c                                    :+:      :+:    :+:   */
+/*   so_long_ft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:50:07 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 15:08:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 02:09:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 char	*ft_strjoin_without_nl(char const *s1, char const *s2)
 {
