@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:46:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 16:58:09 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 02:00:42 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_element(game_t *game)
 	game->exit = 0;
 	game->empty = 0;
 	game->collectible = 0;
+	game->count = 0;
 }
 
 void	count_element(game_t *game, char c, int	i)

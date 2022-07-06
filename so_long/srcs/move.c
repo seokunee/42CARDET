@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 21:57:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 00:34:14 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 02:04:18 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	move_player_to_point(game_t *game, int x, int y)
 	game->map[game->x + game->y * game->width] = '0';
 	game->x = x;
 	game->y = y;
+	game->count++;
+	ft_putnbr_fd(game->count, 1);
+	write(1, "\n", 1);
 }
 
 void	move_w(game_t *game)

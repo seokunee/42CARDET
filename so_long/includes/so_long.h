@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:12:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 01:29:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 02:00:11 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		game_s
 	int		empty;
 	int		x;
 	int		y;
+	int		count;
 	
 	img_t	image;
 }					game_t;
@@ -84,19 +85,5 @@ void	move_a(game_t *game);
 void	move_s(game_t *game);
 void	move_d(game_t *game);
 void	move_player_to_point(game_t *game, int x, int y);
-
-
-
-// typedef struct		mlx_ptr_s
-// {
-//   void			*appid;
-//   mlx_win_list_t	*win_list;
-//   mlx_img_list_t	*img_list;
-//   void			(*loop_hook)(void *);
-//   void			*loop_hook_data;
-//   void			*loop_timer;
-//   mlx_img_list_t	*font;
-//   int			main_loop_active;
-// } mlx_ptr_t;
 
 #endif

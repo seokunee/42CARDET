@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:44:04 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 21:52:45 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 01:25:27 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	read_map(const char *filename, game_t *game)
 		{
 			game->map = ft_strjoin_without_nl(game->map , line);
 			if (((int)ft_strlen(line) - 1 != game->width && ft_strchr(line, '\n')) \
-					|| ((int)ft_strlen(line) != game->width && !ft_strchr(line, '\n'))) // 길이 체크
+					|| ((int)ft_strlen(line) != game->width && !ft_strchr(line, '\n')))
 				throw_error("The map is not rectangular.\n");
 			free(line);
 		}
@@ -44,8 +44,8 @@ void	read_map(const char *filename, game_t *game)
 
 void	check_map(game_t *game)
 {
-	check_map_round(game); // 둘레가 1로 되어있나?
-	check_element(game); // 장애물, 보물, 플레이어의 수가 적정한가?
+	check_map_round(game);
+	check_element(game);
 }
 
 int	draw_map(game_t *game)
@@ -84,17 +84,17 @@ void	check_map_round(game_t *game)
 	i = 0;
 	while ((game->map)[i])
 	{
-		if (i / game->width == 0 && (game->map)[i] != '1') // 첫줄이 모두 1인지
-			throw_error("The top side of the map is not one\n");
-		if (i / game->width > 0 && i / game->width < game->height - 1) // 양쪽이 1인지 
+		if (i / game->width == 0 && (game->map)[i] != '1')
+			throw_error("The top side of the map is not wall.\n");
+		if (i / game->width > 0 && i / game->width < game->height - 1)
 		{
 			if (i % game->width == 0 && (game->map)[i] != '1')
-				throw_error("The left side of the map is not one\n");
+				throw_error("The left side of the map is not wall.\n");
 			if (i % game->width == game->width - 1 && (game->map)[i] != '1')
-				throw_error("The right side of the map is not one");
+				throw_error("The right side of the map is not wall.\n");
 		}
-		if (i / game->width == game->height - 1 && (game->map)[i] != '1') // 마지막 줄이 모두 1인지
-			throw_error("The bottom side of the map is not one\n");
+		if (i / game->width == game->height - 1 && (game->map)[i] != '1')
+			throw_error("The bottom side of the map is not wall.\n");
 		i++;
 	}
 }
