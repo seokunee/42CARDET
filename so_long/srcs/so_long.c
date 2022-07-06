@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 01:54:17 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 23:42:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_filename(const char *filename)
 }
 
 int	key_press(int key, game_t *game)
-{
+{ 
 	if (key == 13)
 		move_w(game);
 	else if (key == 0)
@@ -54,6 +54,7 @@ int	main(int ac, char **av)
 	(void) av;
 	read_map(av[1], &game);
 	check_map(&game);
+	printf("%s\n", game.map);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, game.width *64, game.height * 64, "so_long");
 	init_image(game.mlx, &(game.image));
