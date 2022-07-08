@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/16 22:51:07 by seokhun           #+#    #+#             */
+/*   Updated: 2022/03/17 16:57:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int	ft_strncmp(const char *s1, const char *s2, size_t len)
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
-	{
-		if (s[i] == cc)
-			rs = &s[i];
+	if (len == 0)
+		return (0);
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < len - 1)
 		i++;
-	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

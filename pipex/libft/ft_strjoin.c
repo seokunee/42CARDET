@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/19 01:06:10 by seokhun           #+#    #+#             */
+/*   Updated: 2022/04/04 19:35:33 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
+		return (0);
 	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
-	{
-		if (s[i] == cc)
-			rs = &s[i];
-		i++;
-	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
+	j = 0;
+	while (j < s1_len)
+		str[i++] = s1[j++];
+	j = 0;
+	while (j < s2_len)
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
 }

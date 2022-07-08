@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/23 15:16:28 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/24 19:11:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
-
-	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
-		if (s[i] == cc)
-			rs = &s[i];
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
 }

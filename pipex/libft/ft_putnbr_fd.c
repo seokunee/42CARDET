@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/21 16:09:09 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/04/05 13:43:41 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+static void	ft_print_number(int n, int fd)
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	char	left;
 
-	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
+	if (n > 9)
+		ft_print_number(n / 10, fd);
+	left = '0' + n % 10;
+	write(fd, &left, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
 	{
-		if (s[i] == cc)
-			rs = &s[i];
-		i++;
+		if (n < 0)
+		{
+			n *= -1;
+			write(fd, "-", 1);
+		}
+		ft_print_number(n, fd);
 	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
 }

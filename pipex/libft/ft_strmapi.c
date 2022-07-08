@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/21 15:36:50 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/21 16:44:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	unsigned int	len;
+	unsigned int	i;
+	char			*str;
 
+	len = 0;
 	i = 0;
-	cc = (char)c;
-	rs = NULL;
+	if (!s || !f)
+		return (NULL);
+	len = (unsigned int)ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
 	while (s[i])
 	{
-		if (s[i] == cc)
-			rs = &s[i];
+		str[i] = f(i, s[i]);
 		i++;
 	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
+	str[i] = '\0';
+	return (str);
 }

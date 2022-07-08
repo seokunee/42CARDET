@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/16 23:19:05 by seokhun           #+#    #+#             */
+/*   Updated: 2022/03/29 18:41:34 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	size_t	i;
+	size_t	j;
+	size_t	lit_len;
 
 	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
+	if (!(*little))
+		return ((char *)big);
+	lit_len = ft_strlen(little);
+	while (big[i] && i < len)
 	{
-		if (s[i] == cc)
-			rs = &s[i];
+		j = 0;
+		if (big[i] == little[j])
+		{
+			while (big[i + j] == little[j] && big[i + j] \
+				&& little[j] && i + j < len)
+				j++;
+			if (j == lit_len)
+				return ((char *)(big + i));
+		}
 		i++;
 	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
+	return (0);
 }

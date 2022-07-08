@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:44:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 03:21:41 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:50:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_image(void *mlx, img_t *image)
+void	init_image(void *mlx, t_img *image)
 {
 	int	img_width;
 	int	img_height;

@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 16:41:25 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:57:03 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/15 20:10:29 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/15 20:27:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	const char	*rs;
-	char		cc;
-	size_t		i;
+	size_t	i;
+	size_t	dest_len;
+	size_t	src_len;
 
+	dest_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
 	i = 0;
-	cc = (char)c;
-	rs = NULL;
-	while (s[i])
+	if (size <= dest_len)
+		return (src_len + size);
+	while (i < size - dest_len - 1 && src[i])
 	{
-		if (s[i] == cc)
-			rs = &s[i];
+		dst[dest_len + i] = src[i];
 		i++;
 	}
-	if (s[i] == cc)
-		rs = &s[i];
-	return ((char *)rs);
+	dst[dest_len + i] = '\0';
+	return (dest_len + src_len);
 }
