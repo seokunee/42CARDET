@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 03:22:49 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 13:19:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	key_press(int key, t_game *game)
 
 static int	end_game(t_game *game)
 {
-	game->x = game->x;
+	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
 
@@ -61,6 +61,7 @@ int	main(int ac, char **av)
 		throw_error("It's not a proper argument.\n");
 	(void) av;
 	check_filename(av[1]);
+	game.height = 0;
 	read_map(av[1], &game);
 	check_map(&game);
 	game.mlx = mlx_init();
@@ -69,7 +70,7 @@ int	main(int ac, char **av)
 	init_image(game.mlx, &(game.image));
 	mlx_key_hook(game.win, key_press, &game);
 	mlx_loop_hook(game.mlx, draw_map, &game);
-	mlx_hook(game.win, 17, 0, end_game, (void *)0);
+	mlx_hook(game.win, 17, 0, end_game, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

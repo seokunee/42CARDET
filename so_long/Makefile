@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/07/08 15:18:38 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/07/09 00:43:53 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,17 @@ all:		${NAME}
 			${CC} ${CFLAGS} -I ${HEAD} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-			make all -C ${LIBFT}/ 
-			make -C $(MLX_DIR)
-			$(CC) -I $(HEAD) -o $(NAME) ${OBJS} -L ./libft -lft -L./mlx -lmlx -framework OpenGL -framework AppKit 
+			arch -x86_64 make all -C ${LIBFT}/ 
+#			make -C $(MLX_DIR)
+			arch -x86_64 $(CC) -I $(HEAD) -o $(NAME) ${ADDSRCS} -L ./libft -lft -L./mlx -lmlx -framework OpenGL -framework AppKit 
 			
 clean:
 			make clean -C ${LIBFT}/
-			make clean -C $(MLX_DIR)/
+#			make clean -C $(MLX_DIR)/
 			rm -f ${OBJS}
 
 fclean:		clean
-			make fclean -C ${LIBFT}/
+#			make fclean -C ${LIBFT}/
 			rm -f ${NAME}
 
 re:			fclean all
