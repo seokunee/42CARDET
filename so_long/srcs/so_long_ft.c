@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:50:07 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 02:09:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:29:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*ft_strjoin_without_nl(char const *s1, char const *s2)
+char	*ft_strjoin_without_nl(char *s1, char *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -35,5 +35,6 @@ char	*ft_strjoin_without_nl(char const *s1, char const *s2)
 	while (j < s2_len && s2[j] != '\n')
 		str[i++] = s2[j++];
 	str[i] = '\0';
+	free(s1);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:12:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 03:28:38 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:29:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_game
 }					t_game;
 
 /* so_long_ft.c */
-char	*ft_strjoin_without_nl(char const *s1, char const *s2);
+char	*ft_strjoin_without_nl(char *s1, char *s2);
 
 /* image.c */
 void	init_image(void *mlx, t_img *image);
