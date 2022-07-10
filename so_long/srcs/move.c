@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 21:57:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 03:21:41 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:39:59 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ void	move_player_to_point(t_game *game, int x, int y)
 	if (game->map[x + y * game->width] == 'E' && game->collectible != 0)
 		return ;
 	if (game->map[x + y * game->width] == 'E')
+	{
+		ft_putstr_fd("clear!\n", 1);
 		exit(0);
+	}
 	game->map[x + y * game->width] = 'P';
 	game->map[game->x + game->y * game->width] = '0';
 	game->x = x;
 	game->y = y;
 	game->count++;
+	ft_putstr_fd("walk count : ", 1);
 	ft_putnbr_fd(game->count, 1);
 	write(1, "\n", 1);
 }
