@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 13:41:35 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/09 13:19:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:06:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	throw_error(char *message)
 {
-	write(1, "Error\n", 6);
-	write(1, message, ft_strlen(message));
+	write(2, "Error\n", 6);
+	write(2, message, ft_strlen(message));
 	exit(1);
 }
 

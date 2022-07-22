@@ -6,11 +6,19 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:44:04 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/09 13:20:14 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/22 17:54:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	check_rectangular(t_game *game, char *line)
+{
+	if (((int)ft_strlen(line) - 1 != game->width && \
+		ft_strchr(line, '\n')) || ((int)ft_strlen(line) != \
+		game->width && !ft_strchr(line, '\n')))
+		throw_error("The map is not rectangular.\n");
+}
 
 void	read_map(const char *filename, t_game *game)
 {
@@ -18,9 +26,11 @@ void	read_map(const char *filename, t_game *game)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd <= 0)
+		throw_error("Failed to open file.\n");
 	line = get_next_line(fd);
 	if (!line)
-		exit(1);
+		throw_error("Not a valid map\n");
 	game->width = ft_strlen(line) - 1;
 	game->map = ft_strdup(line);
 	free(line);
@@ -31,10 +41,7 @@ void	read_map(const char *filename, t_game *game)
 		if (line)
 		{
 			game->map = ft_strjoin_without_nl(game->map, line);
-			if (((int)ft_strlen(line) - 1 != game->width && \
-			ft_strchr(line, '\n')) || ((int)ft_strlen(line) != \
-			game->width && !ft_strchr(line, '\n')))
-				throw_error("The map is not rectangular.\n");
+			check_rectangular(game, line);
 			free(line);
 		}
 	}
@@ -84,16 +91,16 @@ void	check_map_round(t_game *game)
 	while ((game->map)[i])
 	{
 		if (i / game->width == 0 && (game->map)[i] != '1')
-			throw_error("The top side of the map is not wall.\n");
+			throw_error("The side of the map is not wall.\n");
 		if (i / game->width > 0 && i / game->width < game->height - 1)
 		{
 			if (i % game->width == 0 && (game->map)[i] != '1')
-				throw_error("The left side of the map is not wall.\n");
+				throw_error("The side of the map is not wall.\n");
 			if (i % game->width == game->width - 1 && (game->map)[i] != '1')
-				throw_error("The right side of the map is not wall.\n");
+				throw_error("The side of the map is not wall.\n");
 		}
 		if (i / game->width == game->height - 1 && (game->map)[i] != '1')
-			throw_error("The bottom side of the map is not wall.\n");
+			throw_error("The side of the map is not wall.\n");
 		i++;
 	}
 }
