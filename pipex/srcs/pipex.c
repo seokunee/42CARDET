@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/26 17:00:27 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:59:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	print_envp(char **envp)
 	}
 }
 
+
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data data;
@@ -61,6 +63,8 @@ int	main(int ac, char **av, char **envp)
 	printf("cmd1 : %d\n", get_cmd_access(data.cmd1_path));
 	printf("cmd2 : %d\n", get_cmd_access(data.cmd2_path));
 
+	
+	
 	pid = fork();
 	// 명령어 실행
 	if (pid > 0)
