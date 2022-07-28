@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/26 17:59:37 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:24:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ void	set_cmd_and_path(char **av, t_data *data)
 		data->cmd2_path = ft_strjoin("/bin/", data->cmd2[0]);
 }
 
-void	print_envp(char **envp)
+void	find_cmd_path(char **envp, t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (envp[i])
 	{
-		// printf("%s", envp[i]);
+		if (ft_strncmp((const char *)envp[i], "PATH=", 5) == 0)
+			break;
 		i++;
 	}
-}
-
+	data->path = ft_split(envp[i], ':');
+}	
 
 
 int	main(int ac, char **av, char **envp)
@@ -52,35 +53,29 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 5)
 		return (0);
 
-	print_envp(envp);
-	// 명령어 set
+	find_cmd_path(envp, &data);
 	set_cmd_and_path(av, &data);
 
-	// 명령어 유무 및 실행 가능여부 확인
 	printf("%s\n" , data.cmd1_path);
 	printf("%s\n\n" , data.cmd2_path);
 
 	printf("cmd1 : %d\n", get_cmd_access(data.cmd1_path));
 	printf("cmd2 : %d\n", get_cmd_access(data.cmd2_path));
 
-	
-	
 	pid = fork();
-	// 명령어 실행
-	if (pid > 0)
+	if (pid == 0)
 	{
 		x = 1;
-		printf("부모 pid : %d, x = %d\n", pid, x);
-		execve(data.cmd1_path, data.cmd1, NULL);
-	}
-	else if (pid == 0)
-	{
-		x = 2;
 		printf("자식 pid : %d, x = %d\n", pid, x);
 		execve(data.cmd2_path, data.cmd2, NULL);
 	}
-	else
+	else if (pid > 0)
 	{
-		printf("fork error!");
+		x = 2;
+		printf("부모 pid : %d, x = %d\n", pid, x);
+		wait();
+		execve(data.cmd1_path, data.cmd1, NULL);
 	}
+	else
+		printf("fork error!");
 }
