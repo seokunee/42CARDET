@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/07/26 17:01:16 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/08/01 15:01:17 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,11 @@ ${NAME}:	${OBJS}
 			$(CC) -I $(HEAD) -o $(NAME) ${OBJS} -L ./libft -lft
 			
 clean:
-			make clean -C ${LIBFT}/
+#			make clean -C ${LIBFT}/
 			rm -f ${OBJS}
 
 fclean:		clean
-			# make fclean -C ${LIBFT}/
+#			 make fclean -C ${LIBFT}/
 			rm -f ${NAME}
 
 re:			fclean all

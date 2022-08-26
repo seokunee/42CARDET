@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:19:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/28 15:23:41 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:48:41 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_data
 	char *cmd2_path;
 	char **cmd1;
 	char **cmd2;
-	char **path;
+	char **envp_path;
 } t_data;
 
 

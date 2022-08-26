@@ -5,6 +5,7 @@
     "get_next_line.h": "c",
     "unistd.h": "c",
     "stdio.h": "c",
-    "libft.h": "c"
+    "libft.h": "c",
+    "pipex.h": "c"
   }
 }

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/07/28 16:24:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:14:33 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,35 @@ void	set_cmd_and_path(char **av, t_data *data)
 		data->cmd2_path = ft_strjoin("/bin/", data->cmd2[0]);
 }
 
+
+
+void	check_cmd_path(t_data *data, char *cmd1, char *cmd2)
+{
+	int	i;
+
+	i = 0;
+	data->cmd1_path = NULL;
+	data->cmd2_path = NULL;
+	if (get_cmd_access(cmd1) == 1)
+		data->cmd1_path = cmd1;
+	if (get_cmd_access(cmd2) == 1)
+		data->cmd1_path = cmd2;
+	while (data->envp_path[i] && data->cmd1_path != NULL)
+	{
+		if ()
+		i++;
+	}
+	while (data->)
+	if (data->cmd1_path == NULL || data->cmd2_path == NULL)
+		throw_error("Invalid command")
+}
+
+void	throw_error(char *message)
+{
+	perror(message);
+	exit(1);
+}
+
 void	find_cmd_path(char **envp, t_data *data)
 {
 	int	i;
@@ -40,9 +69,8 @@ void	find_cmd_path(char **envp, t_data *data)
 			break;
 		i++;
 	}
-	data->path = ft_split(envp[i], ':');
+	data->envp_path = ft_split(envp[i], ':');
 }	
-
 
 int	main(int ac, char **av, char **envp)
 {
@@ -73,7 +101,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		x = 2;
 		printf("부모 pid : %d, x = %d\n", pid, x);
-		wait();
+		wait(0);
 		execve(data.cmd1_path, data.cmd1, NULL);
 	}
 	else
