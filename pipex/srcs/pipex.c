@@ -6,34 +6,11 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/08/28 19:51:44 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:32:59 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-// cmd 입력받은 명령어
-// cmd_path
-// void	check_cmd_path(t_data *data, char *cmd1, char *cmd)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	data->cmd1_path = NULL;
-// 	data->cmd2_path = NULL;
-// 	if (get_cmd_access(cmd1) == 1)
-// 		data->cmd1_path = cmd1;
-// 	if (get_cmd_access(cmd2) == 1)
-// 		data->cmd1_path = cmd2;
-// 	while (data->envp_path[i] && data->cmd1_path != NULL)
-// 	{
-// 		if ()
-// 		i++;
-// 	}
-// 	while (data->)
-// 	if (data->cmd1_path == NULL || data->cmd2_path == NULL)
-// 		throw_error("Invalid command");
-// }
 
 void	throw_error(char *message, int status)
 {
@@ -110,9 +87,15 @@ void	init_cmd_data(char **av, t_data *data, char **envp)
 	data->envp_path = ft_split(&envp[i][5], ':');
 }
 
-void	set_fd_direction()
+void	set_fd_direction(int fd_closed, int stdin, int stdout)
 {
-
+	close(fd_closed);
+	if (dup2(stdin, STDIN_FILENO))
+		throw_error("Dup2 Error", 1);
+	if (dup2(stdout, STDERR_FILENO))
+		throw_error("Dup2 Error", 1);
+	close(stdin);
+	close(stdout);	
 }
 
 int	main(int ac, char **av, char **envp)
@@ -123,38 +106,29 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 5)
 		return (0);
 	
+	data.infile = open(av[1], O_RDWR);
+	data.outfile = open(av[4], O_RDWR);
 	init_cmd_data(av, &data, envp);
 	data.cmd1_path = set_cmd_path(data.cmd1[0],data.envp_path);
 	data.cmd2_path = set_cmd_path(data.cmd2[0],data.envp_path);
 
-	printf("cmd1 = %s\n", data.cmd1_path);
-	printf("cmd2 = %s\n", data.cmd2_path);
-
 	pid = fork();
 	if (pid < 0)
 		throw_error("Fork Error!", 1);
-	pipe(data.fd);
-	if 
+	if (pipe(data.fd) < 0)
+		throw_error("Pipe Error", 1);
 	if (pid == 0)
 	{
-		set_fd_direction();
+		set_fd_direction(data.fd[0], data.infile, data.fd[1]);
 		if (execve(data.cmd1_path, data.cmd1, envp) < 0)
 			throw_error("command not found", 127);
 	}
 	else
 	{
+		set_fd_direction(data.fd[1], data.fd[0], data.outfile);
 		waitpid(pid, NULL, WNOHANG);
 		if (execve(data.cmd2_path, data.cmd2, envp) < 0)
 			throw_error("command not found", 127);
 	}
 	return (0);
 }
-
-
-/*
-	1. PATH가 적용된 cmd 찾아주기 
-
-	2. 자식프로세서 동작
-
-	3. 부모 프로세서 동작
-*/
