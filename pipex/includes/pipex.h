@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:19:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/08/01 14:48:41 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:52:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 
 typedef struct s_data
 {
-	char *cmd1_path;
+	char *cmd1_path; /* cmd_path는 찐임*/
 	char *cmd2_path;
-	char **cmd1;
+	char **cmd1; /* 인자로 들어온 애들이 split 해서 들어있음. */
 	char **cmd2;
 	char **envp_path;
+	int	fd[2];
 } t_data;
-
 
 #endif
