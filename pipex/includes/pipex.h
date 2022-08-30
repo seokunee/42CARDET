@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:19:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/08/29 13:35:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/30 21:11:29 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ typedef struct s_data
 	int	fd[2];
 	int	infile;
 	int outfile;
+	pid_t	pid;
+	pid_t	pid2;
 } t_data;
+
+char	*set_cmd_path(char *cmd, char **envp_path);
+void	close_all_data(pid_t pid, pid_t pid2, t_data *data);
+void	init_cmd_data(char **av, t_data *data, char **envp);
+void	set_fd_direction(int fd_closed, int stdin, int stdout);
+
+void	throw_error(char *message, int status);
+void	free_sec_arr(char **arr);
+char	*ft_strjoin_between(char const *s1, char const *s2, char c);
 
 #endif

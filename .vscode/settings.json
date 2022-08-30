@@ -17,6 +17,7 @@
     "functional": "c",
     "iterator": "c",
     "string_view": "c",
-    "tuple": "c"
+    "tuple": "c",
+    "sstream": "c"
   }
 }
