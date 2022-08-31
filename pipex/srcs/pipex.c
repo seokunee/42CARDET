@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/08/30 21:13:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:36:01 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,11 @@ void	init_cmd_data(char **av, t_data *data, char **envp)
 		O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (data->infile == -1 || data->outfile == -1)
 		throw_error("open file Error", 1);
-	data->cmd1_path = set_cmd_path(data->cmd1[0], data->envp_path);
-	data->cmd2_path = set_cmd_path(data->cmd2[0], data->envp_path);
+	if (pipe(data->fd) == -1)
+		throw_error("Pipe Error", 1);
+	data->pid = fork();
+	if (data->pid == -1)
+		throw_error("Fork Error!", 1);
 }
 
 void	set_fd_direction(int fd_closed, int stdin, int stdout)
@@ -93,13 +96,9 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 5)
 		throw_error("Argument Error", 1);
 	init_cmd_data(av, &data, envp);
-	if (pipe(data.fd) == -1)
-		throw_error("Pipe Error", 1);
-	data.pid = fork();
-	if (data.pid == -1)
-		throw_error("Fork Error!", 1);
 	if (data.pid == 0)
 	{
+		data.cmd1_path = set_cmd_path(data.cmd1[0], data.envp_path);
 		set_fd_direction(data.fd[0], data.infile, data.fd[1]);
 		if (execve(data.cmd1_path, data.cmd1, envp) == -1)
 			throw_error("command not found", 127);
@@ -107,6 +106,7 @@ int	main(int ac, char **av, char **envp)
 	data.pid2 = fork();
 	if (data.pid2 == 0)
 	{
+		data.cmd2_path = set_cmd_path(data.cmd2[0], data.envp_path);
 		set_fd_direction(data.fd[1], data.fd[0], data.outfile);
 		if (execve(data.cmd2_path, data.cmd2, envp) == -1)
 			throw_error("command not found", 127);
