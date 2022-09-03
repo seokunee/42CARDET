@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/09/02 18:23:23 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/09/03 20:59:52 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ clean:
 			rm -f ${OBJS}
 
 fclean:		clean
-			 make fclean -C ${LIBFT}/
+			make fclean -C ${LIBFT}/
 			rm -f ${NAME}
 
 re:			fclean all

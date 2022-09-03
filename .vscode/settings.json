@@ -18,6 +18,7 @@
     "iterator": "c",
     "string_view": "c",
     "tuple": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "push_swap.h": "c"
   }
 }
