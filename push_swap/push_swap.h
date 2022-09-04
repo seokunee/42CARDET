@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/03 20:46:23 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:43:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct s_data
 # include "libft.h"
 # include <stdio.h> // 지울것
 
-void	make_linked_list(int ac, char **av, t_data *data);
+void		make_linked_list(int ac, char **av, t_data *data);
 t_pw_list	*ft_pw_lstnew(int	value);
-int		check_is_num_arr(char **arr);
-void	av_to_list_string(int ac, char **av, t_data *data);
-int	secend_arr_len(char **arr);
-void	free_sec_str_arr(char **arr);
-int	count_list_in_arr(char **list_string);
+void		check_is_num_arr(char *arr);
+void		av_to_list_string(int ac, char **av, t_data *data);
+int			secend_arr_len(char **arr);
+void		free_sec_str_arr(char **arr);
+int			count_list_in_arr(char **list_string);
 
 
 #endif

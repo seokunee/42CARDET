@@ -6,12 +6,14 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/03 20:59:28 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/04 20:41:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 void test_print_second_arr(char **arr);
+void test_print_int_arr(int *arr,int len);
+
 
 // void	make_linked_list(int ac, char **av, t_data *data)
 // {
@@ -42,27 +44,24 @@ t_pw_list	*ft_pw_lstnew(int	value)
 	return (new);
 }
 
-int		check_is_num_arr(char **arr)
+void		check_is_num_arr(char *arr)
 {
 	int	i; 
-	int	j;
 
 	i = 0;
-	j = 0;
-	while(arr[i])
+	if (arr[i] == '-')
+		i = 1;
+	while (arr[i])
 	{
-		j = 0;
-		if (arr[i][j] == '-')
-			j = 1;
-		while (arr[i][j])
+		if (ft_isdigit(arr[i]) == 0)
 		{
-			if (ft_isdigit(arr[i][j]) == 0)
-				return (0);
-			j++;
+			printf("---?-----\n");
+			exit(1);
 		}
 		i++;
 	}
-	return (1);
+	if (i == 1 && arr[i] =='-')
+		exit(1);
 }
 
 void	av_to_list_str(int ac, char **av, t_data *data)
@@ -122,10 +121,31 @@ int	count_list_in_arr(char **list_str)
 	return (count);
 }
 
-// void	list_str_to_list_int(char **list_str)
-// {
-	
-// }
+void	list_str_to_list_int(t_data *data)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	**splited;
+
+	i = 0;
+	k = 0;
+	data->list_int = (int *)malloc(sizeof(int) * data->list_count);
+	while (data->list_str[i])
+	{
+		splited = ft_split(data->list_str[i], ' ');
+		j = 0;
+		while (splited[j])
+		{
+			check_is_num_arr(splited[j]);
+			data->list_int[k] = ft_atoi(splited[j]);
+			j++;
+			k++;
+		}
+		free_sec_str_arr(splited);
+		i++;
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -133,7 +153,8 @@ int	main(int ac, char **av)
 
 	av_to_list_str(ac, av, &data);
 	data.list_count = count_list_in_arr(data.list_str);
-	
+	list_str_to_list_int(&data);
+	test_print_int_arr(data.list_int, data.list_count);
 	return (0);
 }
 
@@ -154,6 +175,18 @@ void test_print_second_arr(char **arr)
 	while (arr[i])
 	{
 		printf("%s\n", arr[i]);
+		i++;
+	}
+}
+
+void test_print_int_arr(int *arr,int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		printf("%d\n", arr[i]);
 		i++;
 	}
 }
