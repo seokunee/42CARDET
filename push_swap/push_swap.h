@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/06 16:03:13 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:48:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,30 @@
 
 typedef struct s_pw_list
 {
-	int		value;
-	struct s_pw_list *next;
+	int					value;
+	struct s_pw_list	*next;
+	struct s_pw_list	*prev;
+	
 }			t_pw_list;
 
 typedef struct s_data
 {
-	t_pw_list *list_a;
-	t_pw_list *list_b;
+	t_pw_list	*list_a;
+	t_pw_list	*list_b;
 
 	int			list_count;
 	int			*list_int;
 	char		**list_str;
+
+	int			pivot1;
+	int			pivot2;
+
+	int			pa;
+	int			pd;
+	int			ra;
+	int			rb;
+	int			rra;
+	int			rrb;
 }			t_data;
 
 # include <unistd.h>
