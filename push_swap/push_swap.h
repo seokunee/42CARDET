@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/05 01:20:23 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/06 16:03:13 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ typedef struct s_pw_list
 
 typedef struct s_data
 {
-	t_pw_list *list;
+	t_pw_list *list_a;
+	t_pw_list *list_b;
+
 	int			list_count;
 	int			*list_int;
 	char		**list_str;
@@ -43,5 +45,15 @@ void		list_str_to_list_int(t_data *data);
 
 void		throw_error(char *message);
 
+void		sa(t_data *data);
+void		sb(t_data *data);
+void		pa(t_data *data);
+void		pb(t_data *data);
+void		ra(t_data *data);
+void		rb(t_data *data);
+void		rr(t_data *data);
+void		rra(t_data *data);
+void		rrb(t_data *data);
+void		rrr(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/05 19:16:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/06 16:07:10 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void 	test_print_second_arr(char **arr);
 void 	test_print_int_arr(int *arr,int len);
 void	test_linked_list_value(t_pw_list *list);
+void	text_printf_list_a_b(t_data *data);
+
 
 int	main(int ac, char **av)
 {
@@ -23,9 +25,11 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	av_to_list_str(ac, av, &data);
+	data.list_b = NULL;
 	data.list_count = count_list_in_arr(data.list_str);
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
+
 	return (0);
 }
 
@@ -67,10 +71,23 @@ void	test_linked_list_value(t_pw_list *list)
 	t_pw_list *tmp;
 
 	tmp = list;
+	if (list == NULL)
+		return ;
 	while (tmp->next)
 	{
 		printf("%d\n",tmp->value);
 		tmp = tmp->next;
 	}
 	printf("%d\n",tmp->value);
+}
+
+void	text_printf_list_a_b(t_data *data)
+{
+	printf("--------a--------\n");
+	test_linked_list_value(data->list_a);
+	printf("--------a--------\n");
+	printf("--------b--------\n");
+	test_linked_list_value(data->list_b);
+	printf("--------b--------\n");
+
 }

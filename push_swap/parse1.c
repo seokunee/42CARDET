@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/05 15:21:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:49:51 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	make_linked_list(t_data *data)
 	t_pw_list 	*tmp_list;
 
 	i = 0;
-	data->list = ft_pw_lstnew(data->list_int[i++]);
-	tmp_list = data->list;
+	data->list_a = ft_pw_lstnew(data->list_int[i++]);
+	tmp_list = data->list_a;
 	while (i < data->list_count)
 	{
 		tmp_list->next = ft_pw_lstnew(data->list_int[i]);
