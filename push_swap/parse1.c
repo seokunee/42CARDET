@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/06 14:49:51 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:39:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	list_str_to_list_int(t_data *data)
 
 	i = 0;
 	k = 0;
-	data->list_int = (int *)malloc(sizeof(int) * data->list_count);
+	data->list_int = (int *)malloc(sizeof(int) * data->total_size);
 	while (data->list_str[i])
 	{
 		splited = ft_split(data->list_str[i], ' ');
@@ -46,6 +46,7 @@ t_pw_list	*ft_pw_lstnew(int value)
 	if (!new)
 		return (NULL);
 	new->value = value;
+	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -54,14 +55,16 @@ void	make_linked_list(t_data *data)
 {
 	int			i;
 	t_pw_list 	*tmp_list;
+	t_pw_list 	*first_list;
 
-	i = 0;
-	data->list_a = ft_pw_lstnew(data->list_int[i++]);
+	i = data->total_size;
+	data->list_a = ft_pw_lstnew(data->list_int[--i]);
+	first_list = data->list_a;
 	tmp_list = data->list_a;
-	while (i < data->list_count)
+	while (--i >= 0)
 	{
 		tmp_list->next = ft_pw_lstnew(data->list_int[i]);
+		tmp_list->next->prev = tmp_list;
 		tmp_list = tmp_list->next;
-		i++;
 	}
 }

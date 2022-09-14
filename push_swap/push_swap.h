@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/06 19:48:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/13 22:03:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ typedef struct s_data
 	t_pw_list	*list_a;
 	t_pw_list	*list_b;
 
-	int			list_count;
+	int			total_size;
 	int			*list_int;
 	char		**list_str;
 
-	int			pivot1;
-	int			pivot2;
+	int			list_a_size;
+	int			list_b_size;
+
+	int			pivot_f;
+	int			pivot_s;
 
 	int			pa;
 	int			pd;
@@ -44,7 +47,7 @@ typedef struct s_data
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdio.h> // 지울것
+# include <stdio.h> // 지울것ㅁㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㅇㄹㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㄴㅇㄹㅁㄴㅇㅇㄹ
 
 void		make_linked_list(t_data *data);
 t_pw_list	*ft_pw_lstnew(int value);
@@ -67,5 +70,8 @@ void		rr(t_data *data);
 void		rra(t_data *data);
 void		rrb(t_data *data);
 void		rrr(t_data *data);
+
+void		quick_sort(t_data *data, int L, int R);
+
 
 #endif

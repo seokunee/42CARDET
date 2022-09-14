@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/06 18:50:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:34:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void 	test_print_second_arr(char **arr);
 void 	test_print_int_arr(int *arr,int len);
-void	test_linked_list_value(t_pw_list *list);
+void	test_linked_list_value(t_pw_list *list, int size);
 void	text_printf_list_a_b(t_data *data);
+void	printf_sizes(t_data *data);
 
-void quickSort(t_data *data, int L, int R)
+
+void	quick_sort(t_data *data, int L, int R)
 {
 	int left = L;
 	int	right = R;
@@ -40,9 +42,9 @@ void quickSort(t_data *data, int L, int R)
 		}
 	};
 	if (L < right)
-		quickSort(data, L, right);
+		quick_sort(data, L, right);
 	if (left < R)
-		quickSort(data, left, R);
+		quick_sort(data, left, R);
 }
 
 void	check_double(int *arr, int len)
@@ -50,13 +52,26 @@ void	check_double(int *arr, int len)
 	int	i;
 
 	i = 1;
-	while (arr[i] && i < len)
+	if (len < 2)
+		return ;
+	while (i < len)
 	{
 		if (arr[i] == arr[i - 1])
 			throw_error("Error");	
 		i++;
 	}
 }
+
+void	set_pivot(t_data *data)
+{
+	data->pivot_f = data->list_int[data->total_size / 3];
+	data->pivot_s = data->list_int[data->total_size * 2 / 3];
+}
+
+// void	push_swap(t_data *data)
+// {
+	
+// }
 
 int	main(int ac, char **av)
 {
@@ -66,11 +81,25 @@ int	main(int ac, char **av)
 		return (0);
 	av_to_list_str(ac, av, &data);
 	data.list_b = NULL;
-	data.list_count = count_list_in_arr(data.list_str);
+	data.total_size = count_list_in_arr(data.list_str);
+	data.list_a_size = data.total_size;
+	data.list_b_size = 0;
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
-	quickSort(&data, 0, data.list_count - 1);
-	check_double(data.list_int, data.list_count);
+	quick_sort(&data, 0, data.total_size - 1);
+	check_double(data.list_int, data.total_size);
+	set_pivot(&data);
+
+	pb(&data);
+	pb(&data);
+	pb(&data);
+	rra(&data);
+	rrb(&data);
+	// sa(&data);
+	// sb(&data);
+
+	text_printf_list_a_b(&data);
+	printf_sizes(&data);
 	return (0);
 }
 
@@ -109,27 +138,36 @@ void test_print_int_arr(int *arr,int len)
 	}
 }
 
-void	test_linked_list_value(t_pw_list *list)
+void	test_linked_list_value(t_pw_list *list, int size)
 {
-	t_pw_list *tmp;
+	t_pw_list	*tmp;
+	int			i;
 
+	i = 0;
 	tmp = list;
 	if (list == NULL)
 		return ;
-	while (tmp->next)
+	while (i < size)
 	{
 		printf("%d\n",tmp->value);
 		tmp = tmp->next;
+		i++;
 	}
-	printf("%d\n",tmp->value);
 }
 
 void	text_printf_list_a_b(t_data *data)
 {
 	printf("--------a--------\n");
-	test_linked_list_value(data->list_a);
+	test_linked_list_value(data->list_a, data->list_a_size);
 	printf("--------a--------\n");
 	printf("--------b--------\n");
-	test_linked_list_value(data->list_b);
+	test_linked_list_value(data->list_b, data->list_b_size);
 	printf("--------b--------\n");
+}
+
+void	printf_sizes(t_data *data)
+{
+	printf("total size = %d\n", data->total_size);
+	printf("	a size = %d\n", data->list_a_size);
+	printf("	b size = %d\n", data->list_b_size);
 }
