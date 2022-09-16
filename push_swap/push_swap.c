@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 20:34:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:54:16 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,7 @@ int	main(int ac, char **av)
 	check_double(data.list_int, data.total_size);
 	set_pivot(&data);
 
-	pb(&data);
-	pb(&data);
-	pb(&data);
-	rra(&data);
-	rrb(&data);
-	// sa(&data);
-	// sb(&data);
-
 	text_printf_list_a_b(&data);
-	printf_sizes(&data);
 	return (0);
 }
 

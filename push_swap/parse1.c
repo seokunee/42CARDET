@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 19:39:30 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:54:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,15 @@ void	make_linked_list(t_data *data)
 		tmp_list = tmp_list->next;
 	}
 }
+
+/*
+4 5 12 7 8 1
+
+1	next_end prev_start
+8	
+7	
+12	
+5	
+4	head next_start
+
+*/

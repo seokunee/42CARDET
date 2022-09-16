@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:08:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 20:39:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:05:24 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	rev_rotate_list(t_pw_list **list)
 	t_pw_list	*list_last;
 	t_pw_list	*list_last_pre;
 	t_pw_list	*list_fir;
-
 	list_fir = (*list);
 	list_last = (*list);
 	list_last_pre = NULL;
@@ -143,3 +142,6 @@ void	rrr(t_data *data)
 	rra(data);
 	rrb(data);
 }
+
+
+void	
