@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:08:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/16 19:05:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/18 18:25:54 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ void	push_list(t_pw_list **from_list, t_pw_list **to_list)
 
 	if (*from_list == NULL)
 		return ;
+	if ((*from_list)->next)
+		(*from_list)->next->prev = NULL; 
 	from_list_first = *from_list;
 	to_list_first = *to_list;
 	*from_list = (*from_list)->next;
+	if (*to_list)
+		(*to_list)->prev = from_list_first;
 	*to_list = from_list_first;
 	from_list_first->next = to_list_first;
 }
@@ -80,8 +84,10 @@ void	rotate_list(t_pw_list **list)
 	list_last = (*list);
 	if (list_fir == NULL || list_fir->next == NULL)
 		return ;
+	list_fir->next->prev = NULL;
 	while (list_last->next)
 		list_last = list_last->next;
+	list_fir->prev = list_last;
 	list_last->next = list_fir;
 	(*list) = list_fir->next;
 	list_fir->next = NULL;
@@ -110,6 +116,7 @@ void	rev_rotate_list(t_pw_list **list)
 	t_pw_list	*list_last;
 	t_pw_list	*list_last_pre;
 	t_pw_list	*list_fir;
+
 	list_fir = (*list);
 	list_last = (*list);
 	list_last_pre = NULL;
@@ -121,6 +128,7 @@ void	rev_rotate_list(t_pw_list **list)
 		list_last = list_last->next;
 	}
 	list_last->next = list_fir;
+	list_last->prev = NULL;
 	list_last_pre->next = NULL;
 	(*list) = list_last;
 }
@@ -142,6 +150,3 @@ void	rrr(t_data *data)
 	rra(data);
 	rrb(data);
 }
-
-
-void	

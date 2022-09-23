@@ -20,6 +20,11 @@
     "tuple": "c",
     "sstream": "c",
     "push_swap.h": "c",
-    "ios": "c"
+    "ios": "c",
+    "cstdarg": "c",
+    "cstdio": "c",
+    "cwchar": "c",
+    "string": "c",
+    "vector": "c"
   }
 }

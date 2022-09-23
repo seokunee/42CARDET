@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/16 19:08:06 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:20:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct s_data
 	int			pd;
 	int			ra;
 	int			rb;
-	int			rra;
-	int			rrb;
 }			t_data;
 
 # include <unistd.h>
@@ -71,7 +69,7 @@ void		rra(t_data *data);
 void		rrb(t_data *data);
 void		rrr(t_data *data);
 
-void		quick_sort(t_data *data, int L, int R);
+void	quick_sort(int *arr, int L, int R);
 
 
 #endif
