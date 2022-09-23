@@ -25,6 +25,16 @@
     "cstdio": "c",
     "cwchar": "c",
     "string": "c",
-    "vector": "c"
+    "vector": "c",
+    "__bit_reference": "c",
+    "__node_handle": "c",
+    "algorithm": "c",
+    "__memory": "c",
+    "limits": "c",
+    "memory": "c",
+    "optional": "c",
+    "ratio": "c",
+    "system_error": "c",
+    "type_traits": "c"
   }
 }

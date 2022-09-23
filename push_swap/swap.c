@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:08:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/18 18:25:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:47:04 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	swap_list(t_pw_list **list, int size)
 	(*list)->next->value = tmp_value;
 }
 
-void	sa(t_data *data)
+void	sa(t_pw_list **list, int size)
 {
 	write(1, "sa\n", 3);
-	swap_list(&data->list_a, data->list_a_size);
+	swap_list(list, size);
 }
 
-void	sb(t_data *data)
+void	sb(t_pw_list **list, int size)
 {
 	write(1, "sb\n", 3);
-	swap_list(&data->list_b, data->list_b_size);
+	swap_list(list, size);
 }
 
 void	push_list(t_pw_list **from_list, t_pw_list **to_list)

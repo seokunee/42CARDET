@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/23 01:12:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:37:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,6 @@ void	check_double(int *arr, int len)
 	}
 }
 
-void	two_list_sort(t_pw_list **list)
-{
-	int	one;
-	int	two;
-
-	one = (*list)->value;
-	two = (*list)->next->value;
-	if (one > two)
-	{
-		(*list)->value = two;
-		(*list)->value = one;
-	}
-}
-
 void	get_pivot(int *arr, int size, int *big, int *small)
 {
 	*small = arr[size / 3];
@@ -99,13 +85,70 @@ int	*set_int_arr_for_sort(t_pw_list *list, int size)
 	}
 }
 
-void	a_to_b(int	size, t_data *data)
+void	three_sort_a(t_pw_list **list, int size)
+{
+	int	one;
+	int	two;
+	int	three;
+
+	one = (*list)->value;
+	two = (*list)->next->value;
+	three = (*list)->next->next->value;
+	if (one > two && two > three)
+		return ;
+	if ((*list)->value > (*list)->next->next->value)
+}
+/*
+	1 2 3
+	one < two && two < three
+	return ;
+
+	1 3 2
+	one < two && two > three && one < three
+	ra sa rra
+	
+	2 1 3
+	one > two &&  two < three && one < three
+	sa
+
+	2 3 1
+	one < two && one > three && two > three
+	ra
+	sa
+	rra
+	sa
+
+	3 1 2
+	one > two && one > three && two < three
+	sa
+	ra
+	sa
+	rra
+
+	
+	3 2 1
+*/
+void	hard_sort_a(t_pw_list **list, int size)
+{
+	int	tmp;
+
+	if (size == 1)
+		return ;
+	if (size == 2)
+		sa(list, size);
+	if (size == 3)
+	{
+		sa()
+	}
+}
+
+void	a_to_b(int size, t_data *data)
 {
 	int	p_big;
 	int	p_small;
 
-	if (size < 3)
-		two_list_sort(data);
+	if (size < 5)
+		hard_sort(data);
 	data->list_int = set_int_arr_for_sort(data->list_a, size);
 	quick_sort(data->list_int, &p_big, &p_small);
 	get_pivot(data->list_int, size, &p_big, &p_small);

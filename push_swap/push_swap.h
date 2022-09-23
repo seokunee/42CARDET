@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/20 01:20:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:53:18 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void		list_str_to_list_int(t_data *data);
 
 void		throw_error(char *message);
 
-void		sa(t_data *data);
-void		sb(t_data *data);
+void		sa(t_pw_list **list, int size);
+void		sb(t_pw_list **list, int size);
 void		pa(t_data *data);
 void		pb(t_data *data);
 void		ra(t_data *data);
