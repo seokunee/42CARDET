@@ -6,33 +6,33 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:08:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/23 15:47:04 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:22:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_list(t_pw_list **list, int size)
+void	swap_list(t_pw_list **list)
 {
 	int	tmp_value;
 
-	if (size < 2)
+	if ((*list) == NULL || (*list)->next == NULL)
 		return ;
 	tmp_value = (*list)->value;
 	(*list)->value = (*list)->next->value;
 	(*list)->next->value = tmp_value;
 }
 
-void	sa(t_pw_list **list, int size)
+void	sa(t_data *data)
 {
 	write(1, "sa\n", 3);
-	swap_list(list, size);
+	swap_list(&data->list_a);
 }
 
-void	sb(t_pw_list **list, int size)
+void	sb(t_data *data)
 {
 	write(1, "sb\n", 3);
-	swap_list(list, size);
+	swap_list(&data->list_b);
 }
 
 void	push_list(t_pw_list **from_list, t_pw_list **to_list)
@@ -93,22 +93,25 @@ void	rotate_list(t_pw_list **list)
 	list_fir->next = NULL;
 }
 
-void	ra(t_data *data)
+void	ra(t_data *data, int printable)
 {
-	write(1, "ra\n", 3);
+	if (printable)
+		write(1, "ra\n", 3);
 	rotate_list(&data->list_a);
 }
 
-void	rb(t_data *data)
+void	rb(t_data *data, int printable)
 {
-	write(1, "rb\n", 3);
+	if (printable)
+		write(1, "rb\n", 3);
 	rotate_list(&data->list_b);
 }
 
 void	rr(t_data *data)
 {
-	ra(data);
-	rb(data);
+	write(1, "rr\n", 3);
+	rotate_list(&data->list_a);
+	rotate_list(&data->list_b);
 }
 
 void	rev_rotate_list(t_pw_list **list)
@@ -133,20 +136,23 @@ void	rev_rotate_list(t_pw_list **list)
 	(*list) = list_last;
 }
 
-void	rra(t_data *data)
+void	rra(t_data *data, int printable)
 {
-	write(1, "rra\n", 4);
+	if (printable)
+		write(1, "rra\n", 4);
 	rev_rotate_list(&data->list_a);
 }
 
-void	rrb(t_data *data)
+void	rrb(t_data *data, int printable)
 {
-	write(1, "rrb\n", 4);
+	if (printable)
+		write(1, "rrb\n", 4);
 	rev_rotate_list(&data->list_b);
 }
 
 void	rrr(t_data *data)
 {
-	rra(data);
-	rrb(data);
+	write(1, "rrr\n", 4);
+	rev_rotate_list(&data->list_a);
+	rev_rotate_list(&data->list_b);
 }

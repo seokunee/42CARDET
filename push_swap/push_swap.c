@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/23 17:37:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:48:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	quick_sort(int *arr, int L, int R)
 	int left = L;
 	int	right = R;
 	int pivot = arr[(L + R) / 2];
-	int temp;
+	int tmp;
 
 	while (left<= right)
 	{
@@ -34,9 +34,9 @@ void	quick_sort(int *arr, int L, int R)
 			right--;
 		if (left<= right)
 		{
-			temp = arr[left];
+			tmp = arr[left];
 			arr[left] = arr[right];
-			arr[right] = temp;
+			arr[right] = tmp;
 			left++;
 			right--;
 		}
@@ -62,10 +62,10 @@ void	check_double(int *arr, int len)
 	}
 }
 
-void	get_pivot(int *arr, int size, int *big, int *small)
+void	set_pivot(t_data *data, int size)
 {
-	*small = arr[size / 3];
-	*big = arr[size * 2 / 3];
+	data->pivot_small = data->list_int[size / 3];
+	data->pivot_big = data->list_int[size * 2 / 3];
 }
 
 int	*set_int_arr_for_sort(t_pw_list *list, int size)
@@ -73,7 +73,7 @@ int	*set_int_arr_for_sort(t_pw_list *list, int size)
 	int		*arr;
 	int		i;
 
-	arr = (int*)mallc(sizeof(int) * size);
+	arr = (int*)malloc(sizeof(int) * size);
 	if (!arr)
 		exit(1);
 	i = 0;
@@ -83,21 +83,47 @@ int	*set_int_arr_for_sort(t_pw_list *list, int size)
 		list = list->next;
 		i++;
 	}
+	return (arr);
 }
 
-void	three_sort_a(t_pw_list **list, int size)
+void	two_sort_a(t_data *data)
+{
+	t_pw_list	*list_a;
+	
+	list_a = data->list_a;
+	if (list_a->value > list_a->next->value)
+		sa(data);
+}
+
+void	three_sort_a(t_data *data)
 {
 	int	one;
 	int	two;
 	int	three;
 
-	one = (*list)->value;
-	two = (*list)->next->value;
-	three = (*list)->next->next->value;
+	one = data->list_a->value;
+	two = data->list_a->next->value;
+	three = data->list_a->next->next->value;
 	if (one > two && two > three)
 		return ;
-	if ((*list)->value > (*list)->next->next->value)
+	else if (one < two && two > three && one < three)
+	{
+		rra(data, 1);
+		sa(data);
+	}
+	else if (one > two &&  two < three && one < three)
+		sa(data);
+	else if (one < two && one > three && two > three)
+		rra(data, 1);
+	else if (one > two && one > three && two < three)
+		ra(data, 1);
+	else if (one > two && two > three)
+	{
+		sa(data);
+		rra(data, 1);
+	}
 }
+
 /*
 	1 2 3
 	one < two && two < three
@@ -105,7 +131,7 @@ void	three_sort_a(t_pw_list **list, int size)
 
 	1 3 2
 	one < two && two > three && one < three
-	ra sa rra
+	rra sa
 	
 	2 1 3
 	one > two &&  two < three && one < three
@@ -113,45 +139,71 @@ void	three_sort_a(t_pw_list **list, int size)
 
 	2 3 1
 	one < two && one > three && two > three
-	ra
-	sa
 	rra
-	sa
 
 	3 1 2
 	one > two && one > three && two < three
-	sa
 	ra
-	sa
-	rra
 
-	
 	3 2 1
+	one > two && two > three
+	sa rra
 */
-void	hard_sort_a(t_pw_list **list, int size)
-{
-	int	tmp;
 
+void	hard_sort_a(t_data *data, int size)
+{
 	if (size == 1)
 		return ;
-	if (size == 2)
-		sa(list, size);
-	if (size == 3)
-	{
-		sa()
-	}
+	else if (size == 2)
+		two_sort_a(data);
+	else if (size == 3)
+		three_sort_a(data);
 }
 
 void	a_to_b(int size, t_data *data)
 {
-	int	p_big;
-	int	p_small;
+	int			i;
+	t_pw_list	*list_a;
 
-	if (size < 5)
-		hard_sort(data);
+	if (size == 1)
+		return ;
+	else if (size == 2)
+	{
+		two_sort_a(data);
+		return ;
+	}
 	data->list_int = set_int_arr_for_sort(data->list_a, size);
-	quick_sort(data->list_int, &p_big, &p_small);
-	get_pivot(data->list_int, size, &p_big, &p_small);
+	quick_sort(data->list_int, 0, size - 1);
+	set_pivot(data, size);
+	free(data->list_int);
+	i = 0;
+	list_a = data->list_a;
+	while (i < size && list_a->next)
+	{
+		if (data->list_a->value >= data->pivot_big)
+		{
+			ra(data, 1);
+			data->ra++;
+		}
+		else
+		{
+			pb(data);
+			data->pb++;
+			if (data->list_a->value >= data->pivot_small)
+			{
+				rb(data, 1);
+				data->rb++;
+			}
+		}
+		list_a = list_a->next;
+	}
+}
+
+void	push_swap(t_data *data)
+{
+	if (data->total_size < 4)
+		hard_sort_a(data, data->total_size);
+	a_to_b(data->total_size, data);
 }
 
 int	main(int ac, char **av)
@@ -167,10 +219,12 @@ int	main(int ac, char **av)
 	data.list_b_size = 0;
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
-	quick_sort(data.list_a, 0, data.total_size - 1);
+	quick_sort(data.list_int, 0, data.total_size - 1);
 	check_double(data.list_int, data.total_size);
+	set_pivot(&data, data.list_a_size);
 	free(data.list_int);
-	set_pivot(&data);
+	push_swap(&data);
+	text_printf_list_a_b(&data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/23 16:53:18 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:04:46 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ typedef struct s_data
 	int			list_a_size;
 	int			list_b_size;
 
-	int			pivot_f;
-	int			pivot_s;
+	int			pivot_big;
+	int			pivot_small;
 
 	int			pa;
-	int			pd;
+	int			pb;
 	int			ra;
 	int			rb;
 }			t_data;
@@ -58,18 +58,28 @@ void		list_str_to_list_int(t_data *data);
 
 void		throw_error(char *message);
 
-void		sa(t_pw_list **list, int size);
-void		sb(t_pw_list **list, int size);
+void		sa(t_data *data);
+void		sb(t_data *data);
 void		pa(t_data *data);
 void		pb(t_data *data);
-void		ra(t_data *data);
-void		rb(t_data *data);
+void		ra(t_data *data, int printable);
+void		rb(t_data *data, int printable);
 void		rr(t_data *data);
-void		rra(t_data *data);
-void		rrb(t_data *data);
+void		rra(t_data *data, int printable);
+void		rrb(t_data *data, int printable);
 void		rrr(t_data *data);
 
-void	quick_sort(int *arr, int L, int R);
+void		quick_sort(int *arr, int L, int R);
+void		check_double(int *arr, int len);
+void		set_pivot(t_data *data, int size);
+int			*set_int_arr_for_sort(t_pw_list *list, int size);
+
+void		two_sort_a(t_data *data);
+void		three_sort_a(t_data *data);
+void		hard_sort_a(t_data *data, int size);
+void		a_to_b(int size, t_data *data);
+void		push_swap(t_data *data);
+
 
 
 #endif
