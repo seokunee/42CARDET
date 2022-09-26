@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 00:24:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/16 16:50:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:12:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	count_list_in_arr(char **list_str)
 		split = ft_split(list_str[i], ' ');
 		if (split == NULL)
 			exit(1);
+		if (split[0] == NULL)
+			throw_error("Error");
 		count += secend_arr_len(split);
 		free_sec_str_arr(split);
 		i++;
