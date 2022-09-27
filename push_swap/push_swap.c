@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/26 20:32:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:44:33 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	two_sort_a(t_data *data)
 	t_pw_list	*list_a;
 	
 	list_a = data->list_a;
+	printf("1번째 = %d, 2번째 = %d", list_a->value , list_a->next->value);
 	if (list_a->value > list_a->next->value)
 		sa(data);
 }
@@ -94,7 +95,6 @@ void	three_sort_a(t_data *data)
 	int	two;
 	int	three;
 
-	printf("three_sort_a");
 	one = data->list_a->value;
 	two = data->list_a->next->value;
 	three = data->list_a->next->next->value;
@@ -318,6 +318,19 @@ void	init_data(t_data *data)
 	data->rb = 0;
 }
 
+
+void test_print_int_arr(int *arr,int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		printf("%d\n", arr[i]);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data data;
@@ -328,6 +341,7 @@ int	main(int ac, char **av)
 	init_data(&data);
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
+	
 	quick_sort(data.list_int, 0, data.total_size - 1);
 	check_double(data.list_int, data.total_size);
 	set_pivot(&data, data.list_a_size);
