@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/27 01:44:33 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:18:27 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	three_sort_a(t_data *data)
 	one = data->list_a->value;
 	two = data->list_a->next->value;
 	three = data->list_a->next->next->value;
-	if (one > two && two > three)
+	if (one < two && two < three)
 		return ;
 	else if (one < two && two > three && one < three)
 	{
@@ -154,6 +154,88 @@ void	hard_sort_a(t_data *data, int size)
 		three_sort_a(data);
 }
 
+void	b_to_a_three_hard_sort(t_data *data)
+{
+	int	one;
+	int	two;
+	int	three;
+
+	one = data->list_a->value;
+	two = data->list_a->next->value;
+	three = data->list_a->next->next->value;
+	if (one < two && two < three)
+	{
+		pa(data);
+		sb(data);
+		pa(data);
+		sa(data);
+		pa(data);
+		sa(data);
+	}
+	else if (one < two && two > three && one < three)
+	{
+		ra(data, 1);
+		pa(data);
+		pa(data);
+		rra(data, 1);
+		pa(data);
+	}
+	else if (one > two &&  two < three && one < three)
+	{
+		pa(data);
+		sb(data);
+		pa(data);
+		sa(data);
+		pa(data);
+	}
+	else if (one < two && one > three && two > three)
+	{
+		sb(data);
+		pa(data);
+		pa(data);
+		pa(data);
+	}
+	else if (one > two && one > three && two < three)
+	{
+		pa(data);
+		sb(data);
+		pa(data);
+		pa(data);
+	}
+	else if (one > two && two > three)
+	{
+		pa(data);
+		pa(data);
+		pa(data);
+	}
+}
+
+/*
+	1 2 3
+	one < two && two < three
+	pa sb pa sa pa sa
+
+	1 3 2
+	one < two && two > three && one < three
+	ra pa pa rra pa
+	
+	2 1 3
+	one > two &&  two < three && one < three
+	p a sb pa sa pa
+
+	2 3 1
+	one < two && one > three && two > three
+	sb pa pa pa
+
+	3 1 2
+	one > two && one > three && two < three
+	pa sb pa pa
+
+	3 2 1
+	one > two && two > three
+	pa pa pa
+*/
+
 void	b_to_a(int size, t_data *data)
 {
 	int			i;
@@ -163,7 +245,7 @@ void	b_to_a(int size, t_data *data)
 	t_pw_list	*list_b;
 	
 	list_b = data->list_b;
-	if (size < 3)
+	if (size < 4)
 	{
 		if (size == 1)
 			pa(data);
@@ -174,6 +256,8 @@ void	b_to_a(int size, t_data *data)
 			pa(data);
 			pa(data);
 		}
+		else if (size == 3)
+			b_to_a_three_hard_sort(data);
 		return ;
 	}
 	data->list_int = set_int_arr_for_sort(data->list_b, size);
@@ -229,6 +313,88 @@ void	b_to_a(int size, t_data *data)
 	b_to_a(tmp_rb, data);
 }
 
+void	a_to_b_three_hard_sort(t_data *data)
+{
+	int	one;
+	int	two;
+	int	three;
+
+	one = data->list_a->value;
+	two = data->list_a->next->value;
+	three = data->list_a->next->next->value;
+	if (one < two && two < three)
+		return ;
+	else if (one < two && two > three && one < three)
+	{
+		ra(data, 1);
+		sa(data);
+		rra(data, 1);
+	}
+	else if (one > two &&  two < three && one < three)
+		sa(data);
+	else if (one < two && one > three && two > three)
+	{
+		ra(data, 1);
+		sa(data);
+		rra(data, 1);
+		sa(data);
+	}
+	else if (one > two && one > three && two < three)
+	{
+		sa(data);
+		ra(data, 1);
+		sa(data);
+		rra(data, 1);
+	}
+	else if (one > two && two > three)
+	{
+		sa(data);
+		ra(data, 1);
+		sa(data);
+		rra(data, 1);
+		sa(data);
+	}
+}
+
+/*
+	1 2 3
+	one < two && two < three
+	return ;
+
+	1 3 2
+	one < two && two > three && one < three
+	ra(data, 1);
+	sa(data);
+	rra(data, 1);
+
+	2 1 3
+	one > two &&  two < three && one < three
+	sa(data);
+
+	2 3 1
+	one < two && one > three && two > three
+	ra(data, 1);
+	sa(data);
+	rra(data, 1);
+	sa(data);
+
+	3 1 2
+	one > two && one > three && two < three
+	sa(data);
+	ra(data, 1);
+	sa(data);
+	rra(data, 1);
+
+	3 2 1
+	one > two && two > three
+	sa(data);
+	ra(data, 1);
+	sa(data);
+	rra(data, 1);
+	sa(data);
+
+*/
+
 void	a_to_b(int size, t_data *data)
 {
 	int			i;
@@ -238,12 +404,17 @@ void	a_to_b(int size, t_data *data)
 	t_pw_list	*list_a;
 
 	list_a = data->list_a;
-	if (size < 3)
+	if (size < 4)
 	{
 		if (size == 1)
 			return ;
-		else if (list_a->value > list_a->next->value)
-			sa(data);
+		else if (size == 2)
+		{
+			if (list_a->value > list_a->next->value)
+				sa(data);
+		}
+		else if (size == 3)
+			a_to_b_three_hard_sort(data);
 		return ;
 	}
 	data->list_int = set_int_arr_for_sort(data->list_a, size);
@@ -318,19 +489,6 @@ void	init_data(t_data *data)
 	data->rb = 0;
 }
 
-
-void test_print_int_arr(int *arr,int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		printf("%d\n", arr[i]);
-		i++;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_data data;
@@ -341,7 +499,6 @@ int	main(int ac, char **av)
 	init_data(&data);
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
-	
 	quick_sort(data.list_int, 0, data.total_size - 1);
 	check_double(data.list_int, data.total_size);
 	set_pivot(&data, data.list_a_size);
