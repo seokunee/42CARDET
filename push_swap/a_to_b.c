@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 15:50:42 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:03:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,48 @@ static void	a_to_b_three_hard_sort(t_data *data)
 	}
 }
 
+void	a_to_b_four_five_hard_sort(t_data *data, int size)
+{
+	int			center;
+	int			i;
+
+	data->list_int = set_int_arr_for_sort(data->list_a, size);
+	quick_sort(data->list_int, 0, size - 1);
+	center = data->list_int[size - 3];
+	free(data->list_int);
+	i = 0;
+	while (data->ra < size - 3  && i < size)
+	{
+		if (data->list_a->value < center)
+		{
+			ra(data, 1);
+			data->ra++;
+		}
+		else
+		{
+			pb(data);
+			data->pb++;
+		}
+		i++;
+	}
+	while (data->pb > 0)
+	{
+		ft_putstr_fd("find2", 1);
+
+		pa(data);
+		data->pb--;
+	}
+	a_to_b_three_hard_sort(data);
+	while (data->ra > 0)
+	{
+		ft_putstr_fd("find1", 1);
+		rra(data, 1);
+		data->ra--;
+	}
+	if (size == 5 && data->list_a->value > data->list_a->next->value)
+		sa(data);
+}
+
 void	a_to_b(int size, t_data *data)
 {
 	int			i;
@@ -64,7 +106,7 @@ void	a_to_b(int size, t_data *data)
 	t_pw_list	*list_a;
 
 	list_a = data->list_a;
-	if (size < 4)
+	if (size < 6)
 	{
 		if (size == 1)
 			return ;
@@ -75,6 +117,10 @@ void	a_to_b(int size, t_data *data)
 		}
 		else if (size == 3)
 			a_to_b_three_hard_sort(data);
+		else if (size == 4)
+			a_to_b_four_five_hard_sort(data, 4);
+		else if (size == 5)
+			a_to_b_four_five_hard_sort(data, 5);
 		return ;
 	}
 	data->list_int = set_int_arr_for_sort(data->list_a, size);
