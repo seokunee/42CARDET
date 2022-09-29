@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 17:34:35 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:15:42 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,34 +59,6 @@ void	init_data(t_data *data)
 	data->rb = 0;
 }
 
-void	test_linked_list_value(t_pw_list *list, int size)
-{
-	t_pw_list	*tmp;
-	int			i;
-
-	i = 0;
-	tmp = list;
-	if (list == NULL)
-		return ;
-	while (i < size)
-	{
-		printf("%d\n",tmp->value);
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-void	test_printf_list_a_b(t_data *data)
-{
-	printf("--------a--------\n");
-	test_linked_list_value(data->list_a, data->list_a_size);
-	printf("--------a--------\n");
-	printf("--------b--------\n");
-	test_linked_list_value(data->list_b, data->list_b_size);
-	printf("--------b--------\n");
-}
-
-
 int	main(int ac, char **av)
 {
 	t_data data;
@@ -102,6 +74,5 @@ int	main(int ac, char **av)
 	set_pivot(&data, data.list_a_size);
 	free(data.list_int);
 	push_swap(&data);
-	test_printf_list_a_b(&data);
 	return (0);
 }

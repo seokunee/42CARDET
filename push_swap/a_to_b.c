@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 20:03:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:11:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	a_to_b_three_hard_sort(t_data *data)
+void	a_to_b_three_hard_sort(t_data *data)
 {
 	int	one;
 	int	two;
@@ -81,15 +81,12 @@ void	a_to_b_four_five_hard_sort(t_data *data, int size)
 	}
 	while (data->pb > 0)
 	{
-		ft_putstr_fd("find2", 1);
-
 		pa(data);
 		data->pb--;
 	}
 	a_to_b_three_hard_sort(data);
 	while (data->ra > 0)
 	{
-		ft_putstr_fd("find1", 1);
 		rra(data, 1);
 		data->ra--;
 	}

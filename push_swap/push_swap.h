@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 16:12:20 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:14:42 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,12 @@ void		hard_sort_a(t_data *data, int size);
 
 /* a_to_b.c */
 void		a_to_b(int size, t_data *data);
+void		a_to_b_three_hard_sort(t_data *data);
 
 /* b_to_a.c */
 void		b_to_a(int size, t_data *data);
+void		b_to_a_three_hard_sort(t_data *data);
+
 
 /* push_swap.c */
 void		push_swap(t_data *data);

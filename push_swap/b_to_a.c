@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:39 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 15:49:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:13:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	b_to_a_three_hard_sort(t_data *data)
+void	b_to_a_three_hard_sort(t_data *data)
 {
 	int	one;
 	int	two;
@@ -68,6 +68,48 @@ static void	b_to_a_three_hard_sort(t_data *data)
 	}
 }
 
+void	b_to_a_four_five_hard_sort(t_data *data, int size)
+{
+	int			center;
+	int			i;
+
+	data->list_int = set_int_arr_for_sort(data->list_b, size);
+	quick_sort(data->list_int, 0, size - 1);
+	center = data->list_int[size - 3];
+	free(data->list_int);
+	i = 0;
+	while (i < size)
+	{
+		if (data->list_b->value < center)
+		{
+			rb(data, 1);
+			data->rb++;
+		}
+		else
+			pa(data);
+		i++;
+	}
+	a_to_b_three_hard_sort(data);
+	while (data->rb > 0)
+	{
+		rrb(data, 1);
+		data->rb--;
+	}
+	if (size == 5 && data->list_a->value < data->list_a->next->value)
+	{
+		sb(data);
+		pa(data);
+	}
+	pa(data);
+}
+
+/*
+	1
+	2
+	3
+	4
+	5
+*/
 void	b_to_a(int size, t_data *data)
 {
 	int			i;
@@ -90,6 +132,10 @@ void	b_to_a(int size, t_data *data)
 		}
 		else if (size == 3)
 			b_to_a_three_hard_sort(data);
+		else if (size == 4)
+			b_to_a_four_five_hard_sort(data, 4);
+		else if (size == 5)
+			b_to_a_four_five_hard_sort(data, 5);
 		return ;
 	}
 	data->list_int = set_int_arr_for_sort(data->list_b, size);
