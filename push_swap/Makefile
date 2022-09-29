@@ -6,11 +6,13 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/09/27 14:42:18 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/09/29 16:12:52 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = push_swap.c parse.c parse1.c utility.c swap.c
+SRCS    = push_swap.c parse.c parse1.c utility.c operation_s.c \
+			operation_p.c  operation_r.c  operation_rr.c \
+			sort.c a_to_b.c b_to_a.c hard_sort.c
 OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra

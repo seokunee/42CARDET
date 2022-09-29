@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/27 20:34:22 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:05:24 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ void	make_linked_list(t_data *data)
 		i++;
 	}
 	tmp_list->next = NULL;
+}
+
+void	check_double(int *arr, int len)
+{
+	int	i;
+
+	i = 1;
+	if (len < 2)
+		return ;
+	while (i < len)
+	{
+		if (arr[i] == arr[i - 1])
+			throw_error("Error");	
+		i++;
+	}
 }
