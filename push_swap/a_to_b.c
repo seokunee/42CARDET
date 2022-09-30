@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 20:11:45 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:09:09 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,32 @@ void	a_to_b_three_hard_sort(t_data *data)
 		return ;
 	else if (one < two && two > three && one < three)
 	{
-		ra(data, 1);
+		ra(data);
 		sa(data);
-		rra(data, 1);
+		rra(data);
 	}
 	else if (one > two &&  two < three && one < three)
 		sa(data);
 	else if (one < two && one > three && two > three)
 	{
-		ra(data, 1);
+		ra(data);
 		sa(data);
-		rra(data, 1);
+		rra(data);
 		sa(data);
 	}
 	else if (one > two && one > three && two < three)
 	{
 		sa(data);
-		ra(data, 1);
+		ra(data);
 		sa(data);
-		rra(data, 1);
+		rra(data);
 	}
 	else if (one > two && two > three)
 	{
 		sa(data);
-		ra(data, 1);
+		ra(data);
 		sa(data);
-		rra(data, 1);
+		rra(data);
 		sa(data);
 	}
 }
@@ -69,7 +69,7 @@ void	a_to_b_four_five_hard_sort(t_data *data, int size)
 	{
 		if (data->list_a->value < center)
 		{
-			ra(data, 1);
+			ra(data);
 			data->ra++;
 		}
 		else
@@ -87,7 +87,7 @@ void	a_to_b_four_five_hard_sort(t_data *data, int size)
 	a_to_b_three_hard_sort(data);
 	while (data->ra > 0)
 	{
-		rra(data, 1);
+		rra(data);
 		data->ra--;
 	}
 	if (size == 5 && data->list_a->value > data->list_a->next->value)
@@ -129,7 +129,7 @@ void	a_to_b(int size, t_data *data)
 	{
 		if (data->list_a->value >= data->pivot_big)
 		{
-			ra(data, 1);
+			ra(data);
 			data->ra++;
 		}
 		else
@@ -138,7 +138,7 @@ void	a_to_b(int size, t_data *data)
 			data->pb++;
 			if (data->list_b->value >= data->pivot_small)
 			{
-				rb(data, 1);
+				rb(data);
 				data->rb++;
 			}
 		}
@@ -157,12 +157,12 @@ void	a_to_b(int size, t_data *data)
 	}
 	while (data->ra > 0)
 	{
-		rra(data, 1);
+		rra(data);
 		data->ra--;
 	}
 	while (data->rb > 0)
 	{
-		rrb(data, 1);
+		rrb(data);
 		data->rb--;
 	}
 	a_to_b(tmp_ra, data);

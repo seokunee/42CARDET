@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:09:43 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 16:10:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:30:16 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ void	rev_rotate_list(t_pw_list **list)
 	(*list) = list_last;
 }
 
-void	rra(t_data *data, int printable)
+void	rra(t_data *data)
 {
-	if (printable)
-		write(1, "rra\n", 4);
+	write(1, "rra\n", 4);
 	rev_rotate_list(&data->list_a);
 }
 
-void	rrb(t_data *data, int printable)
+void	rrb(t_data *data)
 {
-	if (printable)
-		write(1, "rrb\n", 4);
+	write(1, "rrb\n", 4);
 	rev_rotate_list(&data->list_b);
 }
 

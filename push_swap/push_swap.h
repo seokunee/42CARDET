@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 20:14:42 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:30:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void		sb(t_data *data);
 void		pa(t_data *data);
 void		pb(t_data *data);
 /*  operation_r.c */
-void		ra(t_data *data, int printable);
-void		rb(t_data *data, int printable);
+void		ra(t_data *data);
+void		rb(t_data *data);
 void		rr(t_data *data);
 /*  operation_rr.c */
-void		rra(t_data *data, int printable);
-void		rrb(t_data *data, int printable);
+void		rra(t_data *data);
+void		rrb(t_data *data);
 void		rrr(t_data *data);
 /* sort.c */
 void		quick_sort(int *arr, int L, int R);

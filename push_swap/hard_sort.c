@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:37:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 15:37:45 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:49:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	two_sort_a(t_data *data)
 	t_pw_list	*list_a;
 	
 	list_a = data->list_a;
-	printf("1번째 = %d, 2번째 = %d", list_a->value , list_a->next->value);
 	if (list_a->value > list_a->next->value)
 		sa(data);
 }
@@ -35,20 +34,34 @@ void	three_sort_a(t_data *data)
 		return ;
 	else if (one < two && two > three && one < three)
 	{
-		rra(data, 1);
+		rra(data);
 		sa(data);
 	}
 	else if (one > two &&  two < three && one < three)
 		sa(data);
 	else if (one < two && one > three && two > three)
-		rra(data, 1);
+		rra(data);
 	else if (one > two && one > three && two < three)
-		ra(data, 1);
+		ra(data);
 	else if (one > two && two > three)
 	{
 		sa(data);
-		rra(data, 1);
+		rra(data);
 	}
+}
+
+void	four_sort_a(t_data *data, int size)
+{
+	int	first;
+	t_pw_list *last;
+
+	data->list_int = set_int_arr_for_sort(data->list_a, size);
+	quick_sort(data->list_int, 0, size - 1);
+	if ()
+	{
+		
+	}
+	free(data->list_int);
 }
 
 void	hard_sort_a(t_data *data, int size)

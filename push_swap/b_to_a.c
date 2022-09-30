@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:39 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 20:13:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:39:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,27 @@
 
 void	b_to_a_three_hard_sort(t_data *data)
 {
-	int	one;
-	int	two;
-	int	three;
+	int	i;
 
-	one = data->list_b->value;
-	two = data->list_b->next->value;
-	three = data->list_b->next->next->value;
-	if (one < two && two < three)
+	i = -1;
+	data->list_int = set_int_arr_for_sort(data->list_b, 3);
+	quick_sort(data->list_int, 0, 2);
+	while (++i < 3 && data->list_b->value != data->list_int[2])
 	{
-		pa(data);
+		rb(data);
+		data->rb++;
+	}
+	free(data->list_int);
+	pa(data);
+	while (data->rb > 0)
+	{
+		rrb(data);
+		data->rb--;
+	}
+	if (data->list_b->value < data->list_b->next->value)
 		sb(data);
-		pa(data);
-		sa(data);
-		pa(data);
-		sa(data);
-	}
-	else if (one < two && two > three && one < three)
-	{
-		rb(data, 1);
-		pa(data);
-		rb(data, 1);
-		pa(data);
-		pa(data);
-	}
-	else if (one > two &&  two < three && one < three)
-	{
-		pa(data);
-		sb(data);
-		pa(data);
-		sa(data);
-		pa(data);
-	}
-	else if (one < two && one > three && two > three)
-	{
-		sb(data);
-		pa(data);
-		pa(data);
-		pa(data);
-	}
-	else if (one > two && one > three && two < three)
-	{
-		pa(data);
-		sb(data);
-		pa(data);
-		pa(data);
-	}
-	else if (one > two && two > three)
-	{
-		pa(data);
-		pa(data);
-		pa(data);
-	}
+	pa(data);
+	pa(data);
 }
 
 void	b_to_a_four_five_hard_sort(t_data *data, int size)
@@ -82,7 +51,7 @@ void	b_to_a_four_five_hard_sort(t_data *data, int size)
 	{
 		if (data->list_b->value < center)
 		{
-			rb(data, 1);
+			rb(data);
 			data->rb++;
 		}
 		else
@@ -92,7 +61,7 @@ void	b_to_a_four_five_hard_sort(t_data *data, int size)
 	a_to_b_three_hard_sort(data);
 	while (data->rb > 0)
 	{
-		rrb(data, 1);
+		rrb(data);
 		data->rb--;
 	}
 	if (size == 5 && data->list_a->value < data->list_a->next->value)
@@ -103,13 +72,6 @@ void	b_to_a_four_five_hard_sort(t_data *data, int size)
 	pa(data);
 }
 
-/*
-	1
-	2
-	3
-	4
-	5
-*/
 void	b_to_a(int size, t_data *data)
 {
 	int			i;
@@ -119,7 +81,7 @@ void	b_to_a(int size, t_data *data)
 	t_pw_list	*list_b;
 	
 	list_b = data->list_b;
-	if (size < 4)
+	if (size < 6)
 	{
 		if (size == 1)
 			pa(data);
@@ -145,18 +107,18 @@ void	b_to_a(int size, t_data *data)
 	i = 0;
 	while (i < size)
 	{
-		if (data->list_a->value < data->pivot_small)
+		if (data->list_a->value <= data->pivot_small)
 		{
-			rb(data, 1);
+			rb(data);
 			data->rb++;
 		}
 		else
 		{
 			pa(data);
 			data->pa++;
-			if (data->list_a->value < data->pivot_big)
+			if (data->list_a->value <= data->pivot_big)
 			{
-				ra(data, 1);
+				ra(data);
 				data->ra++;
 			}
 		}
@@ -179,12 +141,12 @@ void	b_to_a(int size, t_data *data)
 	}
 	while (data->ra > 0)
 	{
-		rra(data, 1);
+		rra(data);
 		data->ra--;
 	}
 	while (data->rb > 0)
 	{
-		rrb(data, 1);
+		rrb(data);
 		data->rb--;
 	}
 	a_to_b(tmp_ra, data);
