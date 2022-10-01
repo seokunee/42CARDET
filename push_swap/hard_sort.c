@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:37:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/30 21:49:03 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:45:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,28 @@ void	three_sort_a(t_data *data)
 	}
 }
 
-void	four_sort_a(t_data *data, int size)
+void	four_five_sort_a(t_data *data, int size)
 {
-	int	first;
-	t_pw_list *last;
+	int	center;
 
 	data->list_int = set_int_arr_for_sort(data->list_a, size);
 	quick_sort(data->list_int, 0, size - 1);
-	if ()
+	center = data->list_int[size - 3];
+	while (data->pb < size - 3)
 	{
-		
+		if (data->list_a->value < center)
+		{
+			pb(data);
+			data->pb++;
+		}
+		else
+			ra(data);
 	}
+	three_sort_a(data);
+	if (size == 5 && data->list_b->value < data->list_b->next->value)
+		sb(data);
+	pa(data);
+	pa(data);
 	free(data->list_int);
 }
 
@@ -72,4 +83,8 @@ void	hard_sort_a(t_data *data, int size)
 		two_sort_a(data);
 	else if (size == 3)
 		three_sort_a(data);
+	else if (size == 4)
+		four_five_sort_a(data, 4);
+	else if (size == 5)
+		four_five_sort_a(data, 5);
 }

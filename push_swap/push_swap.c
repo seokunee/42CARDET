@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/30 20:35:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:46:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	*set_int_arr_for_sort(t_pw_list *list, int size)
 
 void	push_swap(t_data *data)
 {
-	if (data->total_size < 4)
+	if (data->total_size < 6)
 	{
 		hard_sort_a(data, data->total_size);
 		return ;
