@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 15:05:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:40:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_pw_list	*ft_pw_lstnew(int value)
 void	make_linked_list(t_data *data)
 {
 	int			i;
-	t_pw_list 	*tmp_list;
+	t_pw_list	*tmp_list;
 
 	i = 0;
 	data->list_a = ft_pw_lstnew(data->list_int[i++]);
@@ -80,7 +80,7 @@ void	check_double(int *arr, int len)
 	while (i < len)
 	{
 		if (arr[i] == arr[i - 1])
-			throw_error("Error");	
+			throw_error("Error");
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:37:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/01 15:45:05 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:41:46 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	two_sort_a(t_data *data)
 {
 	t_pw_list	*list_a;
-	
+
 	list_a = data->list_a;
 	if (list_a->value > list_a->next->value)
 		sa(data);
@@ -37,7 +37,7 @@ void	three_sort_a(t_data *data)
 		rra(data);
 		sa(data);
 	}
-	else if (one > two &&  two < three && one < three)
+	else if (one > two && two < three && one < three)
 		sa(data);
 	else if (one < two && one > three && two > three)
 		rra(data);

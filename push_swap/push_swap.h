@@ -6,19 +6,23 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/30 15:30:03 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:42:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include "libft.h"
+# include <stdio.h> // 지울것ㅁㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㅇㄹㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㄴㅇㄹㅁㄴㅇㅇㄹ
+
 typedef struct s_pw_list
 {
 	int					value;
 	struct s_pw_list	*next;
 	struct s_pw_list	*prev;
-	
 }			t_pw_list;
 
 typedef struct s_data
@@ -42,10 +46,13 @@ typedef struct s_data
 	int			rb;
 }			t_data;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-# include <stdio.h> // 지울것ㅁㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㅇㄹㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㄴㅇㄹㅁㄴㅇㅇㄹ
+typedef struct s_sort
+{
+	int	left;
+	int	right;
+	int	pivot;
+	int	tmp;
+}			t_sort;
 
 /*  utility.c */
 void		throw_error(char *message);
@@ -86,12 +93,17 @@ void		hard_sort_a(t_data *data, int size);
 
 /* a_to_b.c */
 void		a_to_b(int size, t_data *data);
+
+/* a_to_b_hard.c */
+void		a_to_b_hard_sort(t_data *data, int size);
 void		a_to_b_three_hard_sort(t_data *data);
 
 /* b_to_a.c */
 void		b_to_a(int size, t_data *data);
-void		b_to_a_three_hard_sort(t_data *data);
 
+/* b_to_a_hard.c */
+void		b_to_a_three_hard_sort(t_data *data);
+void		b_to_a_four_five_hard_sort(t_data *data, int size);
 
 /* push_swap.c */
 void		push_swap(t_data *data);

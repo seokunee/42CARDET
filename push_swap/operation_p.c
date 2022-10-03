@@ -6,12 +6,11 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:09:48 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/29 16:10:16 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:54:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	push_list(t_pw_list **from_list, t_pw_list **to_list)
 {
@@ -21,7 +20,7 @@ void	push_list(t_pw_list **from_list, t_pw_list **to_list)
 	if (*from_list == NULL)
 		return ;
 	if ((*from_list)->next)
-		(*from_list)->next->prev = NULL; 
+		(*from_list)->next->prev = NULL;
 	from_list_first = *from_list;
 	to_list_first = *to_list;
 	*from_list = (*from_list)->next;

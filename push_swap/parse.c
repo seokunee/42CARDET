@@ -6,15 +6,15 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 00:24:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/09/26 20:12:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:51:29 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		check_is_num_arr(char *arr)
+void	check_is_num_arr(char *arr)
 {
-	int	i; 
+	int	i;
 
 	i = 0;
 	if (arr[i] == '-')
@@ -25,7 +25,7 @@ void		check_is_num_arr(char *arr)
 			throw_error("Error");
 		i++;
 	}
-	if (i == 1 && arr[i] =='-')
+	if (i == 1 && arr[i] == '-')
 		exit(1);
 }
 
@@ -73,7 +73,7 @@ int	count_list_in_arr(char **list_str)
 {
 	int		count;
 	int		i;
-	char 	**split;
+	char	**split;
 
 	i = 0;
 	count = 0;

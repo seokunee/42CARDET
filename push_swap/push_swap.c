@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/01 15:46:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:49:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	*set_int_arr_for_sort(t_pw_list *list, int size)
 	int		*arr;
 	int		i;
 
-	arr = (int*)malloc(sizeof(int) * size);
+	arr = (int *)malloc(sizeof(int) * size);
 	if (!arr)
 		exit(1);
 	i = 0;
@@ -61,7 +61,7 @@ void	init_data(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_data data;
+	t_data	data;
 
 	if (ac < 2)
 		return (0);
