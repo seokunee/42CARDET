@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/03 17:42:52 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:41:19 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_sort
 
 /*  utility.c */
 void		throw_error(char *message);
+int			ft_pw_atoi(const char *nptr);
+
 /*  operation_s.c */
 void		sa(t_data *data);
 void		sb(t_data *data);

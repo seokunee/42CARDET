@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/02 16:40:38 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:43:29 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	list_str_to_list_int(t_data *data)
 		while (splited[j])
 		{
 			check_is_num_arr(splited[j]);
-			data->list_int[k] = ft_atoi(splited[j]);
+			data->list_int[k] = ft_pw_atoi(splited[j]);
 			j++;
 			k++;
 		}

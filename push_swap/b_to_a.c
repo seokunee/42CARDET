@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:39 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/03 17:46:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:37:22 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	raise_big_and_mib_part(t_data *data)
+static void	raise_big_and_small_part(t_data *data)
 {
 	while (data->ra > 0 && data->rb > 0)
 	{
@@ -102,7 +102,7 @@ void	b_to_a(int size, t_data *data)
 	a_to_b(tmp_pa - tmp_ra, data);
 	data->ra = tmp_ra;
 	data->rb = tmp_rb;
-	raise_big_and_mib_part(data);
+	raise_big_and_small_part(data);
 	a_to_b(tmp_ra, data);
 	b_to_a(tmp_rb, data);
 }
