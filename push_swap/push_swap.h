@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:45:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/06 17:41:19 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:43:28 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdio.h> // 지울것ㅁㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㅇㄹㄴㅇㄹㄴㅇㅇㄹㄴㅇㄹㄴㅇㄹㅁㄴㅇㅇㄹ
 
 typedef struct s_pw_list
 {
@@ -57,6 +56,7 @@ typedef struct s_sort
 /*  utility.c */
 void		throw_error(char *message);
 int			ft_pw_atoi(const char *nptr);
+int			check_already_sorted(int *arr, int size, int type);
 
 /*  operation_s.c */
 void		sa(t_data *data);

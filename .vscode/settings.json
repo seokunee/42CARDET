@@ -35,6 +35,14 @@
     "optional": "c",
     "ratio": "c",
     "system_error": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "__hash_table": "c",
+    "__split_buffer": "c",
+    "__tree": "c",
+    "initializer_list": "c",
+    "random": "c",
+    "set": "c",
+    "unordered_map": "c",
+    "utility": "c"
   }
 }

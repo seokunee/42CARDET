@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:19:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/06 17:59:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:26:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,30 @@ int	ft_pw_atoi(const char *nptr)
 	if (result * n < -2147483648 || result * n > 2147483647)
 		throw_error("Error");
 	return (result * n);
+}
+
+int	check_already_sorted(int *arr, int size, int type)
+{
+	int	i;
+
+	i = 0;
+	if (type == 1)
+	{
+		while (i < size - 1)
+		{
+			if (arr[i] > arr[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	else if (type == 2)
+	{
+		while (i < size - 1)
+		{
+			if (arr[i] < arr[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	return (1);
 }

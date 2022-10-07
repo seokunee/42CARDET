@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:37:22 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/02 16:41:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:54:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	four_five_sort_a(t_data *data, int size)
 	three_sort_a(data);
 	if (size == 5 && data->list_b->value < data->list_b->next->value)
 		sb(data);
-	pa(data);
+	if (size == 5)
+		pa(data);
 	pa(data);
 	free(data->list_int);
 }

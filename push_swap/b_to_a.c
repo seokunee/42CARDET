@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:06:39 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/06 16:37:22 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:44:13 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	b_to_a_part_division(t_data *data, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (data->list_a->value <= data->pivot_small)
+		if (data->list_a->value < data->pivot_small)
 		{
 			rb(data);
 			data->rb++;
@@ -48,7 +48,7 @@ static void	b_to_a_part_division(t_data *data, int size)
 		{
 			pa(data);
 			data->pa++;
-			if (data->list_a->value <= data->pivot_big)
+			if (data->list_a->value < data->pivot_big)
 			{
 				ra(data);
 				data->ra++;

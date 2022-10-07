@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:33:41 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/03 17:49:25 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/07 19:26:24 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	main(int ac, char **av)
 	init_data(&data);
 	list_str_to_list_int(&data);
 	make_linked_list(&data);
+	if (check_already_sorted(data.list_int, data.total_size, 1))
+		return (0);
 	quick_sort(data.list_int, 0, data.total_size - 1);
 	check_double(data.list_int, data.total_size);
 	set_pivot(&data, data.list_a_size);
