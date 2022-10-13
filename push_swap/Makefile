@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/10/03 17:55:10 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/11 13:36:34 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS    = push_swap.c parse.c parse1.c utility.c operation_s.c \
 			sort.c a_to_b.c b_to_a.c hard_sort.c a_to_b_hard.c \
 			b_to_a_hard.c
 OBJS	= ${SRCS:.c=.o}
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = push_swap
 LIBFT	= libft

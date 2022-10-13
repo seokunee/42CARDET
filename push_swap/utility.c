@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:19:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/07 19:26:38 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/10 14:37:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_already_sorted(int *arr, int size, int type)
 	{
 		while (i < size - 1)
 		{
-			if (arr[i] > arr[i + 1])
+			if (arr[i] >= arr[i + 1])
 				return (0);
 			i++;
 		}
@@ -79,7 +79,7 @@ int	check_already_sorted(int *arr, int size, int type)
 	{
 		while (i < size - 1)
 		{
-			if (arr[i] < arr[i + 1])
+			if (arr[i] <= arr[i + 1])
 				return (0);
 			i++;
 		}
