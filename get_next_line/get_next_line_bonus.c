@@ -6,11 +6,11 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:43:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/04/12 20:55:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:33:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	ft_ckeck_newline(char *str)
 {
