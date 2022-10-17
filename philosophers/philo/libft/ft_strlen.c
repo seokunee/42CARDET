@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/14 16:26:28 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/04/05 12:42:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+size_t	ft_strlen(const char *s)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	size_t	i;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

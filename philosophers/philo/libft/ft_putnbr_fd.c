@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/21 16:09:09 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/04/05 13:43:41 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+static void	ft_print_number(int n, int fd)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	char	left;
 
+	if (n > 9)
+		ft_print_number(n / 10, fd);
+	left = '0' + n % 10;
+	write(fd, &left, 1);
+}
 
-typedef struct s_philo
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			n *= -1;
+			write(fd, "-", 1);
+		}
+		ft_print_number(n, fd);
+	}
+}

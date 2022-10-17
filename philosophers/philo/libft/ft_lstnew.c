@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/23 01:32:55 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/24 15:49:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+t_list	*ft_lstnew(void *content)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	t_list	*new;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}

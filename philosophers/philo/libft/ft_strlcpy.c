@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/14 18:13:35 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/17 17:18:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	size_t	len;
+	size_t	i;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	i = 0;
+	len = ft_strlen(src);
+	if (dstsize == 0)
+		return (len);
+	while (i < dstsize - 1 && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (len);
+}

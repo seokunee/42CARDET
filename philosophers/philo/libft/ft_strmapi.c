@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/21 15:36:50 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/21 16:44:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	unsigned int	len;
+	unsigned int	i;
+	char			*str;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	len = 0;
+	i = 0;
+	if (!s || !f)
+		return (NULL);
+	len = (unsigned int)ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

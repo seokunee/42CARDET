@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/14 17:41:39 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/04/05 11:29:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	size_t			i;
+	unsigned char	*s;
+	unsigned char	*d;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	i = -1;
+	s = (unsigned char *)src;
+	d = (unsigned char *)dest;
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	if (dest < src)
+	{
+		while (++i < n)
+			d[i] = s[i];
+	}
+	else
+	{
+		while (n)
+		{
+			d[n - 1] = s[n - 1];
+			n--;
+		}
+	}
+	return (dest);
+}

@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/17 14:30:56 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/03/30 14:50:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include "libft.h"
-
-
-
-
-#include <stdio.h>
-
-
-enum error_type
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	ARGS_ERR,
-	PARSE_ERR,
-};
+	unsigned char	*one;
+	unsigned char	*two;
+	size_t			i;
 
-
-typedef struct s_philo
-{
-	int	num_philos;
-	int time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_must_eat;
-}	t_philo;
-
-#endif
+	i = 0;
+	if (!n)
+		return (0);
+	one = (unsigned char *)s1;
+	two = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (one[i] != two[i])
+			return (one[i] - two[i]);
+		i++;
+	}
+	return (0);
+}

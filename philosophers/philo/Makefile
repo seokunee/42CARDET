@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/10/11 14:29:13 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/15 22:24:45 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = 
+SRCS    = main.c
 OBJS	= ${SRCS:.c=.o}
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
@@ -23,7 +23,7 @@ all:		${NAME}
 			${CC} ${CFLAGS} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-			make all -C ${LIBFT}/ 
+#			make all -C ${LIBFT}/ 
 			$(CC) -o $(NAME) ${OBJS} -L ./libft -lft
 
 clean:
@@ -31,7 +31,7 @@ clean:
 			rm -f ${OBJS}
 
 fclean:		clean
-			make fclean -C ${LIBFT}/
+#			make fclean -C ${LIBFT}/
 			rm -f ${NAME}
 
 re:			fclean all
