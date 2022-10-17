@@ -6,14 +6,14 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/08/31 15:37:51 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/17 19:24:52 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = pipex.c functions.c
 SOURCE	= srcs/
 OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}}
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = pipex
 HEAD	= includes

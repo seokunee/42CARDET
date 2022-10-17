@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:10:22 by seokchoi          #+#    #+#              #
-#    Updated: 2022/03/24 15:49:19 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/17 19:24:17 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS_BONUS	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_b
 							
 OBJS	= ${SRCS:.c=.o}
 OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = libft.a
 
