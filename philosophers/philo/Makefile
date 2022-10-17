@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/10/15 22:24:45 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/17 18:07:28 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all:		${NAME}
 			${CC} ${CFLAGS} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-#			make all -C ${LIBFT}/ 
+#			make all -C ${LIBFT}/ s
 			$(CC) -o $(NAME) ${OBJS} -L ./libft -lft
 
 clean:

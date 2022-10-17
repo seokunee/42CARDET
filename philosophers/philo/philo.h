@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/16 18:36:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:49:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 
 
-#include <stdio.h>
+#include <stdio.h> // --------------
 
 
 enum error_type
@@ -30,14 +30,28 @@ enum error_type
 	PARSE_ERR,
 };
 
-
-typedef struct s_philo
+typedef struct s_set_up
 {
 	int	num_philos;
 	int time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	num_must_eat;
+}	t_set_up;
+
+typedef struct s_philo
+{
+	pthread_t p_thread;
+	unsigned int id;
 }	t_philo;
+
+typedef struct s_data
+{
+	t_set_up		set_up;
+	t_philo			**philos;
+	pthread_mutex_t	*mutexs;
+}	t_data;
+
+void	throw_error(char *message);
 
 #endif
