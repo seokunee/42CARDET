@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/17 21:49:05 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:40:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_set_up
 typedef struct s_philo
 {
 	pthread_t p_thread;
+	pthread_mutex_t *l_fork;
+	pthread_mutex_t *r_fork;
 	unsigned int id;
 }	t_philo;
 
@@ -50,6 +52,7 @@ typedef struct s_data
 	t_set_up		set_up;
 	t_philo			**philos;
 	pthread_mutex_t	*mutexs;
+	pthread_t		*p_thread;
 }	t_data;
 
 void	throw_error(char *message);
