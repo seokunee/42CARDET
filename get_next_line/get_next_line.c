@@ -6,11 +6,12 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:41:21 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/04/12 20:55:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:18:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static int	ft_ckeck_newline(char *str)
 {
@@ -19,7 +20,7 @@ static int	ft_ckeck_newline(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\n')
+		if (str[i] == '\n' || str[i] == -1)
 			return (i);
 		i++;
 	}
@@ -65,49 +66,97 @@ static char	*find_line_and_update_str(char **line, ssize_t rdsize)
 	return (top_line);
 }
 
-static ssize_t	until_newline(ssize_t rdsize, char *buf, char **strs, int fd)
+static ssize_t	until_newline(ssize_t rdsize, char *buf, t_fd_list *list, int fd)
 {
 	char		*tmp;
-
+	
 	while (rdsize > 0)
 	{
 		buf[rdsize] = '\0';
-		if (!strs[fd])
-			strs[fd] = ft_strdup("");
-		if (!strs[fd])
+		if (!list->str)
+			list->str = ft_strdup("");
+		if (!list->str)
 			return (-2);
-		tmp = strs[fd];
-		strs[fd] = ft_strjoin(tmp, buf);
+		tmp = list->str;
+		list->str = ft_strjoin(tmp, buf);
 		free(tmp);
-		if (!strs[fd])
+		if (!list->str)
 			return (-2);
-		if (ft_ckeck_newline(strs[fd]) >= 0)
+		if (ft_ckeck_newline(list->str) >= 0)
 			break ;
 		rdsize = read_file(fd, &buf);
 	}
 	return (rdsize);
 }
 
+t_fd_list	*find_fd_linked_list(t_fd_list *list, int fd)
+{
+	t_fd_list *tmp;
+	t_fd_list *last;
+
+	tmp = list;
+	if (tmp == NULL)
+	{
+		list = (t_fd_list*)malloc(sizeof(t_fd_list));
+		list->next = NULL;
+		list->fd = fd;
+		return (list);
+	}
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			break;
+		last = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+	{
+		list = (t_fd_list*)malloc(sizeof(t_fd_list));
+		last->next = list;
+		list->next = NULL;
+		list->fd = fd;
+		return (list);
+	}
+	return (tmp);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*strs[OPEN_MAX];
+	static t_fd_list *list;
 	char		*buf;
 	ssize_t		rdsize;
+	t_fd_list	*target;
 
+	printf("1\n");
 	if (BUFFER_SIZE < 1 || fd < 0 || fd > OPEN_MAX)
 		return (NULL);
+	printf("2\n");
+
 	if (BUFFER_SIZE > (SIZE_MAX / 2))
 		buf = (char *)malloc(sizeof(char) * ((SIZE_MAX / 2) + 1));
 	else
 		buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	printf("3\n");
+	
 	if (!buf)
 		return (0);
+	printf("4\n");
+	
+	target = find_fd_linked_list(list, fd);
+	printf("5\n");
+
 	rdsize = read_file(fd, &buf);
-	rdsize = until_newline(rdsize, buf, strs, fd);
+	printf("6\n");
+
+	rdsize = until_newline(rdsize, buf, target, fd);
+	printf("7\n");
+
 	free(buf);
 	if (rdsize == -2)
 		return (NULL);
-	if (!strs[fd])
+	if (target->str)
 		return (NULL);
-	return (find_line_and_update_str(&strs[fd], rdsize));
+	printf("8\n");
+	
+	return (find_line_and_update_str(&target->str, rdsize));
 }
