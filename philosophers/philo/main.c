@@ -6,11 +6,12 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/18 17:49:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/21 18:28:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 void	set_philo_init(t_set_up *set_up, int ac, char **av)
 {
 	set_up->num_philos = ft_atoi((const char*)av[1]);
@@ -24,14 +25,16 @@ void	set_philo_init(t_set_up *set_up, int ac, char **av)
 void	*philo_to_do(void *philo)
 {
 	t_philo			*info;
-	unsigned int	id;
 
 	info = (t_philo *)philo;
-	pthread_mutex_lock(info->philos[0);
+	pthread_mutex_lock(info->l_fork);
+	pthread_mutex_lock(info->r_fork);
 	
-	printf("%s\n", info->philos[0].);
+	printf("thread id = %u\n", info->id);
 	usleep(2000000);
-	pthread_mutex_unlock(info->philos[0]);
+	
+	pthread_mutex_unlock(info->l_fork);
+	pthread_mutex_unlock(info->r_fork);
 	return NULL;
 }
 
@@ -93,16 +96,13 @@ void	set_fork_each_philo(t_data *data)
 	{
 		if (i == 0)
 		{
-			philos[0]->r_fork = mutexs[0];
-			philos[0]->l_fork = mutexs[data->set_up.num_philos - 1];
-		}
-		else if (i == data->set_up.num_philos - 1)
-		{
-
+			philos[0]->r_fork = &mutexs[0];
+			philos[0]->l_fork = &mutexs[data->set_up.num_philos - 1];
 		}
 		else
 		{
-			
+			philos[i]->r_fork = &mutexs[i];
+			philos[i]->l_fork = &mutexs[i - 1];
 		}
 		i++;
 	}
@@ -116,36 +116,42 @@ int	main(int ac, char **av)
 	int status;
 	pthread_mutex_t mutex;
 
-	if (ac != 4 || ac != 5)
-		exit(1);
+	printf("aa\n");
 
+	if (ac != 5 && ac != 6)
+		exit(1);
+	printf("a\n");
 	set_philo_init(&data.set_up, ac, av);
+	printf("b\n");
+
 	if (data.set_up.num_philos < 2)
 		exit(1);
+	printf("c\n");
+	
 	data.philos = malloc_philos(data.set_up.num_philos);
 	data.mutexs = malloc_mutex(data.set_up.num_philos);
+	printf("d\n");
 
-	thr_id = pthread_create(&p_thread[0], NULL, philo_to_do, (void *)data.philos[0]);
+	set_fork_each_philo(&data);
+	printf("e\n");
+
+	thr_id = pthread_create(&data.philos[0]->p_thread, NULL, philo_to_do, (void *)data.philos[0]);
 	if (thr_id < 0)
 		exit(1);
-	usleep(1);
-	thr_id = pthread_create(&p_thread[1], NULL, philo_to_do, (void *)data.philos[1]);
+	usleep(10);
+	printf("f\n");
+	printf("ff %d\n", status);
+
+	thr_id = pthread_create(&data.philos[1]->p_thread, NULL, philo_to_do, (void *)data.philos[1]);
 	if (thr_id < 0)
 		exit(1);
-	usleep(1);
+	usleep(10);
+	printf("g\n");
+	
 	if (pthread_mutex_init(&mutex, NULL))
 		exit(1);
-
-	pthread_join(p_thread[0], (void **)&status);
-	pthread_join(p_thread[1], (void **)&status);
+	pthread_join(data.philos[0]->p_thread, (void **)&status);
+	pthread_join(data.philos[1]->p_thread, (void **)&status);
 	printf("언제 종료 될까요?\n");
 	return (0);
 }
-
-/*
-
-thread 함수가 동작하기 위해서 필요한 것은? 뮤텍스
-1. 
-2. 
-
-*/

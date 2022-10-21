@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/10/17 18:07:28 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/10/21 17:41:39 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.c
+SRCS    = main.c error.c ft_atoi.c ft_putstr_fd.c
 OBJS	= ${SRCS:.c=.o}
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
@@ -23,15 +23,12 @@ all:		${NAME}
 			${CC} ${CFLAGS} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-#			make all -C ${LIBFT}/ s
-			$(CC) -o $(NAME) ${OBJS} -L ./libft -lft
+			$(CC) -o $(NAME) ${OBJS}
 
 clean:
-			make clean -C ${LIBFT}/
 			rm -f ${OBJS}
 
 fclean:		clean
-#			make fclean -C ${LIBFT}/
 			rm -f ${NAME}
 
 re:			fclean all
