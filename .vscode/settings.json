@@ -43,6 +43,7 @@
     "random": "c",
     "set": "c",
     "unordered_map": "c",
-    "utility": "c"
+    "utility": "c",
+    "__locale": "c"
   }
 }
