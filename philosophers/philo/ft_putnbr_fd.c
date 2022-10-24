@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 17:11:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/24 15:38:33 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/03/21 16:09:09 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/10/24 15:38:49 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+#include "utility.h"
 
-# include <unistd.h>
+static void	ft_print_number(int n, int fd)
+{
+	char	left;
 
-int		ft_atoi(const char *nptr);
-void	ft_putstr_fd(char *s, int fd);
-int		ft_strlen(const char *s);
-void	ft_putnbr_fd(int n, int fd);
+	if (n > 9)
+		ft_print_number(n / 10, fd);
+	left = '0' + n % 10;
+	write(fd, &left, 1);
+}
 
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			n *= -1;
+			write(fd, "-", 1);
+		}
+		ft_print_number(n, fd);
+	}
+}

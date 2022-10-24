@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/23 19:38:02 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:00:11 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
-#include <stdio.h> // -----지울것-----
+
+
+
+# include <stdio.h> // -----지울것-----
+
+
+
+
 
 typedef struct s_data t_data;
 typedef struct s_philo t_philo;
@@ -45,6 +53,7 @@ struct s_philo
 	pthread_t		p_thread;
 	pthread_mutex_t *l_fork;
 	pthread_mutex_t *r_fork;
+	int				num_eat;
 	int				id;
 	t_data			*data;
 };
@@ -75,6 +84,5 @@ void			set_philo_data(t_data *data, int ac, char **av);
 void			set_data_address_each_philo(t_philo **philos, t_data *data);
 void			set_fork_id_each_philo(t_data *data);
 void			set_up_init(t_set_up *set_up, int ac, char **av);
-
 
 #endif

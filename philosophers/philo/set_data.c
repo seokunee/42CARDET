@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/23 19:37:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:00:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	set_fork_id_each_philo(t_data *data)
 			philos[i]->l_fork = &mutexs[i - 1];
 		}
 		philos[i]->id = i;
+		philos[i]->num_eat = 0;
 		i++;
 	}
 }
