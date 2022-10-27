@@ -44,6 +44,7 @@
     "set": "c",
     "unordered_map": "c",
     "utility": "c",
-    "__locale": "c"
+    "__locale": "c",
+    "_types.h": "c"
   }
 }
