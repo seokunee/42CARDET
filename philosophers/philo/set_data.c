@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/27 21:47:52 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:55:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,12 @@ void	set_data_address_last_time_each_philo(t_philo **philos, t_data *data)
 void	set_philo_data(t_data *data, int ac, char **av)
 {
 	set_up_init(&data->set_up, ac, av);
-	if (data->set_up.num_philos < 2)
-		throw_error(ARGS_ERR);
+	// if (data->set_up.num_philos < 2)
+		// throw_error(ARGS_ERR);
 	data->p_thread = malloc(sizeof(pthread_t) * data->set_up.num_philos);
 	data->philos = malloc_philos(data->set_up.num_philos);
 	data->mutexs = malloc_mutex(data->set_up.num_philos);
+	data->done_check_box = ft_calloc(data->set_up.num_philos, sizeof(int));
 	set_data_address_last_time_each_philo(data->philos, data);
 	set_fork_id_each_philo(data);
 }

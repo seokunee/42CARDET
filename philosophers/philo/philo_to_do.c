@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/27 22:02:42 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:22:04 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	count_eat(t_philo *philo)
 {
 	philo->num_eat++;
 	if (philo->num_eat == philo->data->set_up.num_must_eat)
+	{
+		philo->data->done_check_box[philo->id - 1] = 1;
 		return (1);
+	}
 	return (0);
 }
 
@@ -68,8 +71,8 @@ void	*philo_to_do(void *philo)
 	t_philo			*info;
 
 	info = (t_philo *)philo;
-	if (info->id % 2 == 0)
-		usleep(100000);
+	// if (info->id % 2 == 0)
+		// usleep(1);
 	while (1)
 	{
 		pthread_mutex_lock(info->l_fork);
@@ -86,4 +89,3 @@ void	*philo_to_do(void *philo)
 	}
 	return (NULL);
 }
-

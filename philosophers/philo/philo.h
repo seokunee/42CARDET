@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/27 21:48:06 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:16:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ struct s_data
 	t_philo			**philos;
 	pthread_mutex_t	*mutexs;
 	pthread_t		*p_thread;
+	int				*done_check_box;
 };
 
 void			throw_error(enum error_type type);
