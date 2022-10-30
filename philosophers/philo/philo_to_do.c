@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 20:22:04 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 21:28:16 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ time_t	get_cur_time()
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+time_t	get_passed_time_ms(time_t start_time)
+{
+	return (get_cur_time() - start_time);
+}
+
+void	atomic_sleep(time_t time_to_wait)
+{
+	time_t	start_time;
+
+	start_time = get_cur_time();
+	while (get_passed_time_ms(start_time) < time_to_wait)
+		usleep(1000);
+}
+
 void	eating(t_philo *philo)
 {
 	time_t	elapsed_time;
@@ -27,7 +41,7 @@ void	eating(t_philo *philo)
 	philo->last_eat_time = get_cur_time();
 	elapsed_time = philo->last_eat_time - philo->data->set_up.start_time;
 	printf("%ld %d is eating\n", elapsed_time, philo->id);
-	usleep(philo->data->set_up.time_to_eat * 1000);
+	atomic_sleep(philo->data->set_up.time_to_eat);
 }
 
 void	sleeping(t_philo *philo)
@@ -36,7 +50,7 @@ void	sleeping(t_philo *philo)
 
 	elapsed_time = get_cur_time() - philo->data->set_up.start_time;
 	printf("%ld %d is sleeping\n", elapsed_time, philo->id);
-	usleep(philo->data->set_up.time_to_sleep);
+	atomic_sleep(philo->data->set_up.time_to_sleep);
 }
 
 void	thinking(t_philo *philo)
@@ -69,10 +83,10 @@ int	count_eat(t_philo *philo)
 void	*philo_to_do(void *philo)
 {
 	t_philo			*info;
-
+	
 	info = (t_philo *)philo;
 	// if (info->id % 2 == 0)
-		// usleep(1);
+		// usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(info->l_fork);

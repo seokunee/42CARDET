@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 16:16:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 18:01:18 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct s_set_up
 struct s_philo
 {
 	pthread_t		p_thread;
+	pthread_mutex_t event_fork;
 	pthread_mutex_t *l_fork;
 	pthread_mutex_t *r_fork;
 	int				num_eat;
@@ -84,5 +85,11 @@ void			set_philo_data(t_data *data, int ac, char **av);
 void			set_data_address_last_time_each_philo(t_philo **philos, t_data *data);
 void			set_fork_id_each_philo(t_data *data);
 void			set_up_init(t_set_up *set_up, int ac, char **av);
+
+
+
+
+// test-~~~~
+void	test_check_done(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 22:12:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 18:23:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ int	main(int ac, char **av)
 	iterate_pthread_detach(&data);
 	watch_threads(&data);
 	free_all_mutexs(&data);
-	test_check_done(&data);
+	// test_check_done(&data);
 	return (0);
 }
