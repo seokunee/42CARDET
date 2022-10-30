@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/30 18:01:18 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 22:15:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ void			set_data_address_last_time_each_philo(t_philo **philos, t_data *data);
 void			set_fork_id_each_philo(t_data *data);
 void			set_up_init(t_set_up *set_up, int ac, char **av);
 
+//watch
+int				watch_threads(t_data *data);
 
-
-
-// test-~~~~
-void	test_check_done(t_data *data);
 
 #endif
