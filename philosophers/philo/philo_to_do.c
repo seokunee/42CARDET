@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/30 21:28:16 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/31 00:08:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-time_t	get_cur_time()
+time_t	get_cur_time(void)
 {
 	struct timeval	time;
 
@@ -34,41 +34,6 @@ void	atomic_sleep(time_t time_to_wait)
 		usleep(1000);
 }
 
-void	eating(t_philo *philo)
-{
-	time_t	elapsed_time;
-	
-	philo->last_eat_time = get_cur_time();
-	elapsed_time = philo->last_eat_time - philo->data->set_up.start_time;
-	printf("%ld %d is eating\n", elapsed_time, philo->id);
-	atomic_sleep(philo->data->set_up.time_to_eat);
-}
-
-void	sleeping(t_philo *philo)
-{
-	time_t	elapsed_time;
-
-	elapsed_time = get_cur_time() - philo->data->set_up.start_time;
-	printf("%ld %d is sleeping\n", elapsed_time, philo->id);
-	atomic_sleep(philo->data->set_up.time_to_sleep);
-}
-
-void	thinking(t_philo *philo)
-{
-	time_t	elapsed_time;
-
-	elapsed_time = get_cur_time() - philo->data->set_up.start_time;
-	printf("%ld %d is thinking\n", elapsed_time, philo->id);
-}
-
-void	take_fork(t_philo *philo)
-{
-	time_t	elapsed_time;
-
-	elapsed_time = get_cur_time() - philo->data->set_up.start_time;
-	printf("%ld %d has taken a fork\n", elapsed_time, philo->id);
-}
-
 int	count_eat(t_philo *philo)
 {
 	philo->num_eat++;
@@ -83,10 +48,8 @@ int	count_eat(t_philo *philo)
 void	*philo_to_do(void *philo)
 {
 	t_philo			*info;
-	
+
 	info = (t_philo *)philo;
-	// if (info->id % 2 == 0)
-		// usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(info->l_fork);

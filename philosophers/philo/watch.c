@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:13:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/30 22:15:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 23:11:33 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 static void	check_die(t_data *data, int *flag)
 {
-	int	i;
+	int		i;
 	time_t	elapsed_time;
 
 	i = -1;
 	while (++i < data->set_up.num_philos)
 	{
-		if (get_cur_time() - data->philos[i]->last_eat_time > data->set_up.time_to_die)
+		if (get_cur_time() - data->philos[i]->last_eat_time \
+		> data->set_up.time_to_die)
 		{
 			*flag = 0;
-			elapsed_time = get_cur_time() - data->philos[i]->data->set_up.start_time;
+			elapsed_time = get_cur_time() - \
+			data->philos[i]->data->set_up.start_time;
 			printf("%ld %d died\n", elapsed_time, data->philos[i]->id);
 			break ;
 		}

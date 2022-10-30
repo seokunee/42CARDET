@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_philo_data.c                                :+:      :+:    :+:   */
+/*   malloc_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:35:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/23 17:36:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 23:10:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_philo	**malloc_philos(unsigned int num_philos)
 {
 	unsigned int	i;
-	t_philo	**philos;
+	t_philo			**philos;
 
 	i = 0;
 	philos = (t_philo **)malloc(sizeof(t_philo *) * num_philos);

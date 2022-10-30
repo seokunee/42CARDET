@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:26:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/30 21:20:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/30 23:09:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	iterate_pthread_create(t_data *data)
 	i = 0;
 	while (i < data->set_up.num_philos)
 	{
-		status = pthread_create(&data->philos[i]->p_thread, NULL, philo_to_do, (void *)data->philos[i]);
+		status = pthread_create(&data->philos[i]->p_thread, \
+		NULL, philo_to_do, (void *)data->philos[i]);
 		if (status < 0)
 			throw_error(THTREAD_ERR);
 		data->philos[i]->p_thread = data->p_thread[i];
@@ -30,7 +31,8 @@ void	iterate_pthread_create(t_data *data)
 	i = 1;
 	while (i < data->set_up.num_philos)
 	{
-		status = pthread_create(&data->philos[i]->p_thread, NULL, philo_to_do, (void *)data->philos[i]);
+		status = pthread_create(&data->philos[i]->p_thread, \
+		NULL, philo_to_do, (void *)data->philos[i]);
 		if (status < 0)
 			throw_error(THTREAD_ERR);
 		data->philos[i]->p_thread = data->p_thread[i];
