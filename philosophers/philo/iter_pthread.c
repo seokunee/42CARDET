@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:26:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 20:05:23 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:09:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	iterate_pthread_create(t_data *data)
 void	iterate_pthread_detach(t_data *data)
 {
 	int	i;
-	int	status;
 
 	i = 0;
-	status = 0;
 	while (i < data->set_up.num_philos)
 	{
 		pthread_detach(data->philos[i]->p_thread);

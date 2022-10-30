@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 20:47:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:12:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,23 @@ void	test_check_done(t_data *data)
 	int	i;
 
 	i = 0;
+	printf("done = [");
 	while (i < data->set_up.num_philos)
 	{
-		
+		printf("%d ",data->done_check_box[i]);
+		i++;
+	}
+	printf("]\n");
+}
+
+void	free_all_mutexs(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->set_up.num_philos)
+	{
+		pthread_mutex_destroy(&data->mutexs[i]);
 		i++;
 	}
 }
@@ -80,6 +94,7 @@ int	main(int ac, char **av)
 	iterate_pthread_create(&data);
 	iterate_pthread_detach(&data);
 	watch_threads(&data);
-	
+	free_all_mutexs(&data);
+	test_check_done(&data);
 	return (0);
 }
