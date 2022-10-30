@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/31 00:07:52 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/31 01:25:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ typedef struct s_set_up	t_set_up;
 
 enum e_error_type
 {
+	NO_ERR,
 	ARGS_ERR,
 	PARSE_ERR,
 	THTREAD_ERR,
+	INIT_MUTEX_ERR,
+	CREATE_THREAD_ERR,
+	MALLOC_ERR,
 };
 
 struct s_set_up
@@ -62,9 +66,9 @@ struct s_data
 	int				*done_check_box;
 };
 
-void			throw_error(enum e_error_type type);
+int				throw_error(enum e_error_type type);
 
-void			iterate_pthread_create(t_data *data);
+int				iterate_pthread_create(t_data *data);
 void			iterate_pthread_detach(t_data *data);
 
 void			*philo_to_do(void *philo);
@@ -73,10 +77,10 @@ time_t			get_cur_time(void);
 t_philo			**malloc_philos(unsigned int num_philos);
 pthread_mutex_t	*malloc_mutex(unsigned int num_philos);
 
-void			set_philo_data(t_data *data, int ac, char **av);
+int				set_philo_data(t_data *data, int ac, char **av);
 void			set_data_left_each_philo(t_philo **philos, t_data *data);
 void			set_forks_each_philo(t_data *data);
-void			set_up_init(t_set_up *set_up, int ac, char **av);
+int				set_up_init(t_set_up *set_up, int ac, char **av);
 
 int				watch_threads(t_data *data);
 

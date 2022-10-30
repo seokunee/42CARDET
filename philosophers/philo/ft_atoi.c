@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:36:52 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/23 16:18:50 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/31 01:17:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	check_arg_condition(const char *arg)
+static int	check_arg_condition(const char *arg)
 {
 	int	i;
 	int	sign;
@@ -26,13 +26,14 @@ static void	check_arg_condition(const char *arg)
 		i++;
 	}
 	if (sign == -1)
-		throw_error(ARGS_ERR);
+		return (throw_error(ARGS_ERR));
 	while (arg[i])
 	{
 		if (arg[i] < '0' || arg[i] > '9')
-			throw_error(ARGS_ERR);
+			return (throw_error(ARGS_ERR));
 		i++;
 	}
+	return (NO_ERR);
 }
 
 int	ft_atoi(const char *nptr)
@@ -44,7 +45,8 @@ int	ft_atoi(const char *nptr)
 	n = 1;
 	i = 0;
 	result = 0;
-	check_arg_condition(nptr);
+	if (check_arg_condition(nptr))
+		return (check_arg_condition(nptr));
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')

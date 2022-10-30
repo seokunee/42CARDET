@@ -6,16 +6,16 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/31 00:07:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/10/31 01:24:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_up_init(t_set_up *set_up, int ac, char **av)
+int	set_up_init(t_set_up *set_up, int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
-		throw_error(ARGS_ERR);
+		return (throw_error(ARGS_ERR));
 	set_up->num_philos = ft_atoi((const char *)av[1]);
 	set_up->time_to_die = ft_atoi((const char *)av[2]);
 	set_up->time_to_eat = ft_atoi((const char *)av[3]);
@@ -24,6 +24,7 @@ void	set_up_init(t_set_up *set_up, int ac, char **av)
 	if (ac == 6)
 		set_up->num_must_eat = ft_atoi((const char *)av[5]);
 	set_up->start_time = get_cur_time();
+	return (0);
 }
 
 void	set_forks_each_philo(t_data *data)
@@ -67,7 +68,7 @@ void	set_data_left_each_philo(t_philo **philos, t_data *data)
 	}
 }
 
-void	set_philo_data(t_data *data, int ac, char **av)
+int	set_philo_data(t_data *data, int ac, char **av)
 {
 	set_up_init(&data->set_up, ac, av);
 	data->p_thread = malloc(sizeof(pthread_t) * data->set_up.num_philos);
@@ -76,4 +77,5 @@ void	set_philo_data(t_data *data, int ac, char **av)
 	data->done_check_box = ft_calloc(data->set_up.num_philos, sizeof(int));
 	set_data_left_each_philo(data->philos, data);
 	set_forks_each_philo(data);
+	return (NO_ERR);
 }
