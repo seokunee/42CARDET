@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 20:26:23 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:20:56 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ static int	count_eat(t_philo *philo)
 void	*philo_to_do(void *philo)
 {
 	t_philo			*info;
+	int				stop;
 
+	stop = 1;
 	info = (t_philo *)philo;
-	while (1)
+	while (stop)
 	{
 		pthread_mutex_lock(info->l_fork);
 		take_fork(philo);
@@ -38,7 +40,7 @@ void	*philo_to_do(void *philo)
 		pthread_mutex_unlock(info->l_fork);
 		pthread_mutex_unlock(info->r_fork);
 		if (count_eat(philo))
-			break ;
+			stop = 0;
 		sleeping(philo);
 		thinking(philo);
 	}
