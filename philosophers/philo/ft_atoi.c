@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:36:52 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:17:17 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	check_arg_condition(const char *arg)
+static t_error	check_arg_condition(const char *arg)
 {
 	int	i;
 	int	sign;
@@ -26,14 +26,24 @@ static int	check_arg_condition(const char *arg)
 		i++;
 	}
 	if (sign == -1)
-		return (throw_error(ARGS_ERR));
+		return (ARGS_ERR);
 	while (arg[i])
 	{
 		if (arg[i] < '0' || arg[i] > '9')
-			return (throw_error(ARGS_ERR));
+			return (ARGS_ERR);
 		i++;
 	}
 	return (NO_ERR);
+}
+
+static void	check_sign(const char *nptr, int *i, long *n)
+{
+	if (nptr[*i] == '-' || nptr[*i] == '+')
+	{
+		if (nptr[*i] == '-')
+			(*n) *= -1;
+		(*i)++;
+	}
 }
 
 int	ft_atoi(const char *nptr)
@@ -46,15 +56,10 @@ int	ft_atoi(const char *nptr)
 	i = 0;
 	result = 0;
 	if (check_arg_condition(nptr))
-		return (check_arg_condition(nptr));
+		return (ATOI_ERR);
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			n *= -1;
-		i++;
-	}
+	check_sign(nptr, &i, &n);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result *= 10;

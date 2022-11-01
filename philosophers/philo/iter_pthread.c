@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:26:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/31 01:18:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	iterate_pthread_create(t_data *data)
+t_error	iterate_pthread_create(t_data *data)
 {
 	int	i;
 	int	status;
@@ -23,25 +23,25 @@ int	iterate_pthread_create(t_data *data)
 		status = pthread_create(&data->philos[i]->p_thread, \
 		NULL, philo_to_do, (void *)data->philos[i]);
 		if (status < 0)
-			return (throw_error(THTREAD_ERR));
+			return (THREAD_ERR);
 		data->philos[i]->p_thread = data->p_thread[i];
 		i += 2;
 	}
-	usleep(1000);
+	usleep_without_error(1000);
 	i = 1;
 	while (i < data->set_up.num_philos)
 	{
 		status = pthread_create(&data->philos[i]->p_thread, \
 		NULL, philo_to_do, (void *)data->philos[i]);
 		if (status < 0)
-			return (throw_error(THTREAD_ERR));
+			return (throw_error(THREAD_ERR));
 		data->philos[i]->p_thread = data->p_thread[i];
 		i += 2;
 	}
 	return (NO_ERR);
 }
 
-void	iterate_pthread_detach(t_data *data)
+t_error	iterate_pthread_detach(t_data *data)
 {
 	int	i;
 
@@ -51,4 +51,5 @@ void	iterate_pthread_detach(t_data *data)
 		pthread_detach(data->philos[i]->p_thread);
 		i++;
 	}
+	return (NO_ERR);
 }

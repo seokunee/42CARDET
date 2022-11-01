@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 16:09:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/24 15:38:49 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/11/01 20:24:53 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/11/01 21:15:42 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utility.h"
+#include "philo.h"
 
-static void	ft_print_number(int n, int fd)
+time_t	get_now_time_ms(void)
 {
-	char	left;
+	struct timeval	time;
 
-	if (n > 9)
-		ft_print_number(n / 10, fd);
-	left = '0' + n % 10;
-	write(fd, &left, 1);
+	while (1)
+	{
+		if (gettimeofday(&time, NULL) == 0)
+			break ;
+	}
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+time_t	get_passed_time_ms(time_t start_time)
 {
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
-	{
-		if (n < 0)
-		{
-			n *= -1;
-			write(fd, "-", 1);
-		}
-		ft_print_number(n, fd);
-	}
+	return (get_now_time_ms() - start_time);
 }

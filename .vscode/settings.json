@@ -45,6 +45,12 @@
     "unordered_map": "c",
     "utility": "c",
     "__locale": "c",
-    "_types.h": "c"
+    "_types.h": "c",
+    "philo.h": "c",
+    "__tuple": "c",
+    "compare": "c",
+    "cstddef": "c",
+    "variant": "c",
+    "__functional_base_03": "c"
   }
 }

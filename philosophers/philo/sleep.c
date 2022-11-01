@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Created: 2022/11/01 20:26:04 by seokchoi          #+#    #+#             */
+/*   Updated: 2022/11/01 20:26:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_all_mutexs(t_data *data)
+void	usleep_without_error(unsigned int time_to_wait)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->set_up.num_philos)
-	{
-		pthread_mutex_destroy(&data->mutexs[i]);
-		i++;
-	}
+	while (usleep(time_to_wait) != 0)
+		;
 }
 
-int	main(int ac, char **av)
+void	while_sleep(time_t time_to_wait)
 {
-	t_data			data;
-	t_error			type;
+	time_t	start_time;
 
-	type = set_philo_data(&data, ac, av);
-	if (type)
-		return (type);
-	type = iterate_pthread_create(&data);
-	if (type)
-		return (type);
-	iterate_pthread_detach(&data);
-	watch_threads(&data);
-	free_all_mutexs(&data);
-	return (0);
+	start_time = get_now_time_ms();
+	while (get_passed_time_ms(start_time) < time_to_wait)
+		usleep_without_error(1000);
 }
