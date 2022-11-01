@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:26:01 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_forks_each_philo(t_data *data)
+static void	set_forks_each_philo(t_data *data)
 {
 	int				i;
 	t_philo			**philos;
@@ -37,7 +37,7 @@ void	set_forks_each_philo(t_data *data)
 	}
 }
 
-t_error	set_data_left_each_philo(t_philo **philos, t_data *data)
+static t_error	set_data_left_each_philo(t_philo **philos, t_data *data)
 {
 	int	i;
 
@@ -55,15 +55,15 @@ t_error	set_data_left_each_philo(t_philo **philos, t_data *data)
 	return (NO_ERR);
 }
 
-t_error	check_malloc_data_error(t_data *data)
+static t_error	check_malloc_data_error(t_data *data)
 {
-	if (data->p_thread)
+	if (!data->p_thread)
 		return (MALLOC_ERR);
-	if (data->philos)
+	if (!data->philos)
 		return (MALLOC_ERR);
-	if (data->mutexs)
+	if (!data->mutexs)
 		return (MALLOC_ERR);
-	if (data->done_check_box)
+	if (!data->done_check_box)
 		return (MALLOC_ERR);
 	return (NO_ERR);
 }
@@ -76,7 +76,7 @@ t_error	set_philo_data(t_data *data, int ac, char **av)
 	data->philos = malloc_philos(data->set_up.num_philos);
 	data->mutexs = malloc_mutex(data->set_up.num_philos);
 	data->done_check_box = ft_calloc(data->set_up.num_philos, sizeof(int));
-	if (!check_malloc_data_error(data))
+	if (check_malloc_data_error(data))
 		return (throw_error(MALLOC_ERR));
 	if (set_data_left_each_philo(data->philos, data))
 		return (throw_error(MUTEX_ERR));

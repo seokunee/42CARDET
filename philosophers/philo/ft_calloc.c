@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:35:26 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 14:56:49 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:29:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utility.h"
 
-void	ft_bzero(void *s, size_t n)
+static void	ft_bzero(void *s, size_t n)
 {
 	size_t			i;
 	unsigned char	*tmp;

@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:29:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_all_mutexs(t_data *data)
+static void	free_all_mutexs(t_data *data)
 {
 	int	i;
 
@@ -38,5 +38,7 @@ int	main(int ac, char **av)
 	iterate_pthread_detach(&data);
 	watch_threads(&data);
 	free_all_mutexs(&data);
+	if (NULL)
+		printf("hello");
 	return (0);
 }

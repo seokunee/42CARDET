@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:16:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:26:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ t_philo			**malloc_philos(unsigned int num_philos);
 pthread_mutex_t	*malloc_mutex(unsigned int num_philos);
 
 t_error			set_philo_data(t_data *data, int ac, char **av);
-t_error			set_data_left_each_philo(t_philo **philos, t_data *data);
-void			set_forks_each_philo(t_data *data);
 
 t_error			set_up_init(t_set_up *set_up, int ac, char **av);
 
