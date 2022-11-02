@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:26:38 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:55:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_data		t_data;
 typedef struct s_philo		t_philo;
 typedef struct s_set_up		t_set_up;
 typedef enum e_error_type	t_error;
+typedef enum e_to_do_type	t_to_do;
 
 enum e_error_type
 {
@@ -34,6 +35,13 @@ enum e_error_type
 	THREAD_ERR,
 	MUTEX_ERR,
 	MALLOC_ERR,
+};
+
+enum e_to_do_type
+{
+	EAT,
+	SLEEP,
+	THINK,
 };
 
 struct s_set_up
@@ -49,7 +57,7 @@ struct s_set_up
 struct s_philo
 {
 	pthread_t		p_thread;
-	pthread_mutex_t	event_fork;
+	pthread_mutex_t	event;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	int				num_eat;
@@ -64,6 +72,8 @@ struct s_data
 	t_philo			**philos;
 	pthread_mutex_t	*mutexs;
 	pthread_t		*p_thread;
+	pthread_mutex_t event;
+	pthread_mutex_t end_lock;
 	int				*done_check_box;
 };
 

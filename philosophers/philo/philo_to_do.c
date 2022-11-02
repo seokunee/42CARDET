@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 22:20:56 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:55:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	*philo_to_do(void *philo)
 		eating(philo);
 		pthread_mutex_unlock(info->l_fork);
 		pthread_mutex_unlock(info->r_fork);
+		pthread_mutex_lock(&info->event);	
 		if (count_eat(philo))
 			stop = 0;
+		pthread_mutex_unlock(&info->event);
 		sleeping(philo);
 		thinking(philo);
 	}

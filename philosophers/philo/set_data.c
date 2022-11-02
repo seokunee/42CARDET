@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:26:01 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:55:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_error	set_data_left_each_philo(t_philo **philos, t_data *data)
 		philos[i]->last_eat_time = data->set_up.start_time;
 		philos[i]->id = i + 1;
 		philos[i]->num_eat = 0;
-		if (pthread_mutex_init(&philos[i]->event_fork, NULL))
+		if (pthread_mutex_init(&philos[i]->event, NULL))
 			return (MUTEX_ERR);
 		i++;
 	}
@@ -76,6 +76,7 @@ t_error	set_philo_data(t_data *data, int ac, char **av)
 	data->philos = malloc_philos(data->set_up.num_philos);
 	data->mutexs = malloc_mutex(data->set_up.num_philos);
 	data->done_check_box = ft_calloc(data->set_up.num_philos, sizeof(int));
+	pthread_mutex_init(&data->event, NULL);
 	if (check_malloc_data_error(data))
 		return (throw_error(MALLOC_ERR));
 	if (set_data_left_each_philo(data->philos, data))

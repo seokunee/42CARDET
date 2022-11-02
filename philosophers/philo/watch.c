@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:13:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 19:38:16 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:55:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	check_die(t_data *data, int *flag)
 	i = -1;
 	while (++i < data->set_up.num_philos)
 	{
+		pthread_mutex_lock(&data->philos[i]->event);
 		if (get_now_time_ms() - data->philos[i]->last_eat_time \
 		> data->set_up.time_to_die)
 		{
@@ -29,6 +30,7 @@ static void	check_die(t_data *data, int *flag)
 			printf("%ld %d died\n", elapsed_time, data->philos[i]->id);
 			break ;
 		}
+		pthread_mutex_unlock(&data->philos[i]->event);
 	}
 }
 
@@ -37,6 +39,7 @@ static void	check_done_all(t_data *data, int *flag)
 	int	i;
 
 	i = -1;
+	pthread_mutex_lock(&(data->event));
 	if (data->set_up.num_must_eat != -1)
 	{
 		while (++i < data->set_up.num_philos)
@@ -47,6 +50,7 @@ static void	check_done_all(t_data *data, int *flag)
 				*flag = 0;
 		}
 	}
+	pthread_mutex_unlock(&(data->event));
 }
 
 int	watch_threads(t_data *data)
