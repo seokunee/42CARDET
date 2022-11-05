@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:26:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 02:02:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_error	iterate_pthread_create(t_data *data)
 		data->philos[i]->p_thread = data->p_thread[i];
 		i += 2;
 	}
-	usleep_without_error(1000);
+	usleep_without_error(SHORT_USLEEP_TIME);
 	i = 1;
 	while (i < data->set_up.num_philos)
 	{

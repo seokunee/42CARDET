@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/02 20:55:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 01:55:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,37 @@
 
 static int	count_eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->eat_num_event);	
 	philo->num_eat++;
+	pthread_mutex_unlock(&philo->eat_num_event);
 	if (philo->num_eat == philo->data->set_up.num_must_eat)
 	{
+		pthread_mutex_lock(&philo->data->check_box_event);	
 		philo->data->done_check_box[philo->id - 1] = 1;
+		pthread_mutex_unlock(&philo->data->check_box_event);	
 		return (1);
 	}
 	return (0);
+}
+
+static void	get_forks(t_philo *philo)
+{
+	pthread_mutex_lock(philo->l_fork);
+	to_do(philo, TAKE_FORK);
+	pthread_mutex_lock(philo->r_fork);
+	to_do(philo, TAKE_FORK);
+}
+
+static void	put_down_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
+}
+
+static void	count_eat_num(t_philo *philo, int *stop)
+{
+	if (philo->data->set_up.num_must_eat != -1 && count_eat(philo))
+		*stop = 0;
 }
 
 void	*philo_to_do(void *philo)
@@ -32,19 +56,12 @@ void	*philo_to_do(void *philo)
 	info = (t_philo *)philo;
 	while (stop)
 	{
-		pthread_mutex_lock(info->l_fork);
-		take_fork(philo);
-		pthread_mutex_lock(info->r_fork);
-		take_fork(philo);
-		eating(philo);
-		pthread_mutex_unlock(info->l_fork);
-		pthread_mutex_unlock(info->r_fork);
-		pthread_mutex_lock(&info->event);	
-		if (count_eat(philo))
-			stop = 0;
-		pthread_mutex_unlock(&info->event);
-		sleeping(philo);
-		thinking(philo);
+		get_forks(philo);
+		to_do(philo, EAT);
+		put_down_forks(philo);
+		count_eat_num(philo, &stop);
+		to_do(philo, SLEEP);
+		to_do(philo, THINK);
 	}
 	return (NULL);
 }
