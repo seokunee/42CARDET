@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 02:02:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 21:25:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # include <stdio.h>
 
 # define SHORT_USLEEP_TIME 1000
+# define NO_NUM_EAT -2
 
 typedef struct s_data		t_data;
 typedef struct s_philo		t_philo;
 typedef struct s_set_up		t_set_up;
+typedef struct s_end		t_end;
 typedef enum e_error_type	t_error;
 typedef enum e_to_do_type	t_to_do;
 
@@ -37,6 +39,7 @@ enum e_error_type
 	THREAD_ERR,
 	MUTEX_ERR,
 	MALLOC_ERR,
+	MUST_EAT_ZERO,
 };
 
 enum e_to_do_type
@@ -70,13 +73,19 @@ struct s_philo
 	time_t			last_eat_time;
 };
 
+struct s_end
+{
+	pthread_mutex_t end_lock;
+	int				end;
+};
+
 struct s_data
 {
 	t_set_up		set_up;
 	t_philo			**philos;
 	pthread_t		*p_thread;
 	pthread_mutex_t	*mutexs;
-	pthread_mutex_t end_lock;
+	t_end			*end_check;
 	pthread_mutex_t check_box_event;
 	int				*done_check_box;
 };
@@ -99,12 +108,14 @@ t_error			set_up_init(t_set_up *set_up, int ac, char **av);
 int				watch_threads(t_data *data);
 void			while_sleep(time_t time_to_wait);
 
-void			to_do(t_philo *philo, t_to_do type);
+int				to_do(t_philo *philo, t_to_do type);
 
 void			while_sleep(time_t time_to_wait);
 void			usleep_without_error(unsigned int time_to_wait);
 
 time_t			get_now_time_ms(void);
 time_t			get_passed_time_ms(time_t start_time);
+
+int				check_game_over(t_philo *philo);
 
 #endif

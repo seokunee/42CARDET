@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 23:23:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 01:59:03 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 21:26:49 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,19 @@ static void	take_fork(t_philo *philo)
 	printf("%ld %d has taken a fork\n", elapsed_time, philo->id);
 }
 
-void	to_do(t_philo *philo, t_to_do type)
+int	check_game_over(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->data->end_lock));
+	int	status;
+
+	pthread_mutex_lock(&philo->data->end_check->end_lock);
+	status = philo->data->end_check->end;
+	pthread_mutex_unlock(&philo->data->end_check->end_lock);
+	return (status);
+}
+
+int	to_do(t_philo *philo, t_to_do type)
+{
+	pthread_mutex_lock(&(philo->data->end_check->end_lock));
 	if (type == EAT)
 		eating(philo);
 	else if (type == SLEEP)
@@ -58,9 +68,10 @@ void	to_do(t_philo *philo, t_to_do type)
 		thinking(philo);
 	else if (type == TAKE_FORK)
 		take_fork(philo);
-	pthread_mutex_unlock(&(philo->data->end_lock));
+	pthread_mutex_unlock(&(philo->data->end_check->end_lock));
 	if (type == EAT)
 		while_sleep(philo->data->set_up.time_to_eat);
 	else if (type == SLEEP)
 		while_sleep(philo->data->set_up.time_to_sleep);
+	return (check_game_over(philo));
 }

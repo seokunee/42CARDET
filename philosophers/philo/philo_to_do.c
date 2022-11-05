@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 01:55:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 21:25:41 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_eat(t_philo *philo)
 	return (0);
 }
 
-static void	get_forks(t_philo *philo)
+static void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	to_do(philo, TAKE_FORK);
@@ -41,27 +41,30 @@ static void	put_down_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 }
 
-static void	count_eat_num(t_philo *philo, int *stop)
+static int	count_eat_num(t_philo *philo, int *stop)
 {
-	if (philo->data->set_up.num_must_eat != -1 && count_eat(philo))
+	if (philo->data->set_up.num_must_eat >= 0 && count_eat(philo))
 		*stop = 0;
+	return (check_game_over(philo));
 }
 
 void	*philo_to_do(void *philo)
 {
-	t_philo			*info;
 	int				stop;
 
 	stop = 1;
-	info = (t_philo *)philo;
 	while (stop)
 	{
-		get_forks(philo);
-		to_do(philo, EAT);
+		take_forks(philo);
+		if (to_do(philo, EAT))
+			return (NULL);
 		put_down_forks(philo);
-		count_eat_num(philo, &stop);
-		to_do(philo, SLEEP);
-		to_do(philo, THINK);
+		if (count_eat_num(philo, &stop))
+			return (NULL);
+		if (to_do(philo, SLEEP))
+			return (NULL);
+		if (to_do(philo, THINK))
+			return (NULL);
 	}
 	return (NULL);
 }

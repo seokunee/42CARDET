@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:14:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 18:46:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_error	set_up_init(t_set_up *set_up, int ac, char **av)
 	set_up->time_to_die = ft_atoi((const char *)av[2]);
 	set_up->time_to_eat = ft_atoi((const char *)av[3]);
 	set_up->time_to_sleep = ft_atoi((const char *)av[4]);
-	set_up->num_must_eat = -1;
+	set_up->num_must_eat = NO_NUM_EAT;
 	if (ac == 6)
 		set_up->num_must_eat = ft_atoi((const char *)av[5]);
 	if (check_args(set_up, ac))

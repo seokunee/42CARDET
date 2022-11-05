@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:13:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 17:06:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/05 21:28:44 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static void	check_die(t_data *data, int *flag)
 		if (get_now_time_ms() - data->philos[i]->last_eat_time \
 		> data->set_up.time_to_die)
 		{
-			pthread_mutex_lock(&(data->end_lock));
+			pthread_mutex_lock(&(data->end_check->end_lock));
+			data->end_check->end = 1;
+			pthread_mutex_unlock(&data->philos[i]->eat_time_event);
 			*flag = 0;
 			elapsed_time = get_now_time_ms() - \
 			data->philos[i]->data->set_up.start_time;
@@ -40,21 +42,26 @@ static void	check_done_all(t_data *data, int *flag)
 	int	i;
 
 	i = -1;
-	pthread_mutex_lock(&(data->check_box_event));
-	if (data->set_up.num_must_eat != -1)
+	if (data->set_up.num_must_eat != NO_NUM_EAT)
 	{
 		while (++i < data->set_up.num_philos)
 		{
+			pthread_mutex_lock(&(data->check_box_event));
 			if (data->done_check_box[i] == 0)
-				break ;
+			{
+				pthread_mutex_unlock(&(data->check_box_event));
+				return ;
+			}
+			pthread_mutex_unlock(&(data->check_box_event));
 			if (i == data->set_up.num_philos - 1)
 			{
-				pthread_mutex_lock(&(data->end_lock));
+				pthread_mutex_lock(&(data->end_check->end_lock));
+				data->end_check->end = 1;
 				*flag = 0;
+				return ;
 			}
 		}
 	}
-	pthread_mutex_unlock(&(data->check_box_event));
 }
 
 int	watch_threads(t_data *data)
@@ -66,7 +73,7 @@ int	watch_threads(t_data *data)
 	{
 		check_die(data, &flag);
 		if (flag == 0)
-			break ;
+			return (0);
 		check_done_all(data, &flag);
 	}
 	return (0);
