@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:14:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 18:46:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/06 15:09:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_error	check_args(t_set_up *set_up, int ac)
+static t_error_type	check_args(t_set_up *set_up, int ac)
 {
 	if (set_up->num_philos == -1)
 		return (ARGS_ERR);
@@ -27,7 +27,7 @@ static t_error	check_args(t_set_up *set_up, int ac)
 	return (NO_ERR);
 }
 
-t_error	set_up_init(t_set_up *set_up, int ac, char **av)
+t_error_type	set_up_init(t_set_up *set_up, int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		return (throw_error(ARGS_ERR));

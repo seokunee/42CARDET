@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:36:52 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 21:15:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/06 15:09:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_error	check_arg_condition(const char *arg)
+static t_error_type	check_arg_condition(const char *arg)
 {
 	int	i;
 	int	sign;

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 21:17:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/06 15:10:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	set_forks_each_philo(t_data *data)
 	}
 }
 
-static t_error	set_info_of_philo(t_philo **philos, t_data *data)
+static t_error_type	set_info_of_philo(t_philo **philos, t_data *data)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ static t_error	set_info_of_philo(t_philo **philos, t_data *data)
 	return (NO_ERR);
 }
 
-static t_error	check_malloc_data_error(t_data *data)
+static t_error_type	check_malloc_data_error(t_data *data)
 {
 	if (!data->p_thread)
 		return (MALLOC_ERR);
@@ -76,11 +76,11 @@ static t_end	*set_end_struct(t_data *data)
 
 	end = malloc(sizeof(t_end));
 	pthread_mutex_init(&end->end_lock, NULL);
-	end->end = 0;
+	end->end = NO_END;
 	return (end);
 }
 
-t_error	set_philo_data(t_data *data, int ac, char **av)
+t_error_type	set_philo_data(t_data *data, int ac, char **av)
 {
 	if (set_up_init(&data->set_up, ac, av))
 		return (throw_error(ARGS_ERR));

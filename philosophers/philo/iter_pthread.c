@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:26:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/05 20:49:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/06 15:34:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_error	iterate_pthread_create(t_data *data)
+t_error_type	iterate_pthread_create(t_data *data)
 {
 	int	i;
 	int	status;
@@ -41,7 +41,7 @@ t_error	iterate_pthread_create(t_data *data)
 	return (NO_ERR);
 }
 
-t_error	iterate_pthread_detach(t_data *data)
+t_error_type	iterate_pthread_detach(t_data *data)
 {
 	int	i;
 
