@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:13:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 02:02:27 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 02:43:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ static void	check_done_all(t_data *data, int *flag)
 			}
 		}
 	}
+}
+
+t_end_type	check_game_over(t_philo *philo)
+{
+	t_end_type	status;
+
+	pthread_mutex_lock(&philo->data->end_check->end_lock);
+	status = philo->data->end_check->end;
+	pthread_mutex_unlock(&philo->data->end_check->end_lock);
+	return (status);
 }
 
 int	watch_threads(t_data *data)

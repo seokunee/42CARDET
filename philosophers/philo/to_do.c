@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 23:23:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/06 23:15:00 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 02:43:56 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ static void	take_fork(t_philo *philo)
 
 	elapsed_time = get_now_time_ms() - philo->data->set_up->start_time;
 	printf("%ld %d has taken a fork\n", elapsed_time, philo->id);
-}
-
-t_end_type	check_game_over(t_philo *philo)
-{
-	t_end_type	status;
-
-	pthread_mutex_lock(&philo->data->end_check->end_lock);
-	status = philo->data->end_check->end;
-	pthread_mutex_unlock(&philo->data->end_check->end_lock);
-	return (status);
 }
 
 int	to_do(t_philo *philo, t_to_do_type type)

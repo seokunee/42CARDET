@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:35:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 02:26:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 02:34:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_philo	**malloc_philos(t_data *data)
 	int	i;
 
 	i = 0;
-	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->set_up->num_philos);
+	data->philos = (t_philo *)malloc(sizeof(t_philo) \
+			* data->set_up->num_philos);
 	if (!data->philos)
 		return (NULL);
 	while (i < data->set_up->num_philos)

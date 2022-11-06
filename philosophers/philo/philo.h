@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 01:57:52 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 02:44:14 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ enum e_end_type
 };
 struct s_end
 {
-	pthread_mutex_t end_lock;
+	pthread_mutex_t	end_lock;
 	t_end_type		end;
 };
 
@@ -91,7 +91,7 @@ struct s_data
 	t_philo			*philos;
 	pthread_mutex_t	*mutexs;
 	int				*done_check_box;
-	pthread_mutex_t check_box_event;
+	pthread_mutex_t	check_box_event;
 	t_end			*end_check;
 };
 
@@ -112,6 +112,7 @@ t_error_type		set_up_init(t_data *data, int ac, char **av);
 
 int					watch_threads(t_data *data);
 void				while_sleep(time_t time_to_wait);
+t_end_type			check_game_over(t_philo *philo);
 
 int					to_do(t_philo *philo, t_to_do_type type);
 
@@ -120,7 +121,5 @@ void				usleep_without_error(unsigned int time_to_wait);
 
 time_t				get_now_time_ms(void);
 time_t				get_passed_time_ms(time_t start_time);
-
-t_end_type			check_game_over(t_philo *philo);
 
 #endif
