@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/06 16:30:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/06 23:14:44 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	count_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->eat_num_event);	
 	philo->num_eat++;
 	pthread_mutex_unlock(&philo->eat_num_event);
-	if (philo->num_eat == philo->data->set_up.num_must_eat)
+	if (philo->num_eat == philo->data->set_up->num_must_eat)
 	{
 		pthread_mutex_lock(&philo->data->check_box_event);	
 		philo->data->done_check_box[philo->id - 1] = 1;
@@ -43,7 +43,7 @@ static void	put_down_forks(t_philo *philo)
 
 static int	count_eat_num(t_philo *philo, int *stop)
 {
-	if (philo->data->set_up.num_must_eat >= 0 && count_eat(philo))
+	if (philo->data->set_up->num_must_eat >= 0 && count_eat(philo))
 		*stop = 0;
 	return (check_game_over(philo));
 }

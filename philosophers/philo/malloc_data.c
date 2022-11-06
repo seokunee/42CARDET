@@ -6,30 +6,27 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:35:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/01 20:04:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 02:26:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo	**malloc_philos(unsigned int num_philos)
+t_philo	**malloc_philos(t_data *data)
 {
-	unsigned int	i;
-	t_philo			**philos;
+	int	i;
 
 	i = 0;
-	philos = (t_philo **)malloc(sizeof(t_philo *) * num_philos);
-	if (!philos)
+	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->set_up->num_philos);
+	if (!data->philos)
 		return (NULL);
-	while (i < num_philos)
+	while (i < data->set_up->num_philos)
 	{
-		philos[i] = (t_philo *)malloc(sizeof(t_philo));
-		if (!philos[i])
-			return (NULL);
-		philos[i]->id = i;
+		data->philos[i].id = i;
 		i++;
 	}
-	return (philos);
+	return (&data->philos);
+	return (NULL);
 }
 
 pthread_mutex_t	*malloc_mutex(unsigned int num_philos)

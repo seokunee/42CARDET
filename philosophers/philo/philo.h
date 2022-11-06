@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/06 16:00:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 01:57:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,41 +87,40 @@ struct s_end
 
 struct s_data
 {
-	t_set_up		set_up;
-	t_philo			**philos;
-	pthread_t		*p_thread;
+	t_set_up		*set_up;
+	t_philo			*philos;
 	pthread_mutex_t	*mutexs;
-	t_end			*end_check;
-	pthread_mutex_t check_box_event;
 	int				*done_check_box;
+	pthread_mutex_t check_box_event;
+	t_end			*end_check;
 };
 
-t_error_type			throw_error(enum e_error_type type);
+t_error_type		throw_error(enum e_error_type type);
 
-t_error_type			iterate_pthread_create(t_data *data);
-t_error_type			iterate_pthread_detach(t_data *data);
+t_error_type		iterate_pthread_create(t_data *data);
+t_error_type		iterate_pthread_detach(t_data *data);
 
-void			*philo_to_do(void *philo);
-time_t			get_now_time_ms(void);
+void				*philo_to_do(void *philo);
+time_t				get_now_time_ms(void);
 
-t_philo			**malloc_philos(unsigned int num_philos);
-pthread_mutex_t	*malloc_mutex(unsigned int num_philos);
+t_philo				**malloc_philos(t_data *data);
+pthread_mutex_t		*malloc_mutex(unsigned int num_philos);
 
-t_error_type			set_philo_data(t_data *data, int ac, char **av);
+t_error_type		set_philo_data(t_data *data, int ac, char **av);
 
-t_error_type			set_up_init(t_set_up *set_up, int ac, char **av);
+t_error_type		set_up_init(t_data *data, int ac, char **av);
 
-int				watch_threads(t_data *data);
-void			while_sleep(time_t time_to_wait);
+int					watch_threads(t_data *data);
+void				while_sleep(time_t time_to_wait);
 
-int				to_do(t_philo *philo, t_to_do_type type);
+int					to_do(t_philo *philo, t_to_do_type type);
 
-void			while_sleep(time_t time_to_wait);
-void			usleep_without_error(unsigned int time_to_wait);
+void				while_sleep(time_t time_to_wait);
+void				usleep_without_error(unsigned int time_to_wait);
 
-time_t			get_now_time_ms(void);
-time_t			get_passed_time_ms(time_t start_time);
+time_t				get_now_time_ms(void);
+time_t				get_passed_time_ms(time_t start_time);
 
-t_end_type				check_game_over(t_philo *philo);
+t_end_type			check_game_over(t_philo *philo);
 
 #endif
