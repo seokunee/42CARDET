@@ -51,6 +51,7 @@
     "compare": "c",
     "cstddef": "c",
     "variant": "c",
-    "__functional_base_03": "c"
+    "__functional_base_03": "c",
+    "__mutex_base": "c"
   }
 }

@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:35:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 02:34:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 21:13:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo	**malloc_philos(t_data *data)
+t_philo	*malloc_philos(t_data *data)
 {
 	int	i;
 
@@ -21,28 +21,29 @@ t_philo	**malloc_philos(t_data *data)
 			* data->set_up->num_philos);
 	if (!data->philos)
 		return (NULL);
-	while (i < data->set_up->num_philos)
-	{
-		data->philos[i].id = i;
-		i++;
-	}
-	return (&data->philos);
-	return (NULL);
+	return (data->philos);
 }
 
-pthread_mutex_t	*malloc_mutex(unsigned int num_philos)
+t_error_type	malloc_mutex(t_data *data, t_error_type *type)
 {
-	unsigned int	i;
-	pthread_mutex_t	*mutex;
+	int	i;
 
 	i = 0;
-	mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * num_philos);
-	if (!mutex)
-		return (NULL);
-	while (i < num_philos)
+	data->mutexs = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
+	* data->set_up->num_philos);
+	if (!data->mutexs)
 	{
-		pthread_mutex_init(&mutex[i], NULL);
+		*type = MALLOC_ERR;
+		return (MALLOC_ERR);
+	}
+	while (i < data->set_up->num_philos)
+	{
+		if (pthread_mutex_init(&data->mutexs[i], NULL))
+		{
+			*type = MUTEX_ERR;
+			return (MUTEX_ERR);
+		}
 		i++;
 	}
-	return (mutex);
+	return (NO_ERR);
 }

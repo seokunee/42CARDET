@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:36:52 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/06 15:09:39 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:57:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_error_type	check_arg_condition(const char *arg)
 
 static void	check_sign(const char *nptr, int *i, long *n)
 {
-	if (nptr[*i] == '-' || nptr[*i] == '+')
+	while (nptr[*i] == '-' || nptr[*i] == '+')
 	{
 		if (nptr[*i] == '-')
 			(*n) *= -1;
