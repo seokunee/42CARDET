@@ -6,11 +6,27 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 21:16:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/07 22:41:46 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	mutex_destory(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->set_up->num_philos)
+	{
+		pthread_mutex_destroy(&data->mutexs[i]);
+		pthread_mutex_destroy(&data->philos[i].eat_num_event);
+		pthread_mutex_destroy(&data->philos[i].eat_time_event);
+		i++;
+	}
+	pthread_mutex_destroy(&data->check_box_event);
+	pthread_mutex_destroy(&data->check_box_event);
+}
 
 int	main(int ac, char **av)
 {
@@ -24,7 +40,7 @@ int	main(int ac, char **av)
 	type = iterate_pthread_create(data);
 	if (type)
 		return (type);
-	iterate_pthread_detach(data);
 	watch_threads(data);
+	iterate_pthread_detach(data);
 	return (0);
 }
