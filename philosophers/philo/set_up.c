@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:14:50 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 21:16:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 21:59:23 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static t_error_type	check_args(t_set_up *set_up, int ac)
 t_error_type	set_up_init(t_data *data, int ac, char **av, t_error_type *type)
 {
 	if (ac != 5 && ac != 6)
-		return (throw_error(ARGS_ERR));
+	{
+		*type = ARGS_ERR;
+		return (ARGS_ERR);
+	}
 	data->set_up = malloc(sizeof(t_set_up));
 	if (!data->set_up)
 	{
