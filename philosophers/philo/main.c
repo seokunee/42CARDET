@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:05:02 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 22:41:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:21:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	mutex_destory(t_data *data)
+static void	mutex_destory(t_data *data)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	mutex_destory(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->check_box_event);
-	pthread_mutex_destroy(&data->check_box_event);
+	pthread_mutex_destroy(&data->end_check->end_lock);
 }
 
 int	main(int ac, char **av)
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 	if (type)
 		return (type);
 	watch_threads(data);
-	iterate_pthread_detach(data);
+	iterate_pthread_join(data);
+	mutex_destory(data);
 	return (0);
 }

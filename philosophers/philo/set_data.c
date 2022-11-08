@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:30:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 21:16:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:28:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,16 @@ static t_error_type	set_info_of_philo(t_philo *philos, t_data *data)
 		philos[i].id = i + 1;
 		philos[i].num_eat = 0;
 		if (pthread_mutex_init(&philos[i].eat_num_event, NULL))
+		{
+			destory_data_mutexs(data, i);
 			return (MUTEX_ERR);
+		}
 		if (pthread_mutex_init(&philos[i].eat_time_event, NULL))
+		{
+			pthread_mutex_destroy(&philos[i].eat_num_event);
+			destory_data_mutexs(data, i);
 			return (MUTEX_ERR);
+		}
 		i++;
 	}
 	return (NO_ERR);
@@ -95,13 +102,16 @@ t_error_type	set_philo_data(t_data *data, int ac, char **av)
 		return (MUST_EAT_ZERO);
 	if (!malloc_philos(data))
 		return (throw_error(MALLOC_ERR));
-	if (malloc_mutex(data, &type))
+	if (set_end_struct(data, &type))
 		return (throw_error(type));
 	if (malloc_done_check_box(data))
 		return (throw_error(MALLOC_ERR));
 	if (pthread_mutex_init(&data->check_box_event, NULL))
+	{
+		pthread_mutex_destroy(&data->end_check->end_lock);
 		return (throw_error(MUTEX_ERR));
-	if (set_end_struct(data, &type))
+	}
+	if (malloc_mutex(data, &type))
 		return (throw_error(type));
 	if (set_info_of_philo(data->philos, data))
 		return (throw_error(MUTEX_ERR));

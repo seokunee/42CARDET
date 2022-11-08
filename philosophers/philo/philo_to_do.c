@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:30:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 02:34:56 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:15:22 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,19 @@ void	*philo_to_do(void *philo)
 	int				stop;
 
 	stop = 1;
+	if (((t_philo *)philo)->data->set_up->num_philos == 1)
+	{
+		one_philo_to_do(philo);
+		return (NULL);
+	}
 	while (stop)
 	{
 		take_forks(philo);
 		if (to_do(philo, EAT))
+		{
+			put_down_forks(philo);
 			return (NULL);
+		}
 		put_down_forks(philo);
 		if (count_eat_num(philo, &stop))
 			return (NULL);

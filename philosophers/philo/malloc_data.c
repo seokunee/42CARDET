@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:35:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 21:13:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:00:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_error_type	malloc_mutex(t_data *data, t_error_type *type)
 	int	i;
 
 	i = 0;
+	*type = MUTEX_ERR;
 	data->mutexs = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
 	* data->set_up->num_philos);
 	if (!data->mutexs)
@@ -40,7 +41,10 @@ t_error_type	malloc_mutex(t_data *data, t_error_type *type)
 	{
 		if (pthread_mutex_init(&data->mutexs[i], NULL))
 		{
-			*type = MUTEX_ERR;
+			while (--i >= 0)
+				pthread_mutex_destroy(&data->mutexs[i]);
+			pthread_mutex_destroy(&data->check_box_event);
+			pthread_mutex_destroy(&data->end_check->end_lock);
 			return (MUTEX_ERR);
 		}
 		i++;

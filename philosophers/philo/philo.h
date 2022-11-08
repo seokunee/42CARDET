@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:29:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 21:09:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:57:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ struct s_data
 t_error_type		throw_error(enum e_error_type type);
 
 t_error_type		iterate_pthread_create(t_data *data);
-t_error_type		iterate_pthread_detach(t_data *data);
+t_error_type		iterate_pthread_join(t_data *data);
 
 void				*philo_to_do(void *philo);
 time_t				get_now_time_ms(void);
@@ -122,5 +122,9 @@ void				usleep_without_error(unsigned int time_to_wait);
 
 time_t				get_now_time_ms(void);
 time_t				get_passed_time_ms(time_t start_time);
+
+void				destory_data_mutexs(t_data *data, int j);
+
+void				*one_philo_to_do(t_philo *philo);
 
 #endif

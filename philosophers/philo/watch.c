@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 22:13:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/07 02:43:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:30:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	check_die(t_data *data, int *flag)
 		{
 			pthread_mutex_lock(&(data->end_check->end_lock));
 			data->end_check->end = END;
+			pthread_mutex_unlock(&(data->end_check->end_lock));
 			*flag = 0;
 			elapsed_time = get_now_time_ms() - \
 			data->philos[i].data->set_up->start_time;
@@ -58,6 +59,7 @@ static void	check_done_all(t_data *data, int *flag)
 			{
 				pthread_mutex_lock(&(data->end_check->end_lock));
 				data->end_check->end = END;
+				pthread_mutex_unlock(&(data->end_check->end_lock));
 				*flag = 0;
 				return ;
 			}
