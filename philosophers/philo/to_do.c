@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 23:23:51 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/11/08 18:12:37 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:36:16 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static void	take_fork(t_philo *philo)
 
 int	to_do(t_philo *philo, t_to_do_type type)
 {
+	if (check_game_over(philo))
+		return (END);
 	pthread_mutex_lock(&(philo->data->end_check->end_lock));
 	if (type == EAT)
 		eating(philo);
