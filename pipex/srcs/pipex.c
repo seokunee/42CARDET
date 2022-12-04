@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:02:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/08/31 15:36:01 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:43:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	init_cmd_data(char **av, t_data *data, char **envp)
 
 void	set_fd_direction(int fd_closed, int stdin, int stdout)
 {
-	close(fd_closed);
-	if (dup2(stdin, STDIN_FILENO) == -1)
+	close(fd_closed); // 첫번째 명령어인 경우, pipe-read 안쓰고 pipe-write만 쓰고 두번째는 그 반대
+	if (dup2(stdin, STDIN_FILENO) == -1) // 첫번째 명령어의 경우, file1이 입력, pipe-write가 출력 <-> 두번째 명령어 경우, pipe-read가 입력, file2가 표준 출력 
 		throw_error("Dup2 Error", 1);
 	if (dup2(stdout, STDOUT_FILENO) == -1)
 		throw_error("Dup2 Error", 1);
