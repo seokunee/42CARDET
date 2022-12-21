@@ -11,9 +11,8 @@ void	ft_putchar(char c, int *len)
 	(*len)++;
 }
 
-void	ft_putnum_type(long num, int type, int *len)
+void	ft_putnum_type(long num, int *len)
 {
-	char *hex = "0123456789abcdef";
 	char *dec = "0123456789";
 
 	if (num < 0)
@@ -21,18 +20,27 @@ void	ft_putnum_type(long num, int type, int *len)
 		num = -num;
 		ft_putchar('-', len);
 	}
-	if (num / type > 0)
+	if (num / 10 > 0)
 	{
-		ft_putnum_type(num / type, type, len);
-		ft_putnum_type(num % type, type, len);
+		ft_putnum_type(num / 10, len);
+		ft_putnum_type(num % 10, len);
 	}
 	else
+		ft_putchar(dec[num], len);
+	
+}
+
+void	ft_putnum_hex(unsigned int num, int *len)
+{
+	char *hex = "0123456789abcdef";
+
+	if (num / 16 > 0)
 	{
-		if (type == 16)
-			ft_putchar(hex[num], len);
-		else if (type == 10)
-			ft_putchar(dec[num], len);
+		ft_putnum_hex(num / 16, len);
+		ft_putnum_hex(num % 16, len);
 	}
+	else
+		ft_putchar(hex[num], len);
 }
 
 void	ft_putstr(char *str, int *len)
@@ -54,34 +62,29 @@ void	ft_putstr(char *str, int *len)
 int	check_type(va_list *ap, const char *str, int i, int *len)
 {
 	char *s;
-	char c;
-	int	x;
 	int d;
-	int flag;
 	long a;
 
-	flag = 0;
-	flag = 1;
-	switch(*str) {
-    	case 's':    
-    	    s = va_arg(*ap, char *);
-    	    ft_putstr(s, len);
-			flag = 1;
-    	    break;
-    	case 'd':    
-    	    d = va_arg(*ap, int);
-			a = d;
-    	    ft_putnum_type(a, 10, len);
-			flag = 1;
-			break;
-    	case 'x':      
-    	    x = va_arg(*ap, int);
-			a = x;
-    	    ft_putnum_type(a, 16, len);
-			flag = 1;
-    	    break;
-    }
-	return (flag);
+    if (*str ==  's')
+	{
+    	s = va_arg(*ap, char *);
+		ft_putstr(s, len);
+		return (1);
+	}    
+    if (*str ==  'd')
+	{
+        d = va_arg(*ap, int);
+		a = d;
+        ft_putnum_type(a, len);
+		return (1);
+	}    
+    if (*str ==  'x')
+	{
+        d = va_arg(*ap, int);
+        ft_putnum_hex((unsigned int)d, len);
+		return (1)
+	}      
+	return (0);
 }
 
 int ft_printf(const char *str, ... )
