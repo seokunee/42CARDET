@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:25:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/23 20:53:27 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:05:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,62 @@ void	print_map(t_set *set, char *zone)
 	}
 }
 
-int	free_all(FILE *file, char *zone)
+int	free_all(FILE *file, char *zone, char *error)
 {
 	if (file)
 		fclose(file);
 	if (zone)
 		free(zone);
+	if (error)
+		throw_error("Error: Operation file corrupted\n");
 	return (1);
 }
 
+// void	exec_C(int x, int y, t_set *set)
+// {
+	
+// }
+
+// void	exec_c()
+// {
+	
+// }
+
 // line을 하나씩 보면서 원을 그려주는 
-void	set_circle(FILE *file, char *zone, t_set *set)
+int	set_circle(FILE *file, char *zone, t_set *set)
 {
 	t_oper	oper;
 	int		num;
+	int		i;
+	int		x;
+	int		y;
 
-	while (num = fscanf(file ,"%c %f %f %f %c\n", &oper.type, &oper.X, &oper.Y, &oper.radius, &oper.back) == 5)
+	i = 0;
+	while ((num = fscanf(file ,"%c %f %f %f %c\n", &oper.type, &oper.X, &oper.Y, &oper.radius, &oper.back)) == 5)
 	{
-		if ()
+		// printf("%c %f %f %f %c\n", oper.type, oper.X, oper.Y, oper.radius, oper.back);
+		i = 0;
+		while (zone[i])
 		{
-			
+			x = i % set->wid;
+			y = i / set->wid;
+			if (oper.type == 'c')
+			{
+				if (oper.radius >= sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)) \
+				 && oper.radius - 1 <= sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)))
+					zone[i] = oper.back;
+			}
+			else if (oper.type == 'C')
+			{
+				if (oper.radius >= sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)))
+					zone[i] = oper.back;
+			}
+			i++;
 		}
 	}
+	if (num != -1)
+		return (0);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -126,12 +160,9 @@ int	main(int ac, char **av)
 	if (!file)
 		return (throw_error("Error: Operation file corrupted\n"));
 	if ((zone = get_set_info(file, &set)) == NULL) // 기본 zone 생성
-	{
-		free_all(file, zone);
-		return (throw_error("Error: Operation file corrupted\n"));
-	}
-	// if (g)
+		return (free_all(file, zone, "Error: Operation file corrupted\n"));
+	if (set_circle(file, zone, &set) == 0)
+		return (free_all(file, zone, "Error: Operation file corrupted\n"));
 	print_map(&set, zone);
-	printf("\n%d %d %c\n", set.wid, set.hei, set.back);
 	return (0);
 }
