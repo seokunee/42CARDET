@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:25:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/24 03:05:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2022/12/24 17:03:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,9 @@ int	set_circle(FILE *file, char *zone, t_set *set)
 	i = 0;
 	while ((num = fscanf(file ,"%c %f %f %f %c\n", &oper.type, &oper.X, &oper.Y, &oper.radius, &oper.back)) == 5)
 	{
-		// printf("%c %f %f %f %c\n", oper.type, oper.X, oper.Y, oper.radius, oper.back);
 		i = 0;
+		if (oper.radius <= 0.00000000 || (oper.type != 'c' && oper.type != 'C'))
+			return (0);
 		while (zone[i])
 		{
 			x = i % set->wid;
@@ -129,7 +130,7 @@ int	set_circle(FILE *file, char *zone, t_set *set)
 			if (oper.type == 'c')
 			{
 				if (oper.radius >= sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)) \
-				 && oper.radius - 1 <= sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)))
+					&& oper.radius - 1.00000000 < sqrtf(powf(x - oper.X, 2) + powf(y - oper.Y, 2)))
 					zone[i] = oper.back;
 			}
 			else if (oper.type == 'C')
@@ -164,5 +165,6 @@ int	main(int ac, char **av)
 	if (set_circle(file, zone, &set) == 0)
 		return (free_all(file, zone, "Error: Operation file corrupted\n"));
 	print_map(&set, zone);
+	free_all(file, zone, NULL);
 	return (0);
 }

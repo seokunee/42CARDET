@@ -19,7 +19,8 @@ typedef struct	s_shape
 	char	color;
 }				t_shape;
 
-int ft_strlen(char const *str)
+int
+	ft_strlen(char const *str)
 {
 	int	i;
 
@@ -29,7 +30,8 @@ int ft_strlen(char const *str)
 	return (i);
 }
 
-char *get_zone(FILE *file, t_zone *zone)
+char
+	*get_zone(FILE *file, t_zone *zone)
 {
 	int		i;
 	char	*tmp;
@@ -46,7 +48,8 @@ char *get_zone(FILE *file, t_zone *zone)
 	return (tmp);
 }
 
-int in_circle(float x, float y, t_shape *shape)
+int
+	in_circle(float x, float y, t_shape *shape)
 {
 	float	distance;
 
@@ -83,7 +86,8 @@ void
 	}
 }
 
-int draw_shapes(FILE *file, t_zone *zone, char *drawing)
+int
+	draw_shapes(FILE *file, t_zone *zone, char *drawing)
 {
 	t_shape	tmp;
 	int		ret;
@@ -99,7 +103,8 @@ int draw_shapes(FILE *file, t_zone *zone, char *drawing)
 	return (1);
 }
 
-void draw_drawing(t_zone *zone, char *drawing)
+void
+	draw_drawing(t_zone *zone, char *drawing)
 {
 	int	i;
 
@@ -112,14 +117,16 @@ void draw_drawing(t_zone *zone, char *drawing)
 	}
 }
 
-int str_error(char const *str)
+int
+	str_error(char const *str)
 {
 	if (str)
 		write(1, str, ft_strlen(str));
 	return (1);
 }
 
-int clear_all(FILE *file, char *drawing, char const *str)
+int
+	clear_all(FILE *file, char *drawing, char const *str)
 {
 	if (file)
 		fclose(file);
@@ -130,7 +137,8 @@ int clear_all(FILE *file, char *drawing, char const *str)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int
+	main(int argc, char **argv)
 {
 	FILE	*file;
 	t_zone	zone;

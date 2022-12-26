@@ -1,31 +1,28 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <math.h>
 
-typedef struct drawing drawing, *Pdrawing;
-
-struct drawing
+typedef struct	s_zone
 {
-	int width;
-	int height;
-	char *matrice;
-};
+	int		width;
+	int		height;
+	char	background;
+}				t_zone;
 
-typedef struct circle circle, *Pcircle;
-
-struct circle
+typedef struct	s_shape
 {
-	char type;
-	float x;
-	float y;
-	float radius;
-	char color;
-};
+	char	type;
+	float	x;
+	float	y;
+	float	radius;
+	char	color;
+}				t_shape;
 
-int ft_strlen(char *str)
+int
+	ft_strlen(char const *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -33,144 +30,133 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-int get_info(FILE *file, drawing *drawing)
-
+char
+	*get_zone(FILE *file, t_zone *zone)
 {
-	int scan_ret;
-	char *tmp;
-	int i;
-	char background;
+	int		i;
+	char	*tmp;
 
-	scan_ret = fscanf(file, "%d %d %c\n", &drawing->width, &drawing->height, &background);
-	if (scan_ret == 3)
+	if (fscanf(file, "%d %d %c\n", &zone->width, &zone->height, &zone->background) != 3)
+		return (NULL);
+	if (zone->width <= 0 || zone->width > 300 || zone->height <= 0 || zone->height > 300)
+		return (NULL);
+	if (!(tmp = (char*)malloc(sizeof(*tmp) * (zone->width * zone->height))))
+		return (NULL);
+	i = 0;
+	while (i < zone->width * zone->height)
+		tmp[i++] = zone->background;
+	return (tmp);
+}
+
+int
+	in_circle(float x, float y, t_shape *shape)
+{
+	float	distance;
+
+	distance = sqrtf(powf(x - shape->x, 2.) + powf(y - shape->y, 2.));
+	if (distance <= shape->radius)
 	{
-		if ((((drawing->width < 1) || (300 < drawing->width)) || (drawing->height < 1)) || (300 < drawing->height))
-			return (1);
-		tmp = (char *)malloc(drawing->width * drawing->height);
-		drawing->matrice = tmp;
-		if (!drawing->matrice)
-			return (1);
-		i = 0;
-		while (i < drawing->width * drawing->height)
-			drawing->matrice[i++] = background;
-		return (0);
-	}
-	return (1);
-}
-
-float square(float a)
-{
-	return (a * a);
-}
-
-float sq_dist(float x1, float y1, float x2, float y2)
-{
-	float dist_x;
-	float dist_y;
-
-	dist_x = square(x1 - x2);
-	dist_y = square(y1 - y2);
-	return (dist_x + dist_y);
-}
-
-int is_in_circle(float x, float y, circle *circle)
-{
-	float distance;
-	float distance_sqrt;
-
-	distance_sqrt = sqrtf(sq_dist(x, y, circle->x, circle->y));
-	distance = distance_sqrt - circle->radius;
-	if (distance <= 0.00000000)
-	{
-		if (distance <= -1.00000000)
-			return (1); // Inside
-		return (2);		// Border
+		if ((shape->radius - distance) < 1.00000000)
+			return (2);
+		return (1);
 	}
 	return (0);
 }
 
-void execute_one(circle *circle, drawing *drawing, int x, int y)
+void
+	draw_shape(t_zone *zone, char *drawing, t_shape *shape)
 {
-	int is_in;
+	int	y;
+	int	x;
+	int	is_it;
 
-	is_in = is_in_circle((float)x, (float)y, circle);
-	if ((is_in == 2) || ((is_in == 1 && (circle->type == 'C'))))
-		drawing->matrice[x + y * drawing->width] = circle->color;
+	y = 0;
+	while (y < zone->height)
+	{
+		x = 0;
+		while (x < zone->width)
+		{
+			is_it = in_circle((float)x, (float)y, shape);
+			if ((shape->type == 'c' && is_it == 2)
+				|| (shape->type == 'C' && is_it))
+				drawing[(y * zone->width) + x] = shape->color;
+			x++;
+		}
+		y++;
+	}
 }
 
-int apply_op(circle *circle, drawing *drawing)
+int
+	draw_shapes(FILE *file, t_zone *zone, char *drawing)
 {
-	int j;
-	int i;
+	t_shape	tmp;
+	int		ret;
 
-	if ((circle->radius <= 0.00000000) || ((circle->type != 'C' && (circle->type != 'c'))))
-		return (1);
-	i = 0;
-	while (i < drawing->width)
+	while ((ret = fscanf(file, "%c %f %f %f %c\n", &tmp.type, &tmp.x, &tmp.y, &tmp.radius, &tmp.color)) == 5)
 	{
-		j = 0;
-		while (j < drawing->height)
-			execute_one(circle, drawing, i, j++);
+		if (tmp.radius <= 0.00000000 || (tmp.type != 'c' && tmp.type != 'C'))
+			return (0);
+		draw_shape(zone, drawing, &tmp);
+	}
+	if (ret != -1)
+		return (0);
+	return (1);
+}
+
+void
+	draw_drawing(t_zone *zone, char *drawing)
+{
+	int	i;
+
+	i = 0;
+	while (i < zone->height)
+	{
+		write(1, drawing + (i * zone->width), zone->width);
+		write(1, "\n", 1);
 		i++;
 	}
+}
+
+int
+	str_error(char const *str)
+{
+	if (str)
+		write(1, str, ft_strlen(str));
+	return (1);
+}
+
+int
+	clear_all(FILE *file, char *drawing, char const *str)
+{
+	if (file)
+		fclose(file);
+	if (drawing)
+		free(drawing);
+	if (str)
+		str_error(str);
+	return (1);
+}
+
+int
+	main(int argc, char **argv)
+{
+	FILE	*file;
+	t_zone	zone;
+	char	*drawing;
+
+	zone.width = 0;
+	zone.height = 0;
+	zone.background = 0;
+	drawing = NULL;
+	if (argc != 2)
+		return (str_error("Error: argument\n"));
+	if (!(file = fopen(argv[1], "r")))
+		return (str_error("Error: Operation file corrupted\n"));
+	if (!(drawing = get_zone(file, &zone)))
+		return (clear_all(file, NULL, "Error: Operation file corrupted\n"));
+	if (!(draw_shapes(file, &zone, drawing)))
+		return (clear_all(file, drawing, "Error: Operation file corrupted\n"));
+	draw_drawing(&zone, drawing);
+	clear_all(file, drawing, NULL);
 	return (0);
-}
-
-int print_info(drawing *drawing)
-{
-	int i;
-
-	i = 0;
-	while (i < drawing->height)
-	{
-		printf("%.*s\n", drawing->width, drawing->matrice + i * drawing->width);
-		i = i + 1;
-	}
-	return i;
-}
-
-int execute(FILE *file)
-{
-	int scan_ret;
-	circle circle;
-	drawing drawing;
-
-	if (!get_info(file, &drawing))
-	{
-		scan_ret = fscanf(file, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y, &circle.radius, &circle.color);
-		while (scan_ret == 5)
-		{
-			if (apply_op(&circle, &drawing))
-				return (1);
-			scan_ret = fscanf(file, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y, &circle.radius, &circle.color);
-		}
-		if (scan_ret == -1)
-		{
-			print_info(&drawing);
-			return (0);
-		}
-		return (1);
-	}
-	return (1);
-}
-
-int main(int argc, char **argv)
-{
-	int i;
-	FILE *file;
-
-	if (argc == 2)
-	{
-		file = fopen(argv[1], "r");
-		if (file && !execute(file))
-			return (0);
-		i = ft_strlen("Error: Operation file corrupted\n");
-		write(1, "Error: Operation file corrupted\n", i);
-	}
-	else
-	{
-		i = ft_strlen("Error: argument\n");
-		write(1, "Error: argument\n", i);
-	}
-	return (1);
 }
