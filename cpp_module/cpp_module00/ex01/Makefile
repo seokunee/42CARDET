@@ -6,15 +6,15 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 18:34:31 by seokchoi          #+#    #+#              #
-#    Updated: 2022/12/26 18:34:46 by seokchoi         ###   ########.fr        #
+#    Updated: 2022/12/30 12:48:56 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = megaphone.cpp
+SRCS    = PhoneBook.cpp Contact.cpp main.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = megaphone
+NAME    = PhoneBook
 
 all:		${NAME}
 
