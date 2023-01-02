@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:08:06 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/01 22:08:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:45:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		main( void ) {
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
 	for ( acc_int_t it( acc_begin, dep_begin );
-		  it.first != acc_end && it.second != dep_end;
-		  ++(it.first), ++(it.second) ) {
+		it.first != acc_end && it.second != dep_end;
+		++(it.first), ++(it.second) ) {
 
 		(*(it.first)).makeDeposit( *(it.second) );
 	}
@@ -53,8 +53,8 @@ int		main( void ) {
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
 	for ( acc_int_t it( acc_begin, wit_begin );
-		  it.first != acc_end && it.second != wit_end;
-		  ++(it.first), ++(it.second) ) {
+		it.first != acc_end && it.second != wit_end;
+		++(it.first), ++(it.second) ) {
 
 		(*(it.first)).makeWithdrawal( *(it.second) );
 	}

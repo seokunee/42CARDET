@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:30:06 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/01 22:06:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:43:56 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	PhoneBook::addInfo_(){
 
 void	PhoneBook::searchInfo_(){
 	std::string line;
-
+	
 	printContactTable_();
 	while (1){
 		std::cout << "@ Enter Index : ";
@@ -70,10 +70,25 @@ void	PhoneBook::searchInfo_(){
 		if (line.compare("") != 0)
 			break;
 	}
-	if (std::stoi(line) >= 0 && std::stoi(line) <= 7)
-		printContact_(std::stoi(line));
+	if (line.length() == 1 && line[0] >= '0' && line[0] <= 7)
+	{
+		
+	}
 	else
 		std::cout << "Invalid index" << std::endl;
+
+	// std::cout << "ind len = " << line.length() << std::endl;
+	// if (line.length() != 1)
+	// 	std::cout << "Invalid index" << std::endl;
+	// else
+	// {
+	// 	if (line.)
+	// }
+
+	// if (std::stoi(line) >= 0 && std::stoi(line) <= 7)
+	// 	printContact_(std::stoi(line));
+	// else
+	// 	std::cout << "Invalid index" << std::endl;
 }
 
 void	PhoneBook::printContact_(int ind){
@@ -115,11 +130,8 @@ void	PhoneBook::printContactTable_(){
 
 void	PhoneBook::getCommand_(){
 	std::string cmd;
-
+	welcome_();
 	while (1){
-		std::cout << std::endl;
-		std::cout << std::endl;
-		welcome_();
 		std::cout << std::endl;
 		std::cout << "TYPE COMMAND : ";
 		std::getline(std::cin, cmd);
