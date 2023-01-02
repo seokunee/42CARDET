@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:30:06 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 19:43:56 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/03 03:55:11 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ std::string	PhoneBook::readline_(){
 	std::string line;
 	
 	std::getline(std::cin, line);
-	if (line.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") != std::string::npos)
+	if (line.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") != std::string::npos \
+	|| line.length() == 0)
 		throw 0;
 	return line;
 }
@@ -62,7 +63,8 @@ void	PhoneBook::addInfo_(){
 
 void	PhoneBook::searchInfo_(){
 	std::string line;
-	
+	int			index;
+
 	printContactTable_();
 	while (1){
 		std::cout << "@ Enter Index : ";
@@ -70,25 +72,17 @@ void	PhoneBook::searchInfo_(){
 		if (line.compare("") != 0)
 			break;
 	}
-	if (line.length() == 1 && line[0] >= '0' && line[0] <= 7)
+	if (line.length() == 1 && line[0] >= '0' && line[0] <= '7')
 	{
+		index = line[0] - '0';
 		
+		if (store_[index].getFristName().compare("") != 0)
+			printContact_(std::stoi(line));
+		else
+			std::cout << "Empty index" << std::endl;
 	}
 	else
 		std::cout << "Invalid index" << std::endl;
-
-	// std::cout << "ind len = " << line.length() << std::endl;
-	// if (line.length() != 1)
-	// 	std::cout << "Invalid index" << std::endl;
-	// else
-	// {
-	// 	if (line.)
-	// }
-
-	// if (std::stoi(line) >= 0 && std::stoi(line) <= 7)
-	// 	printContact_(std::stoi(line));
-	// else
-	// 	std::cout << "Invalid index" << std::endl;
 }
 
 void	PhoneBook::printContact_(int ind){
