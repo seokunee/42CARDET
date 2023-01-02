@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 18:34:31 by seokchoi          #+#    #+#              #
-#    Updated: 2022/12/30 12:48:56 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/01/01 00:33:33 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS    = PhoneBook.cpp Contact.cpp main.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = PhoneBook
+NAME    = phoneBook
 
 all:		${NAME}
 

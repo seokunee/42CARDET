@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:30:06 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/30 19:24:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/01 22:06:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,44 @@ PhoneBook::PhoneBook(){
 
 PhoneBook::~PhoneBook(){}
 
+std::string	PhoneBook::readline_(){
+	std::string line;
+	
+	std::getline(std::cin, line);
+	if (line.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") != std::string::npos)
+		throw 0;
+	return line;
+}
+
 void	PhoneBook::addInfo_(){
 	std::string line;
+	std::string fn;
+	std::string ln;
+	std::string nn;
+	std::string pn;
+	std::string ds;
 
-	std::cout << "@ Enter First name : ";
-	std::getline(std::cin, line);
-	store_[order].setFristName(line);
-
-	std::cout << "@ Enter Last name : ";
-	std::getline(std::cin, line);
-	store_[order].setLastName(line);
-
-	std::cout << "@ Enter Nickname : ";
-	std::getline(std::cin, line);
-	store_[order].setNickname(line);
-
-	std::cout << "@ Enter Phone number : ";
-	std::getline(std::cin, line);
-	store_[order].setPhoneNumber(line);
-
-	std::cout << "@ Enter Darkest secret : ";
-	std::getline(std::cin, line);
-	store_[order].setDarkestSecret(line);
-
+	try{
+		std::cout << "@ Enter First name     : ";
+		fn = readline_();
+		std::cout << "@ Enter Last name      : ";
+		ln = readline_();
+		std::cout << "@ Enter Nickname       : ";
+		nn = readline_();
+		std::cout << "@ Enter Phone number   : ";
+		pn = readline_();
+		std::cout << "@ Enter Darkest secret : ";
+		ds = readline_();
+	}
+	catch (int e){
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
+	store_[order].setFristName(fn);
+	store_[order].setLastName(ln);
+	store_[order].setNickname(nn);
+	store_[order].setPhoneNumber(pn);
+	store_[order].setDarkestSecret(ds);
 	order = (order + 1) % 8;
 	std::cout  << std::endl << "ADD COMPLETE! :)" << std::endl;
 }
@@ -78,11 +93,11 @@ void	PhoneBook::printContact_(int ind){
 void	PhoneBook::printContactTable_(){
 	std::string	space = "          ";
 
-	std:: cout << "     index|first name| last name|  nickname" << std::endl;
+	std:: cout << "|     index|first name| last name|  nickname|" << std::endl;
 	for (int i = 0; i < 8; i++)
 	{
-		std:: cout << "         " << i << "|";
-		if (store_[i].getFristNaame().length() > 10)
+		std:: cout << "|         " << i << "|";
+		if (store_[i].getFristName().length() > 10)
 			std::cout << store_[i].getFristName().substr(0, 9) << "." << "|";
 		else
 			std::cout << space.substr(0, 10 - store_[i].getFristName().length()) << store_[i].getFristName() << "|";
@@ -91,10 +106,10 @@ void	PhoneBook::printContactTable_(){
 		else
 			std::cout << space.substr(0, 10 - store_[i].getLastName().length()) << store_[i].getLastName() << "|";
 		if (store_[i].getNickname().length() > 10)
-			std::cout << store_[i].getNicknme().substr(0, 9) << ".";
+			std::cout << store_[i].getNickname().substr(0, 9) << ".";
 		else
 			std::cout << space.substr(0, 10 - store_[i].getNickname().length()) << store_[i].getNickname();
-		std::cout << std::endl;
+		std::cout << "|" << std::endl;
 	}
 }
 
@@ -135,10 +150,3 @@ void	PhoneBook::welcome_(){
 void	PhoneBook::start(){
 	getCommand_();
 }
-
-/*
-	처리해줘야할 부분
-	1. 이름에 영어만 들어갈 수 있도록?
-	2. 전번은 숫자만
-	3. 인덱스 숫자만 그리고 0~7까지만
-*/
