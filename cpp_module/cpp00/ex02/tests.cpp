@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 22:08:06 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/03 19:35:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/07 20:45:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <functional>
 #include "Account.hpp"
+
+#include <iostream>
 
 int		main( void ) {
 
@@ -58,7 +60,6 @@ int		main( void ) {
 		(*(it.first)).makeDeposit( *(it.second) );
 		// deposit을 바꾸면 로그를 띄움
 	}
-
 	Account::displayAccountsInfos();
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
