@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <iomanip>
 
 PhoneBook::PhoneBook(){
 	order = 0;
@@ -20,8 +21,13 @@ PhoneBook::~PhoneBook(){}
 
 std::string	PhoneBook::readline_(){
 	std::string line;
-	
+
 	std::getline(std::cin, line);
+	if (std::cin.fail())
+	{
+		std::cout << "Invalid Input" << std::endl;
+		exit(1);
+	}
 	if (line.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") != std::string::npos \
 	|| line.length() == 0)
 		throw 0;
@@ -69,15 +75,20 @@ void	PhoneBook::searchInfo_(){
 	while (1){
 		std::cout << "@ Enter Index : ";
 		std::getline(std::cin, line);
-		if (line.compare("") != 0)
+		if (std::cin.fail())
+		{
+			std::cout << "Invalid Input" << std::endl;
+			exit(1);
+		}
+		if (line != "")
 			break;
 	}
 	if (line.length() == 1 && line[0] >= '0' && line[0] <= '7')
 	{
 		index = line[0] - '0';
-		
-		if (store_[index].getFristName().compare("") != 0)
-			printContact_(std::stoi(line));
+
+		if (store_[index].getFristName() != "")
+			printContact_(index);
 		else
 			std::cout << "Empty index" << std::endl;
 	}
@@ -102,10 +113,14 @@ void	PhoneBook::printContact_(int ind){
 void	PhoneBook::printContactTable_(){
 	std::string	space = "          ";
 
-	std:: cout << "|     index|first name| last name|  nickname|" << std::endl;
+	std:: cout << "|" << std::setw(10) << "index";
+	std:: cout << "|" << std::setw(10) << "first name";
+	std:: cout << "|" << std::setw(10) << "last name";
+	std:: cout << "|" << std::setw(10) << "nickname" << "|" << std::endl;
+
 	for (int i = 0; i < 8; i++)
 	{
-		std:: cout << "|         " << i << "|";
+		std:: cout << "|" << std::setw(10) << i << "|";
 		if (store_[i].getFristName().length() > 10)
 			std::cout << store_[i].getFristName().substr(0, 9) << "." << "|";
 		else
@@ -117,7 +132,7 @@ void	PhoneBook::printContactTable_(){
 		if (store_[i].getNickname().length() > 10)
 			std::cout << store_[i].getNickname().substr(0, 9) << ".";
 		else
-			std::cout << space.substr(0, 10 - store_[i].getNickname().length()) << store_[i].getNickname();
+			std::cout << std::setw(10) << store_[i].getNickname();
 		std::cout << "|" << std::endl;
 	}
 }
@@ -129,11 +144,16 @@ void	PhoneBook::getCommand_(){
 		std::cout << std::endl;
 		std::cout << "TYPE COMMAND : ";
 		std::getline(std::cin, cmd);
-		if (cmd.compare("ADD") == 0)
+		if (std::cin.fail())
+		{
+			std::cout << "Invalid Input" << std::endl;
+			exit(1);
+		}
+		if (cmd == "ADD")
 			addInfo_();
-		else if (cmd.compare("SEARCH") == 0)
+		else if (cmd == "SEARCH")
 			searchInfo_();
-		else if (cmd.compare("EXIT") == 0)
+		else if (cmd == "EXIT")
 			break ;
 		else
 			std::cout << "Invalid Command" << std::endl;
