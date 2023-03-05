@@ -70,7 +70,6 @@ void	Account::_displayTimestamp(void){
 	time_t curTime = time(NULL);
 	struct tm *pLocal = localtime(&curTime);
 
-	std::cout.fill(0);
 	std::cout << "[";
 	std::cout << 1900 + pLocal->tm_year;
 	if (pLocal->tm_mon + 1 < 10)
