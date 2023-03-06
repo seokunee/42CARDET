@@ -86,7 +86,6 @@ void	PhoneBook::searchInfo_(){
 	if (line.length() == 1 && line[0] >= '0' && line[0] <= '7')
 	{
 		index = line[0] - '0';
-
 		if (store_[index].getFristName() != "")
 			printContact_(index);
 		else
@@ -124,11 +123,11 @@ void	PhoneBook::printContactTable_(){
 		if (store_[i].getFristName().length() > 10)
 			std::cout << store_[i].getFristName().substr(0, 9) << "." << "|";
 		else
-			std::cout << space.substr(0, 10 - store_[i].getFristName().length()) << store_[i].getFristName() << "|";
+			std::cout << std::setw(10) << store_[i].getFristName() << "|";
 		if (store_[i].getLastName().length() > 10)
 			std::cout << store_[i].getLastName().substr(0, 9) << "." << "|";
 		else
-			std::cout << space.substr(0, 10 - store_[i].getLastName().length()) << store_[i].getLastName() << "|";
+			std::cout << std::setw(10) << store_[i].getLastName() << "|";
 		if (store_[i].getNickname().length() > 10)
 			std::cout << store_[i].getNickname().substr(0, 9) << ".";
 		else
