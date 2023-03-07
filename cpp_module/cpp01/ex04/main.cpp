@@ -13,21 +13,23 @@
 #include <iostream>
 #include <fstream>
 
+int	throw_error(std::string meg)
+{
+	std::cout << msg << std::endl;
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	std::string line = "";
 
 	if (ac != 4)
-	{
-		std::cout << "Not valid argments" << std::endl;
-		return (1);
-	}
+		return (throw_error("Not valid argments"));
 	std::string file = av[1];
 	std::string s1 = av[2];
 	std::string s2 = av[3];
 	std::string new_file = file + ".replace";
 	std::string buf;
-
 	std::ifstream readFile;
 
 	readFile.open(file);
@@ -35,11 +37,10 @@ int	main(int ac, char **av)
 		while (std::getline(readFile, buf, '0')){
 			line.append(buf);
 		}
-	} else {
-		std::cout << "Not valid file" << std::endl;
-		return (1);
 	}
-	
+	else
+		return (throw_error("Not valid file"));
+
 	size_t idx;
 	while (line.find(s1) != std::string::npos){
 		idx = line.find(s1);
@@ -58,6 +59,6 @@ int	main(int ac, char **av)
 	}
 	readFile.close();
 	writeFile.close();
-	system("leaks replace");
+	// system("leaks replace");
 	return (0);
 }

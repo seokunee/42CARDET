@@ -17,13 +17,14 @@ int	main(void)
 	std::string say = "HI THIS IS BRAIN";
 	std::string *stringPTR = &say;
 	std::string &stringREF = say;
-	
+
 	std::cout << "say : " << say << std::endl;
+	std::cout << "*stringPTR : " << *stringPTR << std::endl;
 	std::cout << "stringPTR : " << stringPTR << std::endl;
 	std::cout << "stringREF : " << stringREF << std::endl;
-	std::cout << "say addree: " << &say << std::endl;
-	std::cout << "stringPTR address: " << &stringPTR << std::endl;
-	std::cout << "stringREF address: " << &stringREF << std::endl;
+	std::cout << "&say: " << &say << std::endl;
+	std::cout << "&stringPTR: " << &stringPTR << std::endl;
+	std::cout << "&stringREF: " << &stringREF << std::endl;
 
 	return 0;
 }

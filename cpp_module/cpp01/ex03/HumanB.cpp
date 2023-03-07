@@ -23,7 +23,7 @@ HumanB::HumanB(std::string name){
 }
 
 void	HumanB::attack(void){
-	std::cout << name_ << "attacks with his " << weapon_->getType() << std::endl;
+	std::cout << name_ << " attacks with his " << weapon_->getType() << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon *weapon){
