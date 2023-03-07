@@ -20,7 +20,7 @@ int main(int ac, char **av)
 
 	if (ac == 1)
 	{
-		std:: cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		std:: cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 		return (0);
 	}
 	i = 1;
@@ -31,7 +31,7 @@ int main(int ac, char **av)
 		{
 			if (av[i][j] >= 'a' && av[i][j] <= 'z')
 			{
-				c = toupper(av[i][j]);
+				c = std::toupper(av[i][j]);
 				std:: cout << c;
 			}
 			else

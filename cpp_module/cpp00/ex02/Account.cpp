@@ -13,6 +13,11 @@
 #include <iostream>
 #include "Account.hpp"
 
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
 int Account::getNbAccounts(){
 	return _nbAccounts;
 }
@@ -61,11 +66,6 @@ int	Account::checkAmount(void) const{
 	return _amount;
 }
 
-int Account::_nbAccounts = 0;
-int Account::_totalAmount = 0;
-int Account::_totalNbDeposits = 0;
-int Account::_totalNbWithdrawals = 0;
-
 void	Account::_displayTimestamp(void){
 	time_t curTime = time(NULL);
 	struct tm *pLocal = localtime(&curTime);
@@ -81,7 +81,18 @@ void	Account::_displayTimestamp(void){
 	else
 		std::cout << pLocal->tm_mday;
 	std::cout << "_";
-	std::cout << pLocal->tm_hour << pLocal->tm_min << pLocal->tm_sec;
+	if (pLocal->tm_hour < 10)
+		std::cout << "0" << pLocal->tm_hour;
+	else
+		std::cout << pLocal->tm_hour;
+	if (pLocal->tm_min < 10)
+		std::cout << "0" << pLocal->tm_min;
+	else
+		std::cout << pLocal->tm_min;
+	if (pLocal->tm_sec < 10)
+		std::cout << "0" << pLocal->tm_sec;
+	else
+		std::cout << pLocal->tm_sec;
 	std::cout << "] ";
 }
 
