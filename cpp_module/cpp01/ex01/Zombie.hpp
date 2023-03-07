@@ -21,7 +21,7 @@ class Zombie {
 		std::string name_;
 	public:
 		typedef Zombie		t;
-		void	announce(void) const;
+		void	announce(void);
 		void	setName(std::string name);
 		Zombie(void);
 		Zombie(std::string name);
