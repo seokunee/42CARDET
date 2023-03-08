@@ -6,18 +6,18 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/09 01:15:00 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/09 02:01:01 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#include "Harl.hpp"
 
 int	main(void){
-	Karen karen;
+	Harl harl;
 
-	karen.complain("debug");
-	karen.complain("info");
-	karen.complain("warning");
-	karen.complain("error");
+	harl.complain("debug");
+	harl.complain("info");
+	harl.complain("warning");
+	harl.complain("error");
 	return 0;
 }
