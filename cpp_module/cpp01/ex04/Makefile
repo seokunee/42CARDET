@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#              #
-#    Updated: 2023/01/10 16:20:35 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/09 00:18:06 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp
+SRCS    = main.cpp Sed.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
