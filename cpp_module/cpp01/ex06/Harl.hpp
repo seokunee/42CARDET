@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/09 02:29:05 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/14 01:50:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef KAREN_HPP
+#define KAREN_HPP
 
-int	main(void){
-	Harl harl;
+#include <iostream>
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return 0;
-}
+class Harl{
+	private:
+		void debug( void );
+		void info( void );
+		void warning( void );
+		void error( void );
+	public:
+		Harl(void);
+		~Harl(void);
+		void complain( std::string level );
+};
+
+#endif
