@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/24 16:12:34 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/09 01:54:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ void Karen::error(void){
 }
 
 void	Karen::complain(std::string level){
+	void (Karen::*ptr[4])(void) = {&Karen::debug, &Karen::info, &Karen::warning, &Karen::error};
+	std::string type[4] = {"debug", "info", "warning", "error"};
 	
+	for (int i = 0; i < 4; i++){
+		if (level == type[i])
+			(this->*ptr[i])();
+	}
 }

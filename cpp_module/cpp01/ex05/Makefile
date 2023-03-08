@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#              #
-#    Updated: 2023/01/14 01:46:26 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/09 01:55:35 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS    = main.cpp Karen.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = replace
+NAME    = karen
 
 all:		${NAME}
 
