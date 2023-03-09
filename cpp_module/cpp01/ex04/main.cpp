@@ -25,6 +25,5 @@ int	main(int ac, char **av)
 	if (ac != 4)
 		throw_error("Not valid argments");
 	changer.toDoLikeSed(av[1], av[2], av[3]);
-	// system("leaks replace");
 	return (0);
 }

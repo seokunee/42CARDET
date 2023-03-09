@@ -12,7 +12,7 @@
 
 SRCS    = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS	= ${SRCS:.cpp=.o}
-CC		= c++
+CC		= clang++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
 NAME    = weapon
 

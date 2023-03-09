@@ -19,12 +19,18 @@ Sed::~Sed(){}
 void Sed::_read(std::string &line){
 	_readFile.open(_file);
 	if (_readFile.is_open() == true){
-		while (std::getline(_readFile, _buf, '0')){
+		while (std::getline(_readFile, _buf)){
 			line.append(_buf);
+			line += '\n';
+		}
+		if (!_readFile.eof()) {
+			_readFile.close();
+			throw_error("There was an error reading " + _file + " file.");
 		}
 	}
 	else
 		throw_error("Not valid file");
+	_readFile.close();
 }
 
 void Sed::_write(std::string &line){
@@ -32,9 +38,9 @@ void Sed::_write(std::string &line){
 	if (_writeFile.is_open() == true){
 		_writeFile << line;
 	} else {
-		_readFile.close();
 		throw_error("Can not open " + _new_file);
 	}
+	_writeFile.close();
 }
 
 void Sed::_changeWord(std::string &line){
@@ -58,6 +64,4 @@ void Sed::toDoLikeSed(std::string file, std::string s1, std::string s2) {
 	_read(line);
 	_changeWord(line);
 	_write(line);
-	_readFile.close();
-	_writeFile.close();
 }
