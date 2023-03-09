@@ -12,7 +12,7 @@
 
 SRCS    = main.cpp
 OBJS	= ${SRCS:.cpp=.o}
-CC		= clang++
+CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
 NAME    = brain
 
