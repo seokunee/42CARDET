@@ -9,3 +9,22 @@
 /*   Updated: 2023/01/09 15:00:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "Fixed.hpp"
+
+Fixed::Fixed(){
+	_fixPoint = 0;
+}
+
+
+Fixed::~Fixed(){
+
+}
+
+Fixed::Fixed(const Fixed &src) {
+	_fixPoint = src._fixPoint;
+};
+
+Fixed &Fixed::operator=(const Fixed&src){
+
+};
