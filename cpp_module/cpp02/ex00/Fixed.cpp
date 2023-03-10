@@ -23,7 +23,7 @@ Fixed::~Fixed(){
 
 Fixed::Fixed(const Fixed &src) {
 	std::cout << "Copy constructor called" << std::endl;
-	_fixPoint = src._fixPoint;
+	_fixPoint = src.getRawBits();
 };
 
 Fixed &Fixed::operator=(const Fixed&src){
