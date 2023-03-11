@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/09 15:00:36 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/03/11 19:56:40 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/03/11 19:56:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Fixed {
 	public:
 		Fixed();
 		Fixed(const Fixed &src);
-		Fixed &operator=(const Fixed&src);
+		Fixed &operator=(const Fixed &src);
 		~Fixed();
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );

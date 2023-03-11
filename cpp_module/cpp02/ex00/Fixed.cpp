@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/09 15:00:36 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/03/11 19:56:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,21 @@ Fixed::~Fixed(){
 
 Fixed::Fixed(const Fixed &src) {
 	std::cout << "Copy constructor called" << std::endl;
+	*this = src;
+};
+
+Fixed &Fixed::operator=(const Fixed &src){
+	std::cout << "Copy assignment operator called" << std::endl;
 	_fixPoint = src.getRawBits();
+	return (*this);
 };
 
-Fixed &Fixed::operator=(const Fixed&src){
-	std::cout << "Copy assignment operator called" << std::endl;
-};
-
-int getRawBits( void ) const{
+int Fixed::getRawBits( void ) const {
 	std::cout << "getRawBits member function called" << std::endl;
+	return (_fixPoint);
 };
 
-void setRawBits( int const raw ){
+void Fixed::setRawBits( int const raw ){
 	std::cout << "Copy assignment operator called" << std::endl;
+	_fixPoint = raw;
 };
