@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/11 21:47:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:00:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Fixed::Fixed(int value){
 
 Fixed::Fixed(float value){
 	std::cout << "Float constructor called" << std::endl;
-	_fixPoint = roundf(value * static_cast<int>(1 << _bit));
+	_fixPoint = roundf(value * static_cast<float>(1 << _bit));
 };
 
 Fixed &Fixed::operator=(const Fixed &src){
@@ -54,14 +54,15 @@ void Fixed::setRawBits( int const raw ){
 };
 
 float Fixed::toFloat( void ) const{
-	return (_fixPoint );
+	return (_fixPoint / static_cast<float>(1 << _bit));
 };
 
 int Fixed::toInt( void ) const{
+	std::cout << _fixPoint << ", ";
 	return (_fixPoint >> _bit);
 };
 
 std::ostream &operator<<( std::ostream &o, Fixed const &fix ){
-	std::cout <<
+	o << fix.toFloat();
+	return o;
 };
-
