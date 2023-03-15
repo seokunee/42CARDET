@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/13 18:59:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:52:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ float Fixed::toFloat( void ) const{
 };
 
 int Fixed::toInt( void ) const{
-	// std::cout << _fixPoint << ", ";
 	return (_fixPoint >> _bit);
 };
 

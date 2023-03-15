@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/13 20:48:13 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/15 00:32:46 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,20 @@ bool	Fixed::operator>=(const Fixed &src){
 	return (false);
 };
 
-Fixed &Fixed::operator+(const Fixed &src){
+Fixed Fixed::operator+(const Fixed &src){
+	Fixed newFix = this->toFloat() + src.toFloat();
+	return (newFix);
+};
+
+Fixed Fixed::operator-(const Fixed &src){
 
 };
 
-Fixed &Fixed::operator-(const Fixed &src){
+Fixed Fixed::operator*(const Fixed &src){
 
 };
 
-Fixed &Fixed::operator*(const Fixed &src){
-
-};
-
-Fixed &Fixed::operator/(const Fixed &src){
+Fixed Fixed::operator/(const Fixed &src){
 
 };
 
