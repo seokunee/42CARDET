@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/15 00:32:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:33:23 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ Fixed::Fixed(const Fixed &src) {
 
 Fixed::Fixed(int value){
 	std::cout << "Int constructor called" << std::endl;
-	_fixPoint = value << _bit;
+	_fixPoint = value * 256;
 };
 
 Fixed::Fixed(float value){
 	std::cout << "Float constructor called" << std::endl;
+	std::cout << "test1 " << value * static_cast<float>(1 << _bit) << std::endl;
+	std::cout << "test2 " << roundf(value * static_cast<float>(1 << _bit)) << std::endl;
+
 	_fixPoint = roundf(value * static_cast<float>(1 << _bit));
 };
 
@@ -52,7 +55,7 @@ float Fixed::toFloat( void ) const{
 };
 
 int Fixed::toInt( void ) const{
-	return (_fixPoint >> _bit);
+	return (_fixPoint / 256);
 };
 
 Fixed &Fixed::operator=(const Fixed &src){
@@ -98,38 +101,70 @@ bool	Fixed::operator>=(const Fixed &src){
 };
 
 Fixed Fixed::operator+(const Fixed &src){
-	Fixed newFix = this->toFloat() + src.toFloat();
+	Fixed newFix(this->toFloat() + src.toFloat());
 	return (newFix);
 };
 
 Fixed Fixed::operator-(const Fixed &src){
-
+	Fixed newFix(this->toFloat() - src.toFloat());
+	return (newFix);
 };
 
 Fixed Fixed::operator*(const Fixed &src){
-
+	Fixed newFix(this->toFloat() * src.toFloat());
+	return (newFix);
 };
 
 Fixed Fixed::operator/(const Fixed &src){
-
+	Fixed newFix(this->toFloat() / src.toFloat());
+	return (newFix);
 };
 
-static  Fixed	&min(Fixed &_fix1, Fixed &_fix2){
-
+Fixed &Fixed::min(Fixed &fix1, Fixed &fix2){
+	if (fix1.getRawBits() <= fix2.getRawBits())
+		return (fix1);
+	return (fix2);
 };
 
-static  Fixed	&max(Fixed &_fix1, Fixed &_fix2){
-
+Fixed &Fixed::operator++(){
+	this->_fixPoint = this->_fixPoint + 1;
+	return (*this);
 };
 
-static const Fixed	&min(const Fixed &_fix1, const Fixed &_fix2){
-
+Fixed Fixed::operator++(int){
+	Fixed tmp(*this);
+	this->_fixPoint = this->_fixPoint + 1;
+	return (tmp);
 };
 
-static const Fixed	&max(const Fixed &_fix1, const Fixed &_fix2){
-
+Fixed &Fixed::operator--(){
+	this->_fixPoint = this->_fixPoint - 1;
+	return (*this);
 };
 
+Fixed Fixed::operator--(int){
+	Fixed tmp(*this);
+	this->_fixPoint = this->_fixPoint - 1;
+	return (tmp);
+};
+
+Fixed &Fixed::max(Fixed &fix1, Fixed &fix2){
+	if (fix1.getRawBits() >= fix2.getRawBits())
+		return (fix1);
+	return (fix2);
+};
+
+const Fixed &Fixed::min(const Fixed &fix1, const Fixed &fix2){
+	if (fix1.getRawBits() <= fix2.getRawBits())
+		return (fix1);
+	return (fix2);
+};
+
+const Fixed &Fixed::max(const Fixed &fix1, const Fixed &fix2){
+	if (fix1.getRawBits() >= fix2.getRawBits())
+		return (fix1);
+	return (fix2);
+};
 
 std::ostream &operator<<( std::ostream &o, Fixed const &fix ){
 	o << fix.toFloat();

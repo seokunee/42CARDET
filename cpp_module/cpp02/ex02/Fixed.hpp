@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:40 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/13 20:35:33 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:45:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ class Fixed {
 		bool	operator<=(const Fixed &src);
 		bool	operator>=(const Fixed &src);
 
-		Fixed	&operator+(const Fixed &src);
-		Fixed	&operator-(const Fixed &src);
-		Fixed	&operator*(const Fixed &src);
-		Fixed	&operator/(const Fixed &src);
+		Fixed	operator+(const Fixed &src);
+		Fixed	operator-(const Fixed &src);
+		Fixed	operator*(const Fixed &src);
+		Fixed	operator/(const Fixed &src);
 
 		Fixed &operator++();
 		Fixed operator++(int);
@@ -51,11 +51,10 @@ class Fixed {
 		float toFloat( void ) const;
 		int toInt( void ) const;
 
-
-		static  Fixed	&min(Fixed &_fix1, Fixed &_fix2);
-		static  Fixed	&max(Fixed &_fix1, Fixed &_fix2);
-		static const Fixed	&min(const Fixed &_fix1, const Fixed &_fix2);
-		static const Fixed	&max(const Fixed &_fix1, const Fixed &_fix2);
+		static  Fixed	&min(Fixed &fix1, Fixed &fix2);
+		static const Fixed &min(const Fixed &fix1, const Fixed &fix2);
+		static  Fixed	&max(Fixed &fix1, Fixed &fix2);
+		static const Fixed &max(const Fixed &fix1, const Fixed &fix2);
 };
 
 std::ostream &operator<<( std::ostream &o, Fixed const &i );
