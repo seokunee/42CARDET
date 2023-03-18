@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/18 20:05:19 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/18 20:17:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class ClapTrap {
 		~ClapTrap();
 		ClapTrap(ClapTrap const &src);
 
-		ClapTrap &ClapTrap::operator=(const ClapTrap &src);
+		ClapTrap &operator=(const ClapTrap &src);
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
