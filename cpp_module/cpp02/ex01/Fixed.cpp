@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/13 20:52:39 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:16:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ float Fixed::toFloat( void ) const{
 };
 
 int Fixed::toInt( void ) const{
-	return (_fixPoint >> _bit);
+	return (_fixPoint / (1 << _bit));
 };
 
 std::ostream &operator<<( std::ostream &o, Fixed const &fix ){
