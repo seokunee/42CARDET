@@ -6,15 +6,15 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 20:00:17 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/11 20:00:22 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/18 17:12:16 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp Fixed.cpp
+SRCS    = main.cpp Fixed.cpp Point.cpp bsp.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = fix
+NAME    = bsp
 
 all:		${NAME}
 
