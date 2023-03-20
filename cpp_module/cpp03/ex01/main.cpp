@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/19 19:32:06 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:17:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int main()
 {
-	// ClapTrap clapTlap = ClapTrap();
-	// ClapTrap ava = ClapTrap();
-	
-	// clapTlap.attack("ava");
-	// clapTlap.takeDamage(clapTlap);
 	ClapTrap seokchoi("seokchoi");
   	ClapTrap eunjiko("eunjiko");
   	ClapTrap jeseo("jeseo");
