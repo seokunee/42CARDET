@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/19 19:32:06 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:58:00 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 int main()
 {
-	// ClapTrap clapTlap = ClapTrap();
-	// ClapTrap ava = ClapTrap();
-	
-	// clapTlap.attack("ava");
-	// clapTlap.takeDamage(clapTlap);
 	ClapTrap seokchoi("seokchoi");
   	ClapTrap eunjiko("eunjiko");
   	ClapTrap jeseo("jeseo");
-	
+
   	std::cout << std::endl;
   	std::cout << "-----Test#1 energyPoints-----" << std::endl;
   	for (int i = 0; i < 10; i++) {
@@ -31,13 +26,13 @@ int main()
   	seokchoi.attack("eunjiko");
   	seokchoi.beRepaired(10);
   	std::cout << std::endl;
-	
+
   	std::cout << "-----Test#2 hitPoints-----" << std::endl;
   	eunjiko.takeDamage(10);
   	eunjiko.attack("seokchoi");
   	eunjiko.beRepaired(10);
   	std::cout << std::endl;
-	
+
   	std::cout << "-----Test#3 beRepaired()-----" << std::endl;
   	jeseo.beRepaired(10);
   	for (int i = 0; i < 20; i++) {

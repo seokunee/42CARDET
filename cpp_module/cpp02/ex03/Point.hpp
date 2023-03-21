@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 00:01:20 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/18 17:51:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:56:43 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ class Point {
 		Fixed  getX() const;
 		Fixed  getY() const;
 };
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

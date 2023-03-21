@@ -6,11 +6,11 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:45:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/18 19:45:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:58:31 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsp.hpp"
+#include "Point.hpp"
 
 Fixed getArea(Point const& a, Point const& b, Point const& c) {
   Fixed area = (b.getX() - a.getX()) * (c.getY() - a.getY()) - (c.getX() - a.getX()) * (b.getY() - a.getY());

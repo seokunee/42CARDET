@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsp.hpp                                            :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 15:46:33 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/18 17:12:59 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/03/19 19:50:37 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/03/21 16:44:00 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-#ifndef BSP_HPP
-#define BSP_HPP
+#include <iostream>
+#include "ClapTrap.hpp"
 
-#include "Point.hpp"
+class ScavTrap : public ClapTrap{
+	private:
 
-bool bsp(Point const a, Point const b, Point const c, Point const point);
+	public:
+		ScavTrap();
+		ScavTrap(std::string name);
+		ScavTrap(ScavTrap const &src);
+		~ScavTrap();
+
+		ScavTrap &operator=(const ScavTrap &src);
+		void attack(const std::string& target);
+		void guardGate();
+};
 
 #endif
