@@ -6,15 +6,15 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/21 21:35:59 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/21 22:17:10 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRCS    = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = fragTrap
+NAME    = diamondTrap
 
 all:		${NAME}
 
