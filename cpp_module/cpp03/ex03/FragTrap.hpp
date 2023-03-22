@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:17:38 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/21 21:34:55 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:49:27 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap{
+class FragTrap : virtual public ClapTrap{
 	private:
 
 	public:
@@ -25,7 +25,6 @@ class FragTrap : public ClapTrap{
 		~FragTrap();
 
 		FragTrap &operator=(const FragTrap &src);
-		void attack(const std::string& target);
 		void highFivesGuys(void);
 };
 
