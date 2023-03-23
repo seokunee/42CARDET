@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:26:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:22:49 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:59:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ Animal::~Animal(){
 
 Animal &Animal::operator=(const Animal &src){
 	_type = src._type;
+	std::cout << "[type :" << _type << "] Animal copy assignment operator!" << std::endl;
 	return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:26:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:39:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:58:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Dog::~Dog(){
 
 Dog &Dog::operator=(const Dog &src){
 	_type = src._type;
-	std::cout << "[type :" << _type << "] Dog a!" << std::endl;
+	std::cout << "[type :" << _type << "] Dog copy assignment operator!" << std::endl;
 	return (*this);
 }
 

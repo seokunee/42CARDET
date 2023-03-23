@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:26:05 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:39:11 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:58:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Cat::~Cat(){
 
 Cat &Cat::operator=(const Cat &src){
 	_type = src._type;
-	std::cout << "[type :" << _type << "] Cat a!" << std::endl;
+	std::cout << "[type :" << _type << "] Cat copy assignment operator!" << std::endl;
 	return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:11:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:31:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:59:33 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ WrongCat::~WrongCat(){
 
 WrongCat &WrongCat::operator=(const WrongCat &src){
 	_type = src._type;
-	std::cout << "[type :" << _type << "] WrongCat a!" << std::endl;
+	std::cout << "[type :" << _type << "] WrongCat copy assignment operator!" << std::endl;
 	return (*this);
 }
 
