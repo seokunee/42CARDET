@@ -6,15 +6,15 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/22 21:17:04 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/23 17:18:42 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp 
+SRCS    = main.cpp Cat.cpp Dog.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = 
+NAME    = animal
 
 all:		${NAME}
 
