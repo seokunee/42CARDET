@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/23 20:26:37 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/03/24 14:51:59 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp Cat.cpp Dog.cpp Animal.cpp
+SRCS    = main.cpp Cat.cpp Dog.cpp Animal.cpp Brain.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98

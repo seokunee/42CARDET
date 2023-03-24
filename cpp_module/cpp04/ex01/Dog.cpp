@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:26:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 19:20:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:05:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Dog::Dog() : Animal(){
 
 Dog::Dog(const Dog &src){
 	*this = src;
+	_brain = new Brain();
 	std::cout << "[type :" << _type << "] Dog copy constructor is called!" << std::endl;
 }
 

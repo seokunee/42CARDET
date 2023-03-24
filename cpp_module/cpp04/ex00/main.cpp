@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:21:40 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:51:11 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:52:31 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int main()
 	delete (wcat);
 	// wcat will say "WrongAnimal sound~" because WrongAnimal' makeSound is not virtual function
 
+	system("leaks animal");
 	return (0);
 }
