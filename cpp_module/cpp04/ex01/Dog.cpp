@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:26:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/24 15:05:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/25 00:29:24 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ Dog::Dog() : Animal(){
 }
 
 Dog::Dog(const Dog &src){
-	*this = src;
 	_brain = new Brain();
+	*this = src;
 	std::cout << "[type :" << _type << "] Dog copy constructor is called!" << std::endl;
 }
 
@@ -31,6 +31,7 @@ Dog::~Dog(){
 
 Dog &Dog::operator=(const Dog &src){
 	_type = src._type;
+	*_brain = *(src._brain);
 	std::cout << "[type :" << _type << "] Dog copy assignment operator!" << std::endl;
 	return (*this);
 }
