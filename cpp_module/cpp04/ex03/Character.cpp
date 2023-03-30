@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 18:59:00 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/29 16:42:34 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:22:50 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ Character::Character(const Character &src){
 	*this = src;
 }
 
-Character::~Character(){}
+Character::~Character(){
+	for (int i = 0; i < 4; i++){
+		if (_inventory[i] != NULL)
+			delete _inventory[i];
+	}
+}
 
 Character &Character::operator=(const Character &src){
 	_name = src._name;
@@ -52,6 +57,11 @@ void Character::equip(AMateria* m){
 void Character::unequip(int idx){
 	if (idx < 0 || idx > 3)
 		return ;
+	if (_inventory[idx] == NULL)
+	{
+		return ;
+	}
+	delete _inventory[idx];
 	_inventory[idx] = NULL;
 }
 

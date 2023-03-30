@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 20:58:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/29 20:59:46 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:23:54 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
+	// system("leaks materia");
 	return 0;
 }

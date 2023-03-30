@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 16:46:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/30 13:02:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:52:50 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ MateriaSource::MateriaSource(const MateriaSource &src){
 	*this = src;
 }
 
-MateriaSource::~MateriaSource(){}
+MateriaSource::~MateriaSource(){
+	for (int i = 0; i < 4; i++){
+		if (_sources[i] != NULL)
+			delete _sources[i];
+	}
+}
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &src){
 	for (int i = 0; i < 4; i++){

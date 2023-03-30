@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:51:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/30 03:32:17 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/03/30 13:57:23 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ class AMateria {
   AMateria(std::string const& type);
   AMateria(AMateria const& obj);
   virtual ~AMateria();
-  std::string const& getType() const;  // Returns the materia type
+  AMateria &operator=(const AMateria &src);
+  std::string const& getType() const;
   virtual AMateria* clone() const = 0;
   virtual void use(ICharacter& target);
 };
