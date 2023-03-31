@@ -85,6 +85,7 @@
     "deque": "cpp",
     "iomanip": "cpp",
     "stack": "cpp",
-    "complex": "cpp"
+    "complex": "cpp",
+    "__verbose_abort": "cpp"
   }
 }
