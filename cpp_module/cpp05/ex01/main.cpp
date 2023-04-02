@@ -6,21 +6,22 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/31 22:03:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/02 14:22:10 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main(){
-	Bureaucrat seok("seokchoi", 3);
+	std::cout << std::endl;
+	std::cout << std::endl;
 	{
 		try{
-			std::cout << seok;
-			seok.increment();
-			seok.increment();
-			std::cout << seok;
-			seok.increment();
+			Bureaucrat seok("seok", 3);
+			Form 		atom("atom", 15, 20);
+			std::cout << seok << "signFrom => ";
+			seok.signForm(atom);
 		}catch (std::exception &error){
 			std::cout << "ERROR!!" << std::endl;
 			std::cout << error.what() << std::endl;
@@ -28,18 +29,19 @@ int main(){
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
-	Bureaucrat atom("atom", 148);
 	{
 		try{
-			std::cout << atom;
-			atom.decrement();
-			atom.decrement();
-			std::cout << atom;
-			atom.decrement();
+			Bureaucrat choi("choi", 18);
+			Form 		atom("atom", 15, 20);
+			std::cout << choi;
+			choi.signForm(atom);
 		}catch (std::exception &error){
 			std::cout << "ERROR!!" << std::endl;
 			std::cout << error.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	// system("leaks form");
 	return 0;
 }

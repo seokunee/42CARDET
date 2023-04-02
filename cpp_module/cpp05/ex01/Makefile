@@ -6,15 +6,15 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/31 22:03:12 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/04/02 13:20:23 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp Bureaucrat.cpp
+SRCS    = main.cpp Bureaucrat.cpp Form.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
-NAME    = bureaucrat
+NAME    = form
 
 all:		${NAME}
 

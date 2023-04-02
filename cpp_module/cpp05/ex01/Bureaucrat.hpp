@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/01 04:03:20 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/02 14:21:22 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "Form.hpp"
+class Form;
 
 class Bureaucrat {
 	private:
