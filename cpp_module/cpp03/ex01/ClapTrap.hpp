@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/21 16:49:01 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:36:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class ClapTrap {
 		ClapTrap(ClapTrap const &src);
 
 		ClapTrap &operator=(const ClapTrap &src);
-		void attack(const std::string& target);
+		virtual void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 };

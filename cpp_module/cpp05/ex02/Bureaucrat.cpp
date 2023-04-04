@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/01 04:03:14 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:02:54 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,22 @@ std::ostream &operator<<( std::ostream &o, const Bureaucrat &i ){
 	return o;
 }
 
-void	Bureaucrat::signForm(Form &obj){
+void	Bureaucrat::signForm(AForm &obj){
 	try{
 		obj.beSigned(*this);
 		std::cout << _name << " signed " << obj.getName() << std::endl;
 	} catch (std::exception &err){
-		std::cout << _name << " couldn’t sign " << obj.getName() 
+		std::cout << _name << " couldn’t sign " << obj.getName()
 		<< " because "<< err.what() <<std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const & form){
+	try{
+		form.execute(*this);
+		std::cout << form.getName() << " executed " << form.getName() << std::endl;
+	}catch (std::exception &err){
+		std::cout << form.getName() << " couldn't execute " << form.getName()
+		 << " becuase " << err.what() << std::endl;
 	}
 }

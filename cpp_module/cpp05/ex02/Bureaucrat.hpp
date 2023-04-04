@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/02 14:21:22 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:59:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "Form.hpp"
-class Form;
+#include "AForm.hpp"
+class AForm;
 
 class Bureaucrat {
 	private:
@@ -43,7 +43,8 @@ class Bureaucrat {
 		void	increment();
 		void	decrement();
 
-		void	signForm(Form &obj);
+		void	signForm(AForm &obj);
+		void	executeForm(AForm const & form);
 };
 
 std::ostream &operator<<( std::ostream &o, const Bureaucrat &i );

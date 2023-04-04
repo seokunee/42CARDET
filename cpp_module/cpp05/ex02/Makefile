@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/04/02 13:20:23 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/04/04 18:59:10 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp Bureaucrat.cpp Form.cpp
+SRCS    = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98

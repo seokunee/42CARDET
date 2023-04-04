@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/03 23:06:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:08:31 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class Bureaucrat;
 class PresidentialPardonForm : public AForm{
 	private:
 		std::string _target;
-	public:
 		PresidentialPardonForm();
+	public:
 		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm &src);
 		~PresidentialPardonForm();
