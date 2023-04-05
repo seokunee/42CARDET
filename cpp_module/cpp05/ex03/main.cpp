@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 20:02:39 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:31:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,38 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int main(){
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		try{
-			Bureaucrat 					seok("seok", 3);
-			// Bureaucrat 					seok("seok", 50);
-			PresidentialPardonForm 		atom("atom");
-			seok.signForm(atom);
-			seok.executeForm(atom);
-		}catch (std::exception &error){
-			std::cout << "ERROR!!" << std::endl;
-			std::cout << error.what() << std::endl;
-		}
+		Bureaucrat seokchoi("seokchoi", 3);
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		// rrf->execute();
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		try{
-			Bureaucrat 			choi("choi", 3);
-			// Bureaucrat 			choi("choi", 50);
-			RobotomyRequestForm 	atom("atom");
-			choi.signForm(atom);
-			choi.executeForm(atom);
-		}catch (std::exception &error){
-			std::cout << "ERROR!!" << std::endl;
-			std::cout << error.what() << std::endl;
-		}
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
-		try{
-			Bureaucrat 			hun("hun", 3);
-			// Bureaucrat 			hun("hun", 140);
-			ShrubberyCreationForm 		atom("atom");
-			hun.signForm(atom);
-			hun.executeForm(atom);
-		}catch (std::exception &error){
-			std::cout << "ERROR!!" << std::endl;
-			std::cout << error.what() << std::endl;
-		}
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;

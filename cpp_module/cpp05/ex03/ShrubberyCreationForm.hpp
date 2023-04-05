@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 14:25:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 20:26:51 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/04/02 14:24:38 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/04/05 20:26:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
+
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include <iostream>
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <fstream>
 
 class Bureaucrat;
 
-class RobotomyRequestForm : public AForm{
+class ShrubberyCreationForm : public AForm{
 	private:
 		std::string _target;
-		RobotomyRequestForm();
+		ShrubberyCreationForm();
 	public:
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &src);
-		~RobotomyRequestForm();
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+		class CantOpenFile : public std::exception {
+			public:
+				const char* what() const throw();
+		};
+		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(const ShrubberyCreationForm &src);
+		~ShrubberyCreationForm();
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &src);
 
 		std::string getTarget() const;
 		void	execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<( std::ostream &o, const RobotomyRequestForm &i );
+std::ostream &operator<<( std::ostream &o, const ShrubberyCreationForm &i );
 
 #endif

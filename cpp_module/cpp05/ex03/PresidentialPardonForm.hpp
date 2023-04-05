@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 14:25:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 20:26:51 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/04/02 14:25:09 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/04/05 16:45:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
 #include <iostream>
 #include "AForm.hpp"
@@ -19,20 +19,20 @@
 
 class Bureaucrat;
 
-class RobotomyRequestForm : public AForm{
+class PresidentialPardonForm : public AForm{
 	private:
 		std::string _target;
-		RobotomyRequestForm();
+		PresidentialPardonForm();
 	public:
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &src);
-		~RobotomyRequestForm();
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+		PresidentialPardonForm(std::string target);
+		PresidentialPardonForm(const PresidentialPardonForm &src);
+		~PresidentialPardonForm();
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
 
 		std::string getTarget() const;
 		void	execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<( std::ostream &o, const RobotomyRequestForm &i );
+std::ostream &operator<<( std::ostream &o, const PresidentialPardonForm &i );
 
 #endif

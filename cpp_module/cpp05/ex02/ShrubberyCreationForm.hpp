@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:24:38 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 16:46:16 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/05 20:26:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ class Bureaucrat;
 class ShrubberyCreationForm : public AForm{
 	private:
 		std::string _target;
+		ShrubberyCreationForm();
 	public:
 		class CantOpenFile : public std::exception {
 			public:
 				const char* what() const throw();
 		};
-		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &src);
 		~ShrubberyCreationForm();
