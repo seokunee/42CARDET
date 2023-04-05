@@ -6,16 +6,16 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/04 15:57:31 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:46:04 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 // #include <ctime>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("parent", 72, 45), _target("de_target") {}
+RobotomyRequestForm::RobotomyRequestForm() : AForm("a_form", 72, 45), _target("de_target") {}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("parent", 72, 45), _target(target){}
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("a_form", 72, 45), _target(target){}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm(src){
 	*this = src;

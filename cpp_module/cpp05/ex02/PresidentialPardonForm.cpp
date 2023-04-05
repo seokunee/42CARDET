@@ -6,15 +6,15 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/03 23:08:44 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:45:54 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("parent", 25, 5), _target("de_target") {}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("a_form", 25, 5), _target("de_target") {}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("parent", 25, 5), _target(target){}
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("a_form", 25, 5), _target(target){}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(src){
 	*this = src;
@@ -42,6 +42,6 @@ void	PresidentialPardonForm::execute(Bureaucrat const & executor) const{
 }
 
 std::ostream &operator<<( std::ostream &o, const PresidentialPardonForm &i ){
-	o << "target is " << i.getTarget() << "." << std::endl; 
+	o << "target is " << i.getTarget() << "." << std::endl;
 	return o;
 }

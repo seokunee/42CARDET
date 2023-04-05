@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 22:14:01 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/04 18:23:02 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:50:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class AForm {
 		const int _grade_execute ;
 		bool	_signed;
 
-		AForm(); // why???
+		AForm();
 	public:
 		class GradeTooHighException : public std::exception {
 			public:
@@ -54,6 +54,7 @@ class AForm {
 		bool getSigned() const;
 
 		void	beSigned(const Bureaucrat &obj);
+		virtual std::string getTarget() const = 0;
 		virtual void	execute(Bureaucrat const & executor) const = 0;
 };
 
