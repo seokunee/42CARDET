@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:27:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 22:31:35 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:44:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 Intern::Intern(){}
 
-Intern::Intern(const Intern &src){}
+Intern::Intern(const Intern &src){
+	*this = src;
+}
 
 Intern::~Intern(){}
 
 Intern &Intern::operator=(const Intern &src){
+	(void)src;
 	return *this;
 }
 

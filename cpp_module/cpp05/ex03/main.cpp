@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 22:31:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:52:37 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Intern.hpp"
 
-int main(){
+int main()
+{
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
@@ -24,31 +25,49 @@ int main(){
 		Intern someRandomIntern;
 		AForm* rrf;
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		// rrf->execute();
+		if (!rrf)
+			return 1;
+		rrf->beSigned(seokchoi);
+		rrf->execute(seokchoi);
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
+		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
 		AForm* rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrf = someRandomIntern.makeForm("presidential pardon", "John");
+		if (!rrf)
+			return 1;
+		rrf->beSigned(seokchoi);
+		rrf->execute(seokchoi);
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
+		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
 		AForm* rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrf = someRandomIntern.makeForm("shrubbery creation", "Roy");
+		if (!rrf)
+			return 1;
+		rrf->beSigned(seokchoi);
+		rrf->execute(seokchoi);
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
 	{
+		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
 		AForm* rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrf = someRandomIntern.makeForm("abocado", "Sally");
+		if (!rrf)
+			return 1;
+		rrf->beSigned(seokchoi);
+		rrf->execute(seokchoi);
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
-	// system("leaks form");
+	// system("leaks intern");
 	return 0;
 }
