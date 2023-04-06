@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:27:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/06 14:44:17 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:17:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,28 @@ Intern &Intern::operator=(const Intern &src){
 	return *this;
 }
 
-AForm 	*Intern::makeForm(std::string name, std::string obj){
+AForm 	*Intern::makeForm(std::string form, std::string target){
 	int i;
 	std::string strArray[3] = {"robotomy request", "presidential pardon", "shrubbery creation"};
 
 	for (i = 0; i < 3; i++)
 	{
-		if (strArray[i] == name)
+		if (strArray[i] == form)
 			break;
 	}
 	if (i < 3)
-		std::cout << "Intern creates " << obj << std::endl;
+		std::cout << "Intern creates " << target << std::endl;
 	switch (i)
 	{
 		case 0:
-			return (new RobotomyRequestForm(obj));
+			return (new RobotomyRequestForm(target));
 		case 1:
-			return new PresidentialPardonForm(obj);
+			return new PresidentialPardonForm(target);
 		case 2:
-			return new ShrubberyCreationForm(obj);
+			return new ShrubberyCreationForm(target);
 		default:
-			std::cout << name << " is not part of forms!" << std::endl;
-			std::cout << "Intern can't create " << obj << std::endl;
+			std::cout << form << " is not part of forms!" << std::endl;
+			std::cout << "Intern can't create " << target << std::endl;
 			break;
 	}
 	return NULL;

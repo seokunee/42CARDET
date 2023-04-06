@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:27:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 21:47:55 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:18:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Intern {
 		~Intern();
 		Intern &operator=(const Intern &src);
 
-		AForm 	*makeForm(std::string name, std::string obj);
+		AForm 	*makeForm(std::string form, std::string target);
 };
 
 #endif

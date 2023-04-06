@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/06 14:52:37 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:24:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main()
 			return 1;
 		rrf->beSigned(seokchoi);
 		rrf->execute(seokchoi);
+		delete rrf;
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -41,6 +42,7 @@ int main()
 			return 1;
 		rrf->beSigned(seokchoi);
 		rrf->execute(seokchoi);
+		delete rrf;
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -53,9 +55,11 @@ int main()
 			return 1;
 		rrf->beSigned(seokchoi);
 		rrf->execute(seokchoi);
+		delete rrf;
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
+	// system("leaks intern");
 	{
 		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
@@ -68,6 +72,5 @@ int main()
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
-	// system("leaks intern");
 	return 0;
 }

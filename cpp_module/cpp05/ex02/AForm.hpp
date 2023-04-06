@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 22:14:01 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 16:50:57 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:20:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ class AForm {
 		};
 		AForm(const std::string name, const int grade_signed, const int grade_excute);
 		AForm(const AForm &src);
-		~AForm();
+		virtual ~AForm();
 		AForm &operator=(const AForm &src);
 
 		std::string getName() const;
