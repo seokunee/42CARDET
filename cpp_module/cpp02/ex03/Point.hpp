@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 00:01:20 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/21 15:56:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:38:04 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Point {
 		Fixed const _y;
 	public:
 		Point();
-		Point(Fixed x, Fixed y);
+		Point(const float x, const float y);
 		Point(Point &src);
 		~Point();
 

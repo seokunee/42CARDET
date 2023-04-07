@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:56:27 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/18 19:40:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:38:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int Fixed::toInt( void ) const{
 
 Fixed &Fixed::operator=(const Fixed &src){
 	// std::cout << "Copy assignment operator called" << std::endl;
+	if (this == &src) {
+		return (*this);
+	}
 	_fixPoint = src.getRawBits();
 	return (*this);
 };

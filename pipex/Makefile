@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 18:31:19 by seokchoi          #+#    #+#              #
-#    Updated: 2022/10/17 19:24:52 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/04/07 16:31:51 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ all:		${NAME}
 			${CC} ${CFLAGS} -I ${HEAD} -c $^ -o ${^:.c=.o}
 
 ${NAME}:	${OBJS}
-			make all -C ${LIBFT}/ 
+			make all -C ${LIBFT}/
 			$(CC) -I $(HEAD) -o $(NAME) ${OBJS} -L ./libft -lft
-			
+
 clean:
 			make clean -C ${LIBFT}/
 			rm -f ${OBJS}
@@ -38,4 +38,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean ree
+.PHONY:		all clean fclean re

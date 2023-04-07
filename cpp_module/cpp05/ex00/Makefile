@@ -6,7 +6,7 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/03/31 22:03:12 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/04/07 16:31:51 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,4 +32,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean ree
+.PHONY:		all clean fclean re
