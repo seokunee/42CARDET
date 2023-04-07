@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 22:17:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/07 20:08:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:53:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,16 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src){
 }
 
 void DiamondTrap::whoAmI(){
-	std::cout << "DiamondTrap name is " << _name << "." << std::endl;
-	std::cout << "ClapTrap name is " << ClapTrap::_name << "." << std::endl;
+	if (_hit == 0)
+		std::cout << _name << "'s hit is zero." << std::endl;
+	else if (_power == 0)
+		std::cout << _name << "'s power is zero." << std::endl;
+	else
+	{
+		_power = _power - 1;
+		std::cout << "DiamondTrap name is " << _name << "." << std::endl;
+		std::cout << "ClapTrap name is " << ClapTrap::_name << "." << std::endl;
+	}
 }
 
 void DiamondTrap::checkStatus(){
