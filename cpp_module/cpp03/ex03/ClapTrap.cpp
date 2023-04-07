@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:55:59 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/19 19:33:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:35:38 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ ClapTrap::ClapTrap(ClapTrap const &src){
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &src){
+	if (this == &src)
+		return (*this);
 	_name = src._name;
 	_hit = src._hit;
 	_power = src._power;
@@ -81,6 +83,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	else
 	{
 		_hit = _hit + amount;
+		_power = _power - 1;
 		std::cout << _name << " is repaired "<< amount << " hit." << std::endl;
 	}
 }

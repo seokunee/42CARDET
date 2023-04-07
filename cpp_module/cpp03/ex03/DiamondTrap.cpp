@@ -6,13 +6,13 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 22:17:17 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/22 21:14:09 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:08:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-// • Hit points (FragTrap) = 100 
+// • Hit points (FragTrap) = 100
 // • Energy points (ScavTrap) == 50
 // • Attack damage (FragTrap) == 30
 // • attack() (Scavtrap)
@@ -41,6 +41,8 @@ DiamondTrap::DiamondTrap(DiamondTrap const &src){
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src){
+	if (this == &src)
+		return (*this);
 	_name = src._name;
 	_hit = src._hit;
 	_power = src._power;

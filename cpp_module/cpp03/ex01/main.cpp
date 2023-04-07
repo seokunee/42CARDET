@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/21 17:14:50 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:59:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int main()
 	gdragon.takeDamage(20);
 	gdragon.takeDamage(20);
 	gdragon.takeDamage(20);
-	gdragon.takeDamage(20);
 	gdragon.beRepaired(10);
-
 	return (0);
 }

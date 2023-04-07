@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/22 18:55:20 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:38:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ int main()
 	gdragon.checkStatus();
 
 
-	std::cout << "-----attack-----" << std::endl;
+	std::cout << "-----seokchoi attack-----" << std::endl;
 	seokchoi.attack("seokchoi");
+	std::cout << "-----gdragon attack-----" << std::endl;
 	gdragon.attack("gdragon");
-
+	std::cout << "-----------------------" << std::endl;
 
 	return (0);
 }

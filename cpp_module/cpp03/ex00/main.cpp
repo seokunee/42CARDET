@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/21 16:58:00 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:05:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main()
   	ClapTrap eunjiko("eunjiko");
   	ClapTrap jeseo("jeseo");
 
+	// seokchoi  = seokchoi;
   	std::cout << std::endl;
   	std::cout << "-----Test#1 energyPoints-----" << std::endl;
   	for (int i = 0; i < 10; i++) {
@@ -39,6 +40,5 @@ int main()
   	  jeseo.takeDamage(1);
   	}
   	std::cout << std::endl;
-
 	return (0);
 }

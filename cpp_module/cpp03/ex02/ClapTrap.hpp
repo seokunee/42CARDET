@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:56:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/04 18:36:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:15:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class ClapTrap {
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
-		~ClapTrap();
+		~ClapTrap();f
 		ClapTrap(ClapTrap const &src);
 
 		ClapTrap &operator=(const ClapTrap &src);
