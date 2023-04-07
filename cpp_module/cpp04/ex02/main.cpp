@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:21:40 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/25 22:28:01 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:29:56 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int main()
 	// 	std::cout << ani->getType() << " " << std::endl;
 	// 	ani->makeSound();
 	// 	std::cout << std::endl;
-	
+
 	// 	delete ani;
 	// }
 	{
-		const AAnimal* i = new Cat();
-		const AAnimal* j = new Dog();
+		const AAnimal *i = new Cat();
+		const AAnimal *j = new Dog();
 		std::cout << i->getType() << " " << std::endl;
 		std::cout << j->getType() << " " << std::endl;
 		i->makeSound();
 		j->makeSound();
 		std::cout << std::endl;
-	
+
 		delete i;
 		delete j;
 	}
