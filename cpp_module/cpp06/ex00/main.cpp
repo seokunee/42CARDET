@@ -6,16 +6,23 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/06 18:11:19 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:12:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int ac, char **av)
 {
+	if (ac != 2)
+	{
+		std::cout << "Argument Fault!" << std::endl;
+		return (1);
+	}
 
+	ScalarConverter changer;
 
+	changer.convert(av[1]);
 
 	// ./convert 0
 	// char: Non displayable

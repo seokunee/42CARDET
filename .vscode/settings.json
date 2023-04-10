@@ -86,6 +86,7 @@
     "iomanip": "cpp",
     "stack": "cpp",
     "complex": "cpp",
-    "__verbose_abort": "cpp"
+    "__verbose_abort": "cpp",
+    "filesystem": "cpp"
   }
 }
