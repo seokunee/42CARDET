@@ -6,19 +6,26 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/14 15:40:34 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:30:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "Serializer.hpp"
 
-int main(int ac, char **av)
+int main()
 {
-	if (ac != 2)
-	{
-		std::cout << "Argument Fault!" << std::endl;
-		return (1);
-	}
-	ScalarConverter::convert(av[1]);
+	Data *data = new Data();
+	data->s1 = "hello";
+	data->s2 = "seokchoi";
+
+	uintptr_t ptr = Serializer::serialize(data);
+	std::cout << ptr << std::endl;
+
+	Data *data_after = Serializer::deserialize(ptr);
+	std::cout << data_after->s1 << std::endl;
+	std::cout << data_after->s2 << std::endl;
+
+	delete data;
+
 	return 0;
 }

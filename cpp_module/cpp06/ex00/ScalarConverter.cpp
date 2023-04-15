@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/10 21:38:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:21:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ ScalarConverter::~ScalarConverter() {}
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
-	(void)src;
+	if (this == &src)
+		return (*this);
 	return (*this);
 }
 
@@ -34,7 +35,7 @@ void ScalarConverter::convert(std::string literal)
 	float f;
 	char *endptr;
 
-	if (!literal.empty() && literal.back() == 'f')
+	if (!literal.empty() && literal.back() == 'f' && literal != "+inf" && literal != "-inf" && literal != "inf")
 		literal.pop_back();
 
 	std::strtod(literal.c_str(), &endptr);
@@ -43,8 +44,16 @@ void ScalarConverter::convert(std::string literal)
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible " << std::endl;
-		std::cout << "float: nanf " << std::endl;
-		std::cout << "double: nan " << std::endl;
+		if (literal == "+inf" || literal == "-inf" || literal == "inf")
+		{
+			std::cout << "float: " << literal << "f" << std::endl;
+			std::cout << "double: " << literal << std::endl;
+		}
+		else
+		{
+			std::cout << "float: nanf " << std::endl;
+			std::cout << "double: nan " << std::endl;
+		}		
 		return;
 	}
 	else
@@ -78,24 +87,3 @@ void ScalarConverter::convert(std::string literal)
 		}
 	}
 }
-
-// 오버플로우 처리?
-//
-
-// /convert 0
-// char: Non displayable
-// int: 0
-// float: 0.0f
-// double: 0.0
-
-// ./convert nan
-// char: impossible
-// int: impossible
-// float: nanf
-// double: nan
-
-// ./convert 42.0f
-// char: '*'
-// int: 42
-// float: 42.0f
-// double: 42.0

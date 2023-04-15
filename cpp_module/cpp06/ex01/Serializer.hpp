@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/14 15:40:34 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/04/14 16:01:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+
+struct Data
 {
-	if (ac != 2)
-	{
-		std::cout << "Argument Fault!" << std::endl;
-		return (1);
-	}
-	ScalarConverter::convert(av[1]);
-	return 0;
-}
+	std::string s1;
+	std::string s2;
+};
+
+class Serializer
+{
+private:
+public:
+	Serializer();
+	Serializer(const Serializer &src);
+	~Serializer();
+	Serializer &operator=(const Serializer &src);
+
+	static uintptr_t serialize(Data *ptr);
+	static Data *deserialize(uintptr_t raw);
+};
+
+#endif

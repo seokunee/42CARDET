@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/14 15:40:34 by seokchoi         ###   ########.fr       */
+/*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
+/*   Updated: 2023/04/15 15:13:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#ifndef BASE_HPP
+#define BASE_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+#include <ctime>
+
+class Base
 {
-	if (ac != 2)
-	{
-		std::cout << "Argument Fault!" << std::endl;
-		return (1);
-	}
-	ScalarConverter::convert(av[1]);
-	return 0;
-}
+private:
+public:
+	virtual ~Base();
+};
+
+class A : public Base
+{
+};
+
+class B : public Base
+{
+};
+
+class C : public Base
+{
+};
+
+Base *generate(void);
+void identify(Base *p);
+void identify(Base &p);
+
+#endif

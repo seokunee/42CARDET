@@ -88,5 +88,9 @@
     "complex": "cpp",
     "__verbose_abort": "cpp",
     "filesystem": "cpp"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnSave": true
   }
 }
