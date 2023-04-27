@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 16:46:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/25 22:35:02 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:08:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void MateriaSource::learnMateria(AMateria *materia)
 	{
 		if (_sources[i] == NULL)
 		{
-			_sources[i] = materia->clone();
+			_sources[i] = materia;
 			return;
 		}
 	}
+	delete materia;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
