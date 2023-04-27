@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 22:59:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/30 03:23:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/25 22:34:51 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 class ICharacter
 {
-	public:
+public:
 	virtual ~ICharacter() {}
-	virtual std::string const & getName() const = 0;
-	virtual void equip(AMateria* m) = 0;
+	virtual std::string const &getName() const = 0;
+	virtual void equip(AMateria *m) = 0;
 	virtual void unequip(int idx) = 0;
-	virtual void use(int idx, ICharacter& target) = 0;
+	virtual void use(int idx, ICharacter &target) = 0;
 };
 
-#endif 
+#endif

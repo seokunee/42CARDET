@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 14:25:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:22:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/04/25 22:05:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 
 #include <iostream>
 
-class Animal {
-	protected:
-		std::string _type;
-	public:
-		Animal();
-		Animal(const Animal &src);
-		virtual ~Animal();
+class Animal
+{
+protected:
+	std::string _type;
 
-		Animal &operator=(const Animal &src);
-		virtual void makeSound() const;
-		std::string getType() const;
+public:
+	Animal();
+	Animal(const Animal &src);
+	virtual ~Animal();
+
+	Animal &operator=(const Animal &src);
+	virtual void makeSound() const;
+	std::string getType() const;
 };
 
 #endif
