@@ -6,22 +6,26 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/03/31 22:03:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:20:52 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-int main(){
+int main()
+{
 	Bureaucrat seok("seokchoi", 3);
 	{
-		try{
+		try
+		{
 			std::cout << seok;
 			seok.increment();
 			seok.increment();
 			std::cout << seok;
 			seok.increment();
-		}catch (std::exception &error){
+		}
+		catch (std::exception &error)
+		{
 			std::cout << "ERROR!!" << std::endl;
 			std::cout << error.what() << std::endl;
 		}
@@ -30,13 +34,16 @@ int main(){
 	std::cout << std::endl;
 	Bureaucrat atom("atom", 148);
 	{
-		try{
+		try
+		{
 			std::cout << atom;
 			atom.decrement();
 			atom.decrement();
 			std::cout << atom;
 			atom.decrement();
-		}catch (std::exception &error){
+		}
+		catch (std::exception &error)
+		{
 			std::cout << "ERROR!!" << std::endl;
 			std::cout << error.what() << std::endl;
 		}

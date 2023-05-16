@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 20:26:30 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:21:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@
 
 class Bureaucrat;
 
-class RobotomyRequestForm : public AForm{
-	private:
-		std::string _target;
-		RobotomyRequestForm();
-	public:
-		RobotomyRequestForm(std::string target);
-		RobotomyRequestForm(const RobotomyRequestForm &src);
-		~RobotomyRequestForm();
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+class RobotomyRequestForm : public AForm
+{
+private:
+	std::string _target;
+	RobotomyRequestForm();
 
-		std::string getTarget() const;
-		void	execute(Bureaucrat const & executor) const;
+public:
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(const RobotomyRequestForm &src);
+	~RobotomyRequestForm();
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+
+	std::string getTarget() const;
+	void execute(Bureaucrat const &executor) const;
 };
 
-std::ostream &operator<<( std::ostream &o, const RobotomyRequestForm &i );
+std::ostream &operator<<(std::ostream &o, const RobotomyRequestForm &i);
 
 #endif

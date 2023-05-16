@@ -6,26 +6,29 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:27:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/06 15:17:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:21:23 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 
-Intern::Intern(){}
+Intern::Intern() {}
 
-Intern::Intern(const Intern &src){
+Intern::Intern(const Intern &src)
+{
 	*this = src;
 }
 
-Intern::~Intern(){}
+Intern::~Intern() {}
 
-Intern &Intern::operator=(const Intern &src){
+Intern &Intern::operator=(const Intern &src)
+{
 	(void)src;
 	return *this;
 }
 
-AForm 	*Intern::makeForm(std::string form, std::string target){
+AForm *Intern::makeForm(std::string form, std::string target)
+{
 	int i;
 	std::string strArray[3] = {"robotomy request", "presidential pardon", "shrubbery creation"};
 
@@ -38,16 +41,16 @@ AForm 	*Intern::makeForm(std::string form, std::string target){
 		std::cout << "Intern creates " << target << std::endl;
 	switch (i)
 	{
-		case 0:
-			return (new RobotomyRequestForm(target));
-		case 1:
-			return new PresidentialPardonForm(target);
-		case 2:
-			return new ShrubberyCreationForm(target);
-		default:
-			std::cout << form << " is not part of forms!" << std::endl;
-			std::cout << "Intern can't create " << target << std::endl;
-			break;
+	case 0:
+		return (new RobotomyRequestForm(target));
+	case 1:
+		return new PresidentialPardonForm(target);
+	case 2:
+		return new ShrubberyCreationForm(target);
+	default:
+		std::cout << form << " is not part of forms!" << std::endl;
+		std::cout << "Intern can't create " << target << std::endl;
+		break;
 	}
 	return NULL;
 }

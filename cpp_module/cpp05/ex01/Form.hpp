@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 22:14:01 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/02 14:21:20 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:20:57 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,40 @@
 #include "Bureaucrat.hpp"
 class Bureaucrat;
 
-class Form {
-	private:
-		const std::string _name;
-		const int _grade_signed;
-		const int _grade_execute;
-		bool	_signed;
+class Form
+{
+private:
+	const std::string _name;
+	const int _grade_signed;
+	const int _grade_execute;
+	bool _signed;
 
+public:
+	class GradeTooHighException : public std::exception
+	{
 	public:
-		class GradeTooHighException : public std::exception {
-			public:
-				const char* what() const throw();
-		};
-		class GradeTooLowException : public std::exception {
-			public:
-				const char* what() const throw();
-		};
-		
-		Form();
-		Form(const std::string name, const int grade_signed, const int grade_excute);
-		Form(const Form &src);
-		~Form();
-		Form &operator=(const Form &src);
+		const char *what() const throw();
+	};
+	class GradeTooLowException : public std::exception
+	{
+	public:
+		const char *what() const throw();
+	};
 
-		std::string getName() const;
-		int getGradeSigned() const;
-		int getGradeExcute() const;
-		bool getSigned() const;
+	Form();
+	Form(const std::string name, const int grade_signed, const int grade_excute);
+	Form(const Form &src);
+	~Form();
+	Form &operator=(const Form &src);
 
-		void	beSigned(const Bureaucrat &obj);
+	std::string getName() const;
+	int getGradeSigned() const;
+	int getGradeExcute() const;
+	bool getSigned() const;
+
+	void beSigned(const Bureaucrat &obj);
 };
 
-std::ostream &operator<<( std::ostream &o, const Form &i );
+std::ostream &operator<<(std::ostream &o, const Form &i);
 
 #endif

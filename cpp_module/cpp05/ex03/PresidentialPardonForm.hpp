@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:09 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/05 16:45:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:21:27 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@
 
 class Bureaucrat;
 
-class PresidentialPardonForm : public AForm{
-	private:
-		std::string _target;
-		PresidentialPardonForm();
-	public:
-		PresidentialPardonForm(std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm &src);
-		~PresidentialPardonForm();
-		PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
+class PresidentialPardonForm : public AForm
+{
+private:
+	std::string _target;
+	PresidentialPardonForm();
 
-		std::string getTarget() const;
-		void	execute(Bureaucrat const & executor) const;
+public:
+	PresidentialPardonForm(std::string target);
+	PresidentialPardonForm(const PresidentialPardonForm &src);
+	~PresidentialPardonForm();
+	PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
+
+	std::string getTarget() const;
+	void execute(Bureaucrat const &executor) const;
 };
 
-std::ostream &operator<<( std::ostream &o, const PresidentialPardonForm &i );
+std::ostream &operator<<(std::ostream &o, const PresidentialPardonForm &i);
 
 #endif

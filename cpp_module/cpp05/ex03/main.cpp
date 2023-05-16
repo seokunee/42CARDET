@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/06 15:24:25 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:21:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
 	{
 		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
-		AForm* rrf;
+		AForm *rrf;
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 		if (!rrf)
 			return 1;
@@ -36,7 +36,7 @@ int main()
 	{
 		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
-		AForm* rrf;
+		AForm *rrf;
 		rrf = someRandomIntern.makeForm("presidential pardon", "John");
 		if (!rrf)
 			return 1;
@@ -49,7 +49,7 @@ int main()
 	{
 		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
-		AForm* rrf;
+		AForm *rrf;
 		rrf = someRandomIntern.makeForm("shrubbery creation", "Roy");
 		if (!rrf)
 			return 1;
@@ -63,7 +63,7 @@ int main()
 	{
 		Bureaucrat seokchoi("seokchoi", 3);
 		Intern someRandomIntern;
-		AForm* rrf;
+		AForm *rrf;
 		rrf = someRandomIntern.makeForm("abocado", "Sally");
 		if (!rrf)
 			return 1;
