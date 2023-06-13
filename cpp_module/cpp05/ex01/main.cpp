@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/05/16 15:20:58 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:24:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int main()
 		{
 			Bureaucrat seok("seok", 3);
 			Form atom("atom", 15, 20);
-			std::cout << seok << "signFrom => ";
+			std::cout << seok;
+			std::cout << atom;
 			seok.signForm(atom);
+			std::cout << atom;
 		}
 		catch (std::exception &error)
 		{
@@ -39,7 +41,9 @@ int main()
 			Bureaucrat choi("choi", 18);
 			Form atom("atom", 15, 20);
 			std::cout << choi;
+			std::cout << atom;
 			choi.signForm(atom);
+			std::cout << atom;
 		}
 		catch (std::exception &error)
 		{
