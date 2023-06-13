@@ -6,15 +6,15 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 14:25:12 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/05/16 15:21:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/14 02:27:53 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("a_form", 25, 5), _target("de_target") {}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("presidential_pardon_form", 25, 5), _target("de_target") {}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("a_form", 25, 5), _target(target) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("presidential_pardon_form", 25, 5), _target(target) {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(src)
 {
