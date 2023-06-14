@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 20:27:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/05/16 15:21:23 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:18:39 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ AForm *Intern::makeForm(std::string form, std::string target)
 	switch (i)
 	{
 	case 0:
-		return (new RobotomyRequestForm(target));
+		return new RobotomyRequestForm(target);
 	case 1:
 		return new PresidentialPardonForm(target);
 	case 2:
