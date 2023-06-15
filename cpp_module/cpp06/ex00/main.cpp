@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/14 15:40:34 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:38:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,23 @@ int main(int ac, char **av)
 	ScalarConverter::convert(av[1]);
 	return 0;
 }
+
+/*
+a
+abc
+/
+1
+1.0
+1.0f
+42.0
+42.0f
+42.0f0f
+42.0000f
+nan
+inf
+-inf
++inf
+inff
+-inff
++inff
+*/
