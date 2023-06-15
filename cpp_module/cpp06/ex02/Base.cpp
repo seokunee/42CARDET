@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/15 15:09:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/16 03:07:27 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void identify(Base *p)
 	}
 	else
 	{
-		std::cout << "The type is none of a, b, or c!" << std::endl;
+		std::cout << "The type is none of A, B, or C!" << std::endl;
 	}
 }
 
