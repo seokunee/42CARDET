@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/17 15:35:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:41:14 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int main(int, char **)
 	std::srand(time(NULL));
 	for (int i = 0; i < MAX_VAL; i++)
 	{
-		const int value = std::rand() % 100;
+		int value = std::rand() % 100;
 		numbers[i] = value;
-		mirror[i] = value;
 	}
 
 	std::cout << "numbers : ";
