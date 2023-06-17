@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:22:54 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/16 16:47:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:13:25 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ private:
 	unsigned int _size;
 
 public:
-	Array() : _array(new T(0)), _size(0){};
+	Array() : _array(new T[0]), _size(0){};
 
-	Array(unsigned int n) : _array(new T(n)), _size(n){};
+	Array(unsigned int n) : _array(new T[n]), _size(n){};
 
-	Array(const Array<T> &src)
+	Array(const Array<T> &src) : _array(new T[src.size()]), _size(src.size())
 	{
 		if (this == &src)
 			return;

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/17 15:51:28 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:10:03 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,31 @@ int main(void)
 	}
 	std::cout << std::endl;
 	std::cout << std::endl;
+	std::cout << "복사 생성자 테스트" << std::endl;
+	try
+	{
+		Array<int> tmp(numbers);
+		std::cout << "tmp0 : ";
+		for (unsigned int i = 0; i < tmp.size(); i++)
+		{
+			std::cout << tmp[i] << " ";
+		}
+		std::cout << std::endl;
+	}
+	catch (std::exception &err)
+	{
+		std::cerr << err.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "복사 잘됐는지 확인" << std::endl;
 	try
 	{
 		Array<int> tmp(MAX_VAL);
 		tmp = numbers;
-		std::cout << "tmp : ";
+		std::cout << "tmp1 : ";
 		for (unsigned int i = 0; i < tmp.size(); i++)
 		{
 			std::cout << tmp[i] << " ";
