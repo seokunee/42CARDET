@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/17 15:41:14 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:51:28 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Array.hpp"
 
 #define MAX_VAL 10
-int main(int, char **)
+int main(void)
 {
 	Array<int> numbers(MAX_VAL);
 	std::srand(time(NULL));
