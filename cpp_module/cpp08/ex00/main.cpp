@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 15:52:07 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/18 17:09:33 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:23:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(void)
 	for (char i = 'a'; i < 'a' + 5; i++)
 		vector_char.push_back(i);
 	std::vector<unsigned int> vector_ui;
-	for (unsigned int i = 0; i < 5; i++)
+	for (unsigned int i = 0; i < 60; i += 10)
 		vector_ui.push_back(i);
 	std::deque<int> deque_int;
 	for (char i = 0; i < 5; i++)
@@ -61,7 +61,7 @@ int main(void)
 	std::cout << "vector unsigned int" << std::endl;
 	try
 	{
-		std::vector<unsigned int>::iterator it = easyfind(vector_ui, -50);
+		std::vector<unsigned int>::iterator it = easyfind(vector_ui, 50);
 		std::cout << *it << std::endl;
 	}
 	catch (std::exception &err)
