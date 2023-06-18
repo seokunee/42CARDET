@@ -87,7 +87,9 @@
     "stack": "cpp",
     "complex": "cpp",
     "__verbose_abort": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "list": "cpp",
+    "queue": "cpp"
   },
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools",
