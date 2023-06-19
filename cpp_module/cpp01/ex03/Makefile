@@ -6,20 +6,20 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#              #
-#    Updated: 2023/04/07 16:31:51 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/06/19 15:12:36 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 NAME    = weapon
 
 all:		${NAME}
 
 .cpp.o:		${SRCS}
-			${CC} ${CFLAGS} -c $^ -o ${^:.cpp=.o}
+			${CC} ${CXXFLAGS} -c $^ -o ${^:.cpp=.o}
 
 ${NAME}:	${OBJS}
 			$(CC) -o $(NAME) ${OBJS}
