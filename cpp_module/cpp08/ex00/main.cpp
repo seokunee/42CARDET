@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 15:52:07 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/18 17:23:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:37:17 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int main(void)
 	std::deque<int> deque_int;
 	for (char i = 0; i < 5; i++)
 		deque_int.push_back(i);
-	std::stack<int> stack_char;
-	for (int i = 0; i < 5; i++)
-		stack_char.push(i);
-	std::queue<int> queue_int;
-	for (int i = 0; i < 5; i++)
-		queue_int.push(i);
+	// std::stack<int> stack_int;
+	// for (int i = 0; i < 5; i++)
+	// 	stack_int.push(i);
+	// std::queue<int> queue_int;
+	// for (int i = 0; i < 5; i++)
+	// 	queue_int.push(i);
 	std::list<int> list_int;
 	for (int i = 0; i < 5; i++)
 		list_int.push_back(i);
@@ -91,27 +91,27 @@ int main(void)
 		std::cerr << err.what() << std::endl;
 	}
 
-	std::cout << "queue int" << std::endl;
-	try
-	{
-		std::list<int>::iterator it = easyfind(list_int, 2);
-		std::cout << *it << std::endl;
-	}
-	catch (std::exception &err)
-	{
-		std::cerr << err.what() << std::endl;
-	}
+	// std::cout << "queue int" << std::endl;
+	// try
+	// {
+	// 	std::list<int>::iterator it = easyfind(queue_int, 2);
+	// 	std::cout << *it << std::endl;
+	// }
+	// catch (std::exception &err)
+	// {
+	// 	std::cerr << err.what() << std::endl;
+	// }
 
-	std::cout << "stack int" << std::endl;
-	try
-	{
-		std::list<int>::iterator it = easyfind(list_int, 3);
-		std::cout << *it << std::endl;
-	}
-	catch (std::exception &err)
-	{
-		std::cerr << err.what() << std::endl;
-	}
+	// std::cout << "stack int" << std::endl;
+	// try
+	// {
+	// 	std::list<int>::iterator it = easyfind(stack_int, 3);
+	// 	std::cout << *it << std::endl;
+	// }
+	// catch (std::exception &err)
+	// {
+	// 	std::cerr << err.what() << std::endl;
+	// }
 
 	std::cout << "list int" << std::endl;
 	try
