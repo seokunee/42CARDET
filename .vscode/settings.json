@@ -89,7 +89,8 @@
     "__verbose_abort": "cpp",
     "filesystem": "cpp",
     "list": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "version": "cpp"
   },
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools",
