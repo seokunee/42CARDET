@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:28:42 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/19 01:15:35 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:43:54 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ int Span::shortestSpan()
 {
 	if (_span.size() < 2)
 		throw NumbersNotEnough();
+	int len;
 	std::vector<int> sortedSpans = _span;
 	std::sort(sortedSpans.begin(), sortedSpans.end());
-	int shorestLen = sortedSpans[1] - sortedSpans[0];
+	int shorestLen = std::abs(sortedSpans[1] - sortedSpans[0]);
 	for (unsigned int i = 2; i < _span.size(); i++)
 	{
-		if (sortedSpans[i] - sortedSpans[i - 1] < shorestLen)
-			shorestLen = sortedSpans[i] - sortedSpans[i - 1];
+		len = std::abs(sortedSpans[i] - sortedSpans[i - 1]);
+		if (len < shorestLen)
+			shorestLen = len;
 	}
 	return shorestLen;
 };
