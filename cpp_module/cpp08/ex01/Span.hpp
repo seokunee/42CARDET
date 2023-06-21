@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:28:44 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/21 16:00:24 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:28:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,7 @@ public:
 	int shortestSpan();
 	int longestSpan();
 
-	void addNumberByRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
-	{
-		if (std::distance(begin, end) > static_cast<int>(_span.capacity() - _span.size()))
-			throw SpanIsFull();
-		for (std::vector<int>::iterator it = begin; it != end; it++)
-			_span.push_back(*it);
-	}
-
+	void addNumberByRange(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 	std::vector<int> getSpan();
 };
 
