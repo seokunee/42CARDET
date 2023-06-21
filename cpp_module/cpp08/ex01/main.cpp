@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:25:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/19 02:33:31 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:01:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,17 @@ void bigNumbersTest()
 
 void oneTimeBigNumAddTest()
 {
-	Span sp(100);
+	Span sp(15);
 
-	// vector로 한번에 sp에 데이터 넣기
 	try
 	{
 		std::vector<int> tmp;
 		std::srand(std::time(nullptr));
-		for (int i = 0; i < 75; i++)
+		for (int i = 0; i < 15; i++)
 		{
-			tmp.push_back(std::rand() % 1000000);
+			tmp.push_back(std::rand() % 500);
 		}
-		sp.addNumber(tmp);
+		sp.addNumberByRange(tmp.begin(), tmp.end());
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
@@ -83,30 +82,28 @@ void oneTimeBigNumAddTest()
 		std::cerr << err.what() << std::endl;
 	}
 
-	// std::vector<int> span = sp.getSpan();
-	// std::cout << "span : ";
-	// for (std::vector<int>::iterator it = span.begin(); it != span.end(); it++)
-	// {
-	// 	std::cout << *it << " ";
-	// }
-	// std::cout << std::endl;
+	std::vector<int> span = sp.getSpan();
+	std::cout << "span : ";
+	for (std::vector<int>::iterator it = span.begin(); it != span.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+
 	try
 	{
 		std::vector<int> tmp;
 		std::srand(std::time(nullptr));
-		for (int i = 0; i < 75; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			tmp.push_back(std::rand() % 100);
 		}
-		sp.addNumber(tmp);
+		sp.addNumberByRange(tmp.begin(), tmp.end());
 	}
 	catch (std::exception &err)
 	{
 		std::cerr << err.what() << std::endl;
 	}
-
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
 }
 
 int main()

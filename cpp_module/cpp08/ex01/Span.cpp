@@ -6,15 +6,21 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:28:42 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/21 14:43:54 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:00:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
-Span::Span() : _max_size(0){};
+Span::Span() : _span(0)
+{
+	_span.reserve(0);
+};
 
-Span::Span(unsigned int N) : _max_size(N){};
+Span::Span(unsigned int N) : _span(0)
+{
+	_span.reserve(N);
+};
 
 Span::~Span(){};
 
@@ -29,23 +35,15 @@ Span &Span::operator=(const Span &src)
 		return *this;
 	_span.clear();
 	_span = src._span;
-	_max_size = src._max_size;
 	return *this;
 };
 
 void Span::addNumber(int num)
 {
-	if (_span.size() > _max_size)
+	if (_span.capacity() == _span.size())
 		throw SpanIsFull();
 	_span.push_back(num);
 };
-
-void Span::addNumber(std::vector<int> nums)
-{
-	if (_span.size() + nums.size() > _max_size)
-		throw SpanIsFull();
-	_span.insert(_span.end(), nums.begin(), nums.end());
-}
 
 int Span::shortestSpan()
 {
@@ -68,9 +66,7 @@ int Span::longestSpan()
 {
 	if (_span.size() < 2)
 		throw NumbersNotEnough();
-	std::vector<int> sortedSpans = _span;
-	std::sort(sortedSpans.begin(), sortedSpans.end());
-	return (sortedSpans[sortedSpans.size() - 1] - sortedSpans[0]);
+	return (std::abs(*std::max_element(_span.begin(), _span.end()) - *std::min_element(_span.begin(), _span.end())));
 };
 
 const char *Span::SpanIsFull::what() const throw()
