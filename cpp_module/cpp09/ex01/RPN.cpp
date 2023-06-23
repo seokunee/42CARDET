@@ -6,44 +6,26 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 04:44:55 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:46:29 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
 RPN::RPN(){};
+
 RPN::~RPN(){};
+
 RPN::RPN(const RPN &src)
 {
 	(void)src;
 };
+
 RPN &RPN::operator=(const RPN &src)
 {
 	(void)src;
 	return *this;
 };
-
-// bool inputSplit(std::string &date, std::string &line, char delimiter)
-// {
-// 	std::stringstream ss(line);
-// 	std::string temp;
-
-// 	if (std::getline(ss, temp, delimiter))
-// 		date = temp;
-// 	if (ss.fail() || !ss.eof())
-// 		return false;
-// 	return true;
-// }
-
-// void split(std::string &str)
-// {
-// 	std::stringstream ss(str);
-// 	int value;
-
-// 	ss >> value;
-// 	std::cout << value << std::endl;
-// }
 
 void RPN::checkElement(std::string &str)
 {
