@@ -6,24 +6,109 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 21:01:00 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:44:55 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <RPN.hpp>
+#include "RPN.hpp"
 
 RPN::RPN(){};
 RPN::~RPN(){};
-RPN::RPN(const RPN &src){};
-RPN &RPN::operator=(const RPN &src){};
+RPN::RPN(const RPN &src)
+{
+	(void)src;
+};
+RPN &RPN::operator=(const RPN &src)
+{
+	(void)src;
+	return *this;
+};
 
-void RPN::run(std::string polishMath)
+// bool inputSplit(std::string &date, std::string &line, char delimiter)
+// {
+// 	std::stringstream ss(line);
+// 	std::string temp;
+
+// 	if (std::getline(ss, temp, delimiter))
+// 		date = temp;
+// 	if (ss.fail() || !ss.eof())
+// 		return false;
+// 	return true;
+// }
+
+// void split(std::string &str)
+// {
+// 	std::stringstream ss(str);
+// 	int value;
+
+// 	ss >> value;
+// 	std::cout << value << std::endl;
+// }
+
+void RPN::checkElement(std::string &str)
 {
 	std::string::iterator it;
-	for (it = polishMath.begin(); it != polishMath.end(); ++it)
+	int first, second, result;
+	char oper;
+
+	for (it = str.begin(); it != str.end(); ++it)
 	{
 		if ((*it >= '0' && *it <= '9') || *it == ' ')
 		{
+			if ((*it >= '0' && *it <= '9'))
+			{
+				_stack.push(*it - '0');
+				if (*(++it) != ' ' && it != str.end())
+				{
+					throw std::runtime_error("Error1");
+				}
+			}
+			while (*it != ' ' && it != str.end())
+				it++;
 		}
+		else if (*it == '*' || *it == '/' || *it == '+' || *it == '-')
+		{
+			oper = *it;
+			++it;
+			if (it != str.end() && *it != ' ')
+				throw std::runtime_error("Error3");
+			if (_stack.empty())
+				throw std::runtime_error("Error4");
+			first = _stack.top();
+			_stack.pop();
+			if (_stack.empty())
+				throw std::runtime_error("Error5");
+			second = _stack.top();
+			_stack.pop();
+			if (oper == '*')
+				result = second * first;
+			else if (oper == '/')
+				result = second / first;
+			else if (oper == '+')
+				result = second + first;
+			else if (oper == '-')
+				result = second - first;
+			_stack.push(result);
+			while (*it != ' ' && it != str.end())
+				it++;
+		}
+		else
+			throw std::runtime_error("Error2");
+		if (it == str.end())
+			break;
+	}
+	std::cout << _stack.top() << std::endl;
+}
+
+void RPN::run(std::string polishMath)
+{
+	try
+	{
+		checkElement(polishMath);
+	}
+	catch (std::exception &err)
+	{
+		std::cerr << err.what() << std::endl;
+		std::exit(1);
 	}
 }
