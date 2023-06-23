@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 02:44:19 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:11:36 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ bool checkFloatPoint(float f)
 
 FloatCheckType checkValue(std::string &value, float &f_value)
 {
-	char *endptr;
-	f_value = std::strtof(value.c_str(), &endptr);
-	if (*endptr != '\0')
+	std::stringstream ss(value);
+	ss >> f_value;
+
+	if (ss.fail() || !ss.eof())
 		return BADINPUT;
-	else if (f_value == HUGE_VAL)
+	else if (f_value > 1000)
 		return TOOBIG;
-	else if (f_value < 0 || f_value == -HUGE_VAL)
+	else if (f_value < 0)
 		return MINUS;
 	return PLUS;
 }
@@ -71,11 +72,7 @@ void readFile(std::map<std::string, float> &dataBase)
 	{
 		std::string line;
 		while (std::getline(file, line))
-		{
 			csvSplit(dataBase, line, ',');
-			// if (dataBase
-			// 	.push_back();
-		}
 		file.close();
 	}
 	else
@@ -93,7 +90,7 @@ std::string trim(const std::string &str)
 	return str.substr(first, (last - first + 1));
 }
 
-void inputSplit(std::string &date, std::string &value, std::string &line, char delimiter)
+bool inputSplit(std::string &date, std::string &value, std::string &line, char delimiter)
 {
 	std::stringstream ss(line);
 	std::string temp;
@@ -102,21 +99,9 @@ void inputSplit(std::string &date, std::string &value, std::string &line, char d
 		date = trim(temp);
 	if (std::getline(ss, temp, delimiter))
 		value = trim(temp);
-}
-
-void dateSplit(std::string &year, std::string &month, std::string &day, std::string &line, char delimiter)
-{
-	std::stringstream ss(line);
-	std::string temp;
-
-	if (std::getline(ss, temp, delimiter))
-		year = temp;
-	if (std::getline(ss, temp, delimiter))
-		month = temp;
-	if (std::getline(ss, temp, delimiter))
-		day = temp;
-	if (ss.tellg() != 0)
-		day.clear();
+	if (ss.fail() || !ss.eof())
+		return false;
+	return true;
 }
 
 bool checkDate(std::string date)
@@ -165,7 +150,7 @@ bool checkDate(std::string date)
 				return false;
 		}
 	}
-	if (str_year.empty() || str_month.empty() || str_day.empty())
+	if (ss.fail() || !ss.eof())
 		return false;
 	return true;
 }
@@ -176,15 +161,28 @@ void checkInputFile(std::map<std::string, float> &dataBase, char *inputFileName)
 	std::string line;
 	std::string date;
 	std::string value;
+	bool first = true;
 	float f_value;
 
 	if (!file.is_open())
 		throw std::runtime_error("Error: could not open file.");
 	while (std::getline(file, line))
 	{
-		inputSplit(date, value, line, '|');
-		if (date == "date")
+		date.clear();
+		value.clear();
+		if (line.empty())
 			continue;
+		if (!inputSplit(date, value, line, '|'))
+		{
+			std::cout << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+		if (date == "date" && value == "value" && first == true)
+		{
+			first = false;
+			continue;
+		}
+		first = false;
 		if (!checkDate(date))
 		{
 			std::cout << "Error: bad input => " << date << std::endl;
@@ -192,23 +190,27 @@ void checkInputFile(std::map<std::string, float> &dataBase, char *inputFileName)
 		}
 		FloatCheckType v_result = checkValue(value, f_value);
 		if (v_result == BADINPUT)
-			std::cout << "Error: bad input => " << date << std::endl;
-		else if (f_value > 1000 || v_result == TOOBIG)
+			std::cout << "Error: bad input => " << value << std::endl;
+		else if (v_result == TOOBIG)
 			std::cout << "Error: too large a number." << std::endl;
 		else if (v_result == MINUS)
 			std::cout << "Error: not a positive number." << std::endl;
 		else if (dataBase.find(date) != dataBase.end())
-		{
 			std::cout << date << " => " << f_value << " = " << dataBase[date] * f_value << std::endl;
-		}
 		else
 		{
 			std::map<std::string, float>::iterator it = dataBase.lower_bound(date);
+			if (it == dataBase.begin())
+			{
+				std::cout << "Error: bad input => " << date << std::endl;
+				continue;
+			}
+			--it;
 			float result = (*it).second * f_value;
 			if (result > static_cast<float>(std::numeric_limits<int>::max()))
 				std::cout << "Error: too large a number." << std::endl;
 			else
-				std::cout << date << " => " << f_value << " = " << result << std::endl;
+				std::cout << date << " => " << static_cast<double>(f_value) << " = " << result << std::endl;
 		}
 	}
 }
