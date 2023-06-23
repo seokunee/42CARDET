@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:36 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 00:55:59 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:48:11 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class RPN
 {
 private:
 	std::stack<int> _stack;
-	void checkElement(std::string &str);
+	void calculator(std::string &str);
 
 public:
 	RPN();

@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 04:46:29 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:48:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ RPN &RPN::operator=(const RPN &src)
 	return *this;
 };
 
-void RPN::checkElement(std::string &str)
+void RPN::calculator(std::string &str)
 {
 	std::string::iterator it;
 	int first, second, result;
@@ -86,7 +86,7 @@ void RPN::run(std::string polishMath)
 {
 	try
 	{
-		checkElement(polishMath);
+		calculator(polishMath);
 	}
 	catch (std::exception &err)
 	{
