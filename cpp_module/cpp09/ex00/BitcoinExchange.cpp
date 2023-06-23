@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 17:11:36 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:12:32 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 	return *this;
 };
 
-bool checkFloatPoint(float f)
+bool BitcoinExchange::checkFloatPoint(float f)
 {
 	std::ostringstream oss;
 	oss << f;
@@ -36,7 +36,7 @@ bool checkFloatPoint(float f)
 	return true;
 }
 
-FloatCheckType checkValue(std::string &value, float &f_value)
+FloatCheckType BitcoinExchange::checkValue(std::string &value, float &f_value)
 {
 	std::stringstream ss(value);
 	ss >> f_value;
@@ -50,7 +50,7 @@ FloatCheckType checkValue(std::string &value, float &f_value)
 	return PLUS;
 }
 
-void csvSplit(std::map<std::string, float> &dataBase, std::string &line, char delimiter)
+void BitcoinExchange::csvSplit(std::map<std::string, float> &dataBase, std::string &line, char delimiter)
 {
 	std::stringstream ss(line);
 	std::string temp;
@@ -64,7 +64,7 @@ void csvSplit(std::map<std::string, float> &dataBase, std::string &line, char de
 	dataBase[key] = value;
 }
 
-void readFile(std::map<std::string, float> &dataBase)
+void BitcoinExchange::readFile(std::map<std::string, float> &dataBase)
 {
 	std::ifstream file("data.csv");
 
@@ -79,7 +79,7 @@ void readFile(std::map<std::string, float> &dataBase)
 		throw std::runtime_error("Error: could not open file.");
 }
 
-std::string trim(const std::string &str)
+std::string BitcoinExchange::trim(const std::string &str)
 {
 	std::size_t first = str.find_first_not_of(' ');
 	if (first == std::string::npos)
@@ -90,7 +90,7 @@ std::string trim(const std::string &str)
 	return str.substr(first, (last - first + 1));
 }
 
-bool inputSplit(std::string &date, std::string &value, std::string &line, char delimiter)
+bool BitcoinExchange::inputSplit(std::string &date, std::string &value, std::string &line, char delimiter)
 {
 	std::stringstream ss(line);
 	std::string temp;
@@ -104,7 +104,7 @@ bool inputSplit(std::string &date, std::string &value, std::string &line, char d
 	return true;
 }
 
-bool checkDate(std::string date)
+bool BitcoinExchange::checkDate(std::string date)
 {
 	float year, month, day;
 	std::string str_year, str_month, str_day;
@@ -155,7 +155,7 @@ bool checkDate(std::string date)
 	return true;
 }
 
-void checkInputFile(std::map<std::string, float> &dataBase, char *inputFileName)
+void BitcoinExchange::checkInputFile(std::map<std::string, float> &dataBase, char *inputFileName)
 {
 	std::ifstream file(inputFileName);
 	std::string line;
