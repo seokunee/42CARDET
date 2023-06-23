@@ -90,7 +90,8 @@
     "filesystem": "cpp",
     "list": "cpp",
     "queue": "cpp",
-    "version": "cpp"
+    "version": "cpp",
+    "map": "cpp"
   },
   "[cpp]": {
     "editor.defaultFormatter": "ms-vscode.cpptools",
