@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/16 00:37:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:23:45 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ private:
 	static void changeDouble(std::string &literal);
 	static bool checkDoublePoint(double d);
 	static bool checkFloatPoint(float f);
-
-public:
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &src);
-	~ScalarConverter();
 	ScalarConverter &operator=(const ScalarConverter &src);
+
+public:
+	~ScalarConverter();
 
 	static void convert(std::string literal);
 };
