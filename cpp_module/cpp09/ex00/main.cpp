@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:03:26 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/22 23:35:53 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:21:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int ac, char **av)
 	if (ac != 2)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
-		exit(1);
+		return 1;
 	}
 	BitcoinExchange bitcoinExchange;
 	try
@@ -27,7 +27,7 @@ int main(int ac, char **av)
 	catch (std::exception &err)
 	{
 		std::cerr << err.what() << std::endl;
-		exit(1);
+		return 1;
 	}
 	return 0;
 }
