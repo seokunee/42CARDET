@@ -6,11 +6,11 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/06/24 16:55:56 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/06/24 22:12:49 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.cpp RPN.cpp
+SRCS    = main.cpp PmergeMe.cpp
 OBJS	= ${SRCS:.cpp=.o}
 CC		= c++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98
