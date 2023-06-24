@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 04:48:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:50:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void RPN::calculator(std::string &str)
 				_stack.push(*it - '0');
 				if (*(++it) != ' ' && it != str.end())
 				{
-					throw std::runtime_error("Error1");
+					throw std::runtime_error("Error");
 				}
 			}
 			while (*it != ' ' && it != str.end())
@@ -53,13 +53,13 @@ void RPN::calculator(std::string &str)
 			oper = *it;
 			++it;
 			if (it != str.end() && *it != ' ')
-				throw std::runtime_error("Error3");
+				throw std::runtime_error("Error");
 			if (_stack.empty())
-				throw std::runtime_error("Error4");
+				throw std::runtime_error("Error");
 			first = _stack.top();
 			_stack.pop();
 			if (_stack.empty())
-				throw std::runtime_error("Error5");
+				throw std::runtime_error("Error");
 			second = _stack.top();
 			_stack.pop();
 			if (oper == '*')
@@ -75,7 +75,7 @@ void RPN::calculator(std::string &str)
 				it++;
 		}
 		else
-			throw std::runtime_error("Error2");
+			throw std::runtime_error("Error");
 		if (it == str.end())
 			break;
 	}
