@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 20:29:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 22:16:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ RPN::~RPN() {}
 
 RPN::RPN(const RPN &src)
 {
-	(void)src;
+	*this = src;
 }
 
 RPN &RPN::operator=(const RPN &src)
