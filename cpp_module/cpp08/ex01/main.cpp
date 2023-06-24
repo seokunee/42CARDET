@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:25:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/21 16:01:20 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:57:28 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void subjectTest()
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 	try
 	{
@@ -43,7 +43,7 @@ void subjectTest()
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 }
 
@@ -79,7 +79,7 @@ void oneTimeBigNumAddTest()
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::vector<int> span = sp.getSpan();
@@ -102,7 +102,7 @@ void oneTimeBigNumAddTest()
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 }
 

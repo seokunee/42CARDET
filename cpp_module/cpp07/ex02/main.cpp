@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/17 17:10:03 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:57:28 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::cout << std::endl;
@@ -64,7 +64,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 	std::cout << std::endl;
 	std::cout << "길이가 달라도 복사 잘 되는지 확인" << std::endl;
@@ -81,7 +81,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 	std::cout << std::endl;
 	std::cout << "복사한 배열이 바뀌어도 서로 영향을 주는지 확인" << std::endl;
@@ -110,7 +110,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 	std::cout << std::endl;
 	std::cout << "복사한 배열이 바뀌어도 서로 영향을 주는지 확인" << std::endl;
@@ -120,7 +120,7 @@ int main(void)
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	try
 	{
@@ -128,7 +128,7 @@ int main(void)
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	try
 	{
@@ -136,7 +136,7 @@ int main(void)
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << e.what() << '\n';
 	}
 	return 0;
 }

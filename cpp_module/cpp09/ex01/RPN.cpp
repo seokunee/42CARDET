@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 04:50:30 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:45:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void RPN::run(std::string polishMath)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 		std::exit(1);
 	}
 }

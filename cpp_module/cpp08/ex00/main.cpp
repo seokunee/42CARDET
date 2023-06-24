@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 15:52:07 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/19 15:37:17 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:57:28 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::cout << "vector char" << std::endl;
@@ -55,7 +55,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::cout << "vector unsigned int" << std::endl;
@@ -66,7 +66,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::cout << "deque int" << std::endl;
@@ -77,7 +77,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	std::cout << "deque int" << std::endl;
@@ -88,7 +88,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	// std::cout << "queue int" << std::endl;
@@ -99,7 +99,7 @@ int main(void)
 	// }
 	// catch (std::exception &err)
 	// {
-	// 	std::cerr << err.what() << std::endl;
+	// 	std::cout << err.what() << std::endl;
 	// }
 
 	// std::cout << "stack int" << std::endl;
@@ -110,7 +110,7 @@ int main(void)
 	// }
 	// catch (std::exception &err)
 	// {
-	// 	std::cerr << err.what() << std::endl;
+	// 	std::cout << err.what() << std::endl;
 	// }
 
 	std::cout << "list int" << std::endl;
@@ -121,7 +121,7 @@ int main(void)
 	}
 	catch (std::exception &err)
 	{
-		std::cerr << err.what() << std::endl;
+		std::cout << err.what() << std::endl;
 	}
 
 	return 0;
