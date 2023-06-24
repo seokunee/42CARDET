@@ -6,24 +6,24 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 19:12:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:29:59 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <limits>
 
-BitcoinExchange::BitcoinExchange(){};
-BitcoinExchange::~BitcoinExchange(){};
+BitcoinExchange::BitcoinExchange() {}
+BitcoinExchange::~BitcoinExchange() {}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
 {
 	*this = src;
-};
+}
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 {
 	(void)src;
 	return *this;
-};
+}
 
 bool BitcoinExchange::checkFloatPoint(float f)
 {

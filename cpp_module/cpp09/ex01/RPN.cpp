@@ -6,26 +6,26 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 17:45:35 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:29:47 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-RPN::RPN(){};
+RPN::RPN() {}
 
-RPN::~RPN(){};
+RPN::~RPN() {}
 
 RPN::RPN(const RPN &src)
 {
 	(void)src;
-};
+}
 
 RPN &RPN::operator=(const RPN &src)
 {
 	(void)src;
 	return *this;
-};
+}
 
 void RPN::calculator(std::string &str)
 {
