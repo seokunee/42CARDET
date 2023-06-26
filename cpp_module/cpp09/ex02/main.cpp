@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:11 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/25 21:06:09 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:37:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int ac, char **av)
 		return 0;
 	PmergeMe pmergeMe(ac, av);
 
-	pmergeMe.sort();
+	pmergeMe.start();
 	return 0;
 }
 

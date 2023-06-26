@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 01:08:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:54:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,17 @@ void PmergeMe::setArray(int ac, char **av)
 		_deque.push_back(value);
 	}
 }
-
-void printArray(std::vector<int> &array)
+void printList(std::list<int> &list, std::string when)
 {
-	std::cout << "array = ";
-	for (size_t i = 0; i < array.size(); i++)
+	std::cout << when << ":" << std::setw(10 - when.length());
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
 	{
-		std::cout << array[i] << " ";
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 }
 
-void printlistlist(std::list<INT_LIST> &list)
+void PmergeMe::printlistlist(std::list<INT_LIST> &list)
 {
 	std::cout << "array = [";
 	for (std::list<INT_LIST>::iterator i = list.begin(); i != list.end(); ++i)
@@ -82,11 +81,10 @@ void printlistlist(std::list<INT_LIST> &list)
 	std::cout << "]" << std::endl;
 }
 
-void merge(std::list<INT_LIST> &list, int left, int mid, int right)
+void PmergeMe::merge(std::list<INT_LIST> &list, int left, int mid, int right)
 {
 	int n1 = mid - left + 1;
 	int n2 = right - mid;
-	std::cout << "n1 = " << n1 << " n2 = " << n2 << std::endl;
 
 	std::list<INT_LIST> leftArr, rightArr;
 	std::list<INT_LIST>::iterator it = list.begin();
@@ -94,7 +92,6 @@ void merge(std::list<INT_LIST> &list, int left, int mid, int right)
 	std::advance(it, left);
 	for (int i = 0; i < n1; ++i)
 	{
-		std::cout << *(*it).begin() << std::endl;
 		leftArr.push_back(*it);
 		++it;
 	}
@@ -116,7 +113,6 @@ void merge(std::list<INT_LIST> &list, int left, int mid, int right)
 	{
 		if (*(*it_l).begin() > *(*it_r).begin())
 		{
-			std::cout << *(*it).begin() << " " << *(*it_l).begin() << std::endl;
 			*it = *it_l;
 			++i;
 			++it_l;
@@ -147,9 +143,8 @@ void merge(std::list<INT_LIST> &list, int left, int mid, int right)
 	}
 }
 
-void fordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right)
+void PmergeMe::fordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right)
 {
-	printlistlist(list);
 	if (left < right)
 	{
 		int mid = left + (right - left) / 2;
@@ -160,7 +155,57 @@ void fordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right)
 	}
 }
 
-void PmergeMe::sort()
+void PmergeMe::fordJohnsonInsertSort(std::list<INT_LIST> &list)
+{
+	std::list<INT_LIST>::iterator it = list.begin();
+
+	_list.push_back((*it).back());
+	if ((*it).size() == 2)
+		_list.push_back((*it).front());
+
+	for (it = list.end(); it != list.begin(); --it)
+	{
+		if (it == list.end())
+			continue;
+		if (it == list.begin())
+			break;
+		if ((*it).size() == 1)
+			continue;
+		int insertNum = (*it).back();
+		std::list<int>::reverse_iterator i;
+		for (i = _list.rbegin(); i != _list.rend(); ++i)
+		{
+			if (*i <= insertNum)
+			{
+				_list.insert(i.base(), insertNum);
+				break;
+			}
+		}
+		if (i == _list.rend())
+			_list.push_front(insertNum);
+	}
+	for (it = list.end(); it != list.begin(); --it)
+	{
+		if (it == list.end())
+			continue;
+		if (it == list.begin())
+			break;
+		int insertNum = (*it).front();
+		std::list<int>::reverse_iterator i;
+		for (i = _list.rbegin(); i != _list.rend(); ++i)
+		{
+			if (*i <= insertNum)
+			{
+				_list.insert(i.base(), insertNum);
+				break;
+			}
+		}
+		if (i == _list.rend())
+			_list.push_front(insertNum);
+	}
+}
+
+void PmergeMe::list_sort()
 {
 	try
 	{
@@ -192,12 +237,27 @@ void PmergeMe::sort()
 			tmp.clear();
 		}
 		fordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
-		printlistlist(list_tmp);
+		_list.clear();
+		// printlistlist(list_tmp);
+		fordJohnsonInsertSort(list_tmp);
 	}
 	catch (std::exception &err)
 	{
 		std::cout << err.what() << std::endl;
 	}
+}
+
+void PmergeMe::start()
+{
+	printList(_list, "Before");
+
+	clock_t start = clock();
+	list_sort();
+	clock_t end = clock();
+	printList(_list, "After");
+
+	double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+	std::cout << "Time to process a range of " << _list.size() << "  elements with std::[..] : " << elapsedTime << " us" << std::endl;
 }
 
 /* Ford-Johnson 알고리즘 순서
@@ -211,5 +271,8 @@ void PmergeMe::sort()
  * 1. 오른쪽부터 pend element를 삽입 정렬을 시킨다.
  * 2  이때 Jacobsthal number을 잘 계산해서 해줘야한다.
  * 3.
-
+ *
+ *
+ * Jacobsthal number
+ * 0 1 1 3 5 11 21
  */

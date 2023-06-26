@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/25 21:00:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:37:15 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <vector>
 #include <list>
 #include <deque>
+#include <ctime>
+#include <iomanip>
 
 class PmergeMe
 {
@@ -26,6 +28,11 @@ private:
 	std::deque<int> _deque;
 	void setArray(int ac, char **av);
 	void checkArgument(std::string str);
+	void printlistlist(std::list<INT_LIST> &list);
+	void merge(std::list<INT_LIST> &list, int left, int mid, int right);
+	void fordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right);
+	void fordJohnsonInsertSort(std::list<INT_LIST> &list);
+
 	PmergeMe();
 
 public:
@@ -33,7 +40,9 @@ public:
 	~PmergeMe();
 	PmergeMe(const PmergeMe &src);
 	PmergeMe &operator=(const PmergeMe &src);
-	void sort();
+	void start();
+	void list_sort();
+	void deque_sort();
 };
 
 #endif
