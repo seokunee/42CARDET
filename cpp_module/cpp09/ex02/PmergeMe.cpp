@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 19:54:08 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:03:09 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,55 +207,46 @@ void PmergeMe::fordJohnsonInsertSort(std::list<INT_LIST> &list)
 
 void PmergeMe::list_sort()
 {
-	try
+	size_t first, second;
+	INT_LIST tmp;
+	INT_LIST::iterator it = _list.begin();
+	std::list<INT_LIST> list_tmp;
+	for (size_t i = 0; i < _list.size(); i++) // 두개씩 짝짓고 그 안에 정렬하기
 	{
-		size_t first, second;
-		INT_LIST tmp;
-		INT_LIST::iterator it = _list.begin();
-		std::list<INT_LIST> list_tmp;
-		for (size_t i = 0; i < _list.size(); i++) // 두개씩 짝짓고 그 안에 정렬하기
+		if (i + 2 < _list.size())
 		{
-			if (i + 2 < _list.size())
+			first = *it++;
+			second = *it++;
+			if (first < second)
 			{
-				first = *it++;
-				second = *it++;
-				if (first < second)
-				{
-					tmp.push_back(second);
-					tmp.push_back(first);
-				}
-				else
-				{
-					tmp.push_back(first);
-					tmp.push_back(second);
-				}
-				i++;
+				tmp.push_back(second);
+				tmp.push_back(first);
 			}
 			else
-				tmp.push_back(*it++);
-			list_tmp.push_back(tmp);
-			tmp.clear();
+			{
+				tmp.push_back(first);
+				tmp.push_back(second);
+			}
+			i++;
 		}
-		fordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
-		_list.clear();
-		// printlistlist(list_tmp);
-		fordJohnsonInsertSort(list_tmp);
+		else
+			tmp.push_back(*it++);
+		list_tmp.push_back(tmp);
+		tmp.clear();
 	}
-	catch (std::exception &err)
-	{
-		std::cout << err.what() << std::endl;
-	}
+	fordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
+	_list.clear();
+	// printlistlist(list_tmp);
+	fordJohnsonInsertSort(list_tmp);
 }
 
 void PmergeMe::start()
 {
 	printList(_list, "Before");
-
 	clock_t start = clock();
 	list_sort();
 	clock_t end = clock();
 	printList(_list, "After");
-
 	double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 	std::cout << "Time to process a range of " << _list.size() << "  elements with std::[..] : " << elapsedTime << " us" << std::endl;
 }
