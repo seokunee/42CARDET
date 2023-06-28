@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/16 00:38:27 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/28 21:06:51 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void ScalarConverter::changeChar(std::string &literal)
 {
 	char *endptr;
 	double d = std::strtod(literal.c_str(), &endptr);
-	if (*endptr != '\0')
+	if (literal == "nan" || literal == "nanf")
+		std::cout << "char : impossible" << std::endl;
+	else if (*endptr != '\0')
 		std::cout << "char: impossible" << std::endl;
 	else if (d == HUGE_VAL || d == -HUGE_VAL)
 		std::cout << "char: impossible" << std::endl;
@@ -79,7 +81,10 @@ void ScalarConverter::changeInt(std::string &literal)
 {
 	char *endptr;
 	double d = std::strtod(literal.c_str(), &endptr);
-	if (*endptr != '\0')
+
+	if (literal == "nan" || literal == "nanf")
+		std::cout << "int : impossible" << std::endl;
+	else if (*endptr != '\0')
 		std::cout << "int : impossible" << std::endl;
 	else if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
 		std::cout << "int : impossible" << std::endl;
@@ -101,6 +106,8 @@ void ScalarConverter::changeFloat(std::string &literal)
 {
 	if (literal == "+inf" || literal == "-inf" || literal == "inf")
 		std::cout << "float : " << literal << "f" << std::endl;
+	else if (literal == "nan" || literal == "nanf")
+		std::cout << "float : nanf" << std::endl;
 	else
 	{
 		char *endptr;
@@ -129,6 +136,8 @@ void ScalarConverter::changeDouble(std::string &literal)
 {
 	if (literal == "+inf" || literal == "-inf" || literal == "inf")
 		std::cout << "double : " << literal << std::endl;
+	else if (literal == "nan" || literal == "nanf")
+		std::cout << "double : nan" << std::endl;
 	else
 	{
 		char *endptr;
