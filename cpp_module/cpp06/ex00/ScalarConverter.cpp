@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/28 21:06:51 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:42:16 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,8 @@ void ScalarConverter::convert(std::string literal)
 {
 	if (!literal.empty() && literal.back() == 'f' && literal != "+inf" && literal != "-inf" && literal != "inf")
 		literal.pop_back();
-
+	if (literal.size() == 0)
+		literal = "nan";
 	changeChar(literal);
 	changeInt(literal);
 	changeFloat(literal);
