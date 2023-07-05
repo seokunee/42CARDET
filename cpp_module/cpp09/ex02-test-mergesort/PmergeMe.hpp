@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/05 21:16:26 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:48:50 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ private:
 	void listMerge(std::list<INT_LIST> &list, int left, int mid, int right);
 	void listFordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right);
 	void listFordJohnsonInsertSort(std::list<INT_LIST> &list);
-	void setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain, std::list<int> &pendingElements);
-	void listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIST> &pending, size_t total);
-	std::list<int>::iterator listBinarySearch(std::list<int>::iterator first, std::list<int>::iterator last, int value);
 
 	// deque
 	void printDeque(std::deque<int> &deque, std::string when);

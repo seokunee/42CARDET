@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/05 21:21:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:40:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ void PmergeMe::setArray(int ac, char **av)
 void PmergeMe::printList(std::list<int> &list, std::string when)
 {
 	std::cout << when << ":" << std::setw(10 - when.length());
-	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
-	{
-		std::cout << *it << " ";
-	}
+	if (list.size() > 5)
+		for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
+		{
+			std::cout << *it << " ";
+		}
 	std::cout << std::endl;
 }
 
@@ -132,7 +133,7 @@ void PmergeMe::listMerge(std::list<INT_LIST> &list, int left, int mid, int right
 	std::advance(it, left);
 	while (i < n1 && j < n2)
 	{
-		if (*(*it_l).begin() < *(*it_r).begin())
+		if (*(*it_l).begin() > *(*it_r).begin())
 		{
 			*it = *it_l;
 			++i;
@@ -176,137 +177,69 @@ void PmergeMe::listFordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int
 	}
 }
 
-/*
-	5 3 1 2 4 97 230 12 1 2823
-	(5 3) (1 2) (4 97) (230 12) (1 283)
-	(5 3) (2 1) (97 4) (230 12) (283 1)
-
-	(2 1) (5 3) (97 4) (230 12) (283 1)
-
-	mainChain = [2 5 97 230 283] = [a1 a2 a3 a4 a5]
-	pendingElements = [1 3 4 12 1] = [b1 b2 b3 b4 b5]
-*/
-
-// 내가 만든 lower_bound 굳이 뭐 해보지 뭐.
-//
-
-// int listBinarySearchRecursive(int arr[], int target, int low, int high)
-// { // 이거는 지금 int 배열을 위한 거고 지금 우리가 해야할 건... 어디 위치에 넣어야하는지 알기 위한 것이기 때문에..
-// 	if (low > high)
-// 		return -1;
-
-// 	int mid = (low + high) / 2;
-// 	if (mid == low)
-// 	{
-// 	}
-// 	else if (arr[mid] == target)
-// 		return mid;
-// 	else if (arr[mid] > target)
-// 		return listBinarySearchRecursive(arr, target, low, mid - 1);
-// 	else
-// 		return litBinarySearchRecursive(arr, target, mid + 1, high);
-// }
-
-int getSecondValueOfListInt(std::list<int>::iterator it)
+void PmergeMe::listFordJohnsonInsertSort(std::list<INT_LIST> &list)
 {
-	std::advance(it, 1);
-	return *it;
-}
-
-std::list<int>::iterator PmergeMe::listBinarySearch(std::list<int>::iterator first, std::list<int>::iterator last, int value)
-{
-	if (first == last)
-		return last;
-
-	std::list<int>::iterator mid = std::next(first, std::distance(first, last) / 2);
-
-	if (*mid == value)
-		return mid;
-	else if (*mid < value)
-		return listBinarySearch(std::next(mid), last, value);
-	else
-		return listBinarySearch(first, mid, value);
-}
-
-void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIST> &pending, size_t total)
-{
-	size_t j0 = 1;
+	size_t j0 = 0;
 	size_t j1 = 1;
-	size_t jn = 3;
-	std::list<int>::iterator i;
-	std::list<INT_LIST>::iterator it = pending.begin();
-	std::list<int>::iterator mi;
-	size_t pendingLen = pending.size();
-	std::list<int>::iterator j = std::next((*it).begin(), 1);
-	main.insert(main.begin(), *j);
-	total--;
-	while (total > 0)
+	size_t jn;
+
+	std::list<INT_LIST>::iterator it = list.begin();
+
+	_list.push_back((*it).back());
+	if ((*it).size() == 2)
+		_list.push_back((*it).front());
+
+	for (it = list.end(); it != list.begin(); --it)
 	{
-		jn = j1 + 2 * j0;
-		if (jn > pendingLen)
-			jn = pendingLen;
-		it = pending.begin();
-		std::advance(it, jn - 1);
-		while (it != std::next(pending.begin(), j1 - 1))
+		if (it == list.end())
+			continue;
+		if (it == list.begin())
+			break;
+		if ((*it).size() == 1)
+			continue;
+		int insertNum = (*it).back();
+		std::list<int>::reverse_iterator i;
+		for (i = _list.rbegin(); i != _list.rend(); ++i)
 		{
-			if ((*it).size() != 2)
+			if (*i <= insertNum)
 			{
-				--it;
-				continue;
+				_list.insert(i.base(), insertNum);
+				break;
 			}
-			j = (*it).begin();
-			mi = listBinarySearch((main).begin(), (main).end(), *j);
-			std::advance(j, 1);
-			mi = listBinarySearch(main.begin(), mi, *j);
-			main.insert(mi, *j);
-			total--;
-			--it;
 		}
-		j0 = j1;
-		j1 = jn;
+		if (i == _list.rend())
+			_list.push_front(insertNum);
 	}
-}
-
-void PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain, std::list<int> &pendingElements)
-{
-	size_t count = 0;
-	for (std::list<INT_LIST>::iterator it = list.begin(); it != list.end(); ++it)
+	for (it = list.end(); it != list.begin(); --it)
 	{
-		std::list<int>::iterator i = (*it).begin();
-		mainChain.push_back(*i);
-		if ((*it).size() == 2)
+		if (it == list.end())
+			continue;
+		if (it == list.begin())
+			break;
+		int insertNum = (*it).front();
+		std::list<int>::reverse_iterator i;
+		for (i = _list.rbegin(); i != _list.rend(); ++i)
 		{
-			std::advance(i, 1);
-
-			pendingElements.push_back(*i);
+			if (*i <= insertNum)
+			{
+				_list.insert(i.base(), insertNum);
+				break;
+			}
 		}
+		if (i == _list.rend())
+			_list.push_front(insertNum);
 	}
 }
 
 void PmergeMe::list_sort()
 {
 	size_t first, second;
-	std::list<int> tmp;
-	std::list<int>::iterator it = _list.begin();
+	INT_LIST tmp;
+	INT_LIST::iterator it = _list.begin();
 	std::list<INT_LIST> list_tmp;
-	std::list<int> pendingElements;
-	if (_list.size() == 1)
-		return;
-	if (_list.size() == 2)
-	{
-		first = *it;
-		std::advance(it, 1);
-		second = *it;
-		if (first > second)
-		{
-			*_list.begin() = second;
-			*it = first;
-		}
-		return;
-	}
 	for (size_t i = 0; i < _list.size(); i++)
 	{
-		if (i + 2 <= _list.size())
+		if (i + 2 < _list.size())
 		{
 			first = *it++;
 			second = *it++;
@@ -328,23 +261,9 @@ void PmergeMe::list_sort()
 		tmp.clear();
 	}
 	listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
-	// printlistlist(list_tmp);
 	_list.clear();
-	setMainChainAndPendingElements(list_tmp, _list, pendingElements);
-	// printList(mainChain, "mainChain");
-	// printList(pendingElements, "pendingElements");
-	listFordJohnsonInsertSort(_list, list_tmp, pendingElements.size());
+	listFordJohnsonInsertSort(list_tmp);
 }
-
-/*
- * ford johnson 순서
- * 1. 2개씩 짝을 짓는다.
- * 2. 짝의 큰 숫자 기준으로 merge sort
- * 3. merge sort 된 애들을 가지고 mainChain, pendingElements 배열 두개를 만든다.
- * 3-1. 어떻게 정렬? a1,a2,... b1, b2를 기억하고 싶은데 기억 안해도 될 듯 싶다.
- * 4. Jacobsthal number에 따라서 pendingEelements를 mainChain에 이진탐색으로 insert 정렬을 한다.
- * 5. 끝
- */
 
 // --- ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
@@ -573,14 +492,3 @@ void PmergeMe::start()
 	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " us" << std::endl;
 }
-
-/*
-진행 위사 페 -> 9월 말 지원 -> 8월 대관 영상촬영 (일정 맞춰놓은 상태) -> 뽑히면 1월 -> 좀 큼
-
-위사 언더 페 (규모 조금 더 작은) -> 8월 ~ 12월 (8~9월 오텐 작품 발표) -> 10, 11 월 자율 수업 -> 12월에 언더 페만의 공연을 한다. -> 위사페랑 다른 점은 알려주고 멘토링 후 작업물 뽑아감.
-엄청 빡세진 않아보임 -> 은지는 두개 다하고 싶음. -> 7월 21일이 마감.
-
-
-1순위 위사페 is best of 은지
-2순위 위사 언더 만 or 둘 다. -> 포폴을 다시만들어야할 수도 (서터레스) -> 포폴 걱정 없으면 위사 언더
-*/
