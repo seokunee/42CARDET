@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/05 21:21:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/05 21:32:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,37 +176,6 @@ void PmergeMe::listFordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int
 	}
 }
 
-/*
-	5 3 1 2 4 97 230 12 1 2823
-	(5 3) (1 2) (4 97) (230 12) (1 283)
-	(5 3) (2 1) (97 4) (230 12) (283 1)
-
-	(2 1) (5 3) (97 4) (230 12) (283 1)
-
-	mainChain = [2 5 97 230 283] = [a1 a2 a3 a4 a5]
-	pendingElements = [1 3 4 12 1] = [b1 b2 b3 b4 b5]
-*/
-
-// 내가 만든 lower_bound 굳이 뭐 해보지 뭐.
-//
-
-// int listBinarySearchRecursive(int arr[], int target, int low, int high)
-// { // 이거는 지금 int 배열을 위한 거고 지금 우리가 해야할 건... 어디 위치에 넣어야하는지 알기 위한 것이기 때문에..
-// 	if (low > high)
-// 		return -1;
-
-// 	int mid = (low + high) / 2;
-// 	if (mid == low)
-// 	{
-// 	}
-// 	else if (arr[mid] == target)
-// 		return mid;
-// 	else if (arr[mid] > target)
-// 		return listBinarySearchRecursive(arr, target, low, mid - 1);
-// 	else
-// 		return litBinarySearchRecursive(arr, target, mid + 1, high);
-// }
-
 int getSecondValueOfListInt(std::list<int>::iterator it)
 {
 	std::advance(it, 1);
@@ -267,7 +236,7 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 	}
 }
 
-void PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain, std::list<int> &pendingElements)
+size_t PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain)
 {
 	size_t count = 0;
 	for (std::list<INT_LIST>::iterator it = list.begin(); it != list.end(); ++it)
@@ -275,11 +244,7 @@ void PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::li
 		std::list<int>::iterator i = (*it).begin();
 		mainChain.push_back(*i);
 		if ((*it).size() == 2)
-		{
-			std::advance(i, 1);
-
-			pendingElements.push_back(*i);
-		}
+			count++;
 	}
 }
 
@@ -289,7 +254,6 @@ void PmergeMe::list_sort()
 	std::list<int> tmp;
 	std::list<int>::iterator it = _list.begin();
 	std::list<INT_LIST> list_tmp;
-	std::list<int> pendingElements;
 	if (_list.size() == 1)
 		return;
 	if (_list.size() == 2)
@@ -330,21 +294,11 @@ void PmergeMe::list_sort()
 	listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
 	// printlistlist(list_tmp);
 	_list.clear();
-	setMainChainAndPendingElements(list_tmp, _list, pendingElements);
+	size_t pendingSize = setMainChainAndPendingElements(list_tmp, _list);
 	// printList(mainChain, "mainChain");
 	// printList(pendingElements, "pendingElements");
-	listFordJohnsonInsertSort(_list, list_tmp, pendingElements.size());
+	listFordJohnsonInsertSort(_list, list_tmp, pendingSize);
 }
-
-/*
- * ford johnson 순서
- * 1. 2개씩 짝을 짓는다.
- * 2. 짝의 큰 숫자 기준으로 merge sort
- * 3. merge sort 된 애들을 가지고 mainChain, pendingElements 배열 두개를 만든다.
- * 3-1. 어떻게 정렬? a1,a2,... b1, b2를 기억하고 싶은데 기억 안해도 될 듯 싶다.
- * 4. Jacobsthal number에 따라서 pendingEelements를 mainChain에 이진탐색으로 insert 정렬을 한다.
- * 5. 끝
- */
 
 // --- ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
@@ -573,14 +527,3 @@ void PmergeMe::start()
 	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " us" << std::endl;
 }
-
-/*
-진행 위사 페 -> 9월 말 지원 -> 8월 대관 영상촬영 (일정 맞춰놓은 상태) -> 뽑히면 1월 -> 좀 큼
-
-위사 언더 페 (규모 조금 더 작은) -> 8월 ~ 12월 (8~9월 오텐 작품 발표) -> 10, 11 월 자율 수업 -> 12월에 언더 페만의 공연을 한다. -> 위사페랑 다른 점은 알려주고 멘토링 후 작업물 뽑아감.
-엄청 빡세진 않아보임 -> 은지는 두개 다하고 싶음. -> 7월 21일이 마감.
-
-
-1순위 위사페 is best of 은지
-2순위 위사 언더 만 or 둘 다. -> 포폴을 다시만들어야할 수도 (서터레스) -> 포폴 걱정 없으면 위사 언더
-*/
