@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/06 13:58:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:00:35 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void ScalarConverter::changeChar(std::string &literal)
 		std::cout << "char : impossible" << std::endl;
 	else if (*endptr != '\0')
 		std::cout << "char: impossible" << std::endl;
-	else if (d == HUGE_VAL || d == -HUGE_VAL)
+	else if (d == HUGE_VAL || d == -HUGE_VAL || d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max())
 		std::cout << "char: impossible" << std::endl;
-	else if (std::isprint(static_cast<int>(d)) == 0)
+	else if (std::isprint(static_cast<char>(d)) == 0)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char : " << static_cast<char>(d) << std::endl;
@@ -109,17 +109,17 @@ void ScalarConverter::changeFloat(std::string &literal)
 	else
 	{
 		char *endptr;
-		float f = std::strtof(literal.c_str(), &endptr);
+		double d = std::strtod(literal.c_str(), &endptr);
 		if (*endptr != '\0')
 			std::cout << "float : nanf" << std::endl;
-		else if (f == HUGE_VAL)
+		else if (d == HUGE_VAL || d > std::numeric_limits<float>::max())
 			std::cout << "float : inff" << std::endl;
-		else if (f == -HUGE_VAL)
+		else if (d == -HUGE_VAL || d < std::numeric_limits<int>::min())
 			std::cout << "float : -inff" << std::endl;
-		else if (checkFloatPoint(f))
-			std::cout << "float : " << f << "f" << std::endl;
+		else if (checkFloatPoint(d))
+			std::cout << "float : " << static_cast<float>(d) << "f" << std::endl;
 		else
-			std::cout << "float : " << f << ".0f" << std::endl;
+			std::cout << "float : " << static_cast<float>(d) << ".0f" << std::endl;
 	}
 }
 
