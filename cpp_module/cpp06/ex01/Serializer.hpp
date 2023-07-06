@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 17:23:50 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:52:30 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ private:
 	Serializer();
 	Serializer(const Serializer &src);
 	Serializer &operator=(const Serializer &src);
-
-public:
 	~Serializer();
 
+public:
 	static uintptr_t serialize(Data *ptr);
 	static Data *deserialize(uintptr_t raw);
 };
