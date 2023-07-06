@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:43:28 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/30 15:42:16 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:58:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,7 @@ void ScalarConverter::changeInt(std::string &literal)
  */
 void ScalarConverter::changeFloat(std::string &literal)
 {
-	if (literal == "+inf" || literal == "-inf" || literal == "inf")
-		std::cout << "float : " << literal << "f" << std::endl;
-	else if (literal == "nan" || literal == "nanf")
+	if (literal == "nan" || literal == "nanf")
 		std::cout << "float : nanf" << std::endl;
 	else
 	{
@@ -134,9 +132,7 @@ void ScalarConverter::changeFloat(std::string &literal)
  */
 void ScalarConverter::changeDouble(std::string &literal)
 {
-	if (literal == "+inf" || literal == "-inf" || literal == "inf")
-		std::cout << "double : " << literal << std::endl;
-	else if (literal == "nan" || literal == "nanf")
+	if (literal == "nan" || literal == "nanf")
 		std::cout << "double : nan" << std::endl;
 	else
 	{
