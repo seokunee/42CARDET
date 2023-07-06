@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/05 21:26:47 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/06 20:20:56 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ private:
 	void listMerge(std::list<INT_LIST> &list, int left, int mid, int right);
 	void listFordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right);
 	void listFordJohnsonInsertSort(std::list<INT_LIST> &list);
-	size_t setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain);
+	size_t setListMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain);
 	void listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIST> &pending, size_t total);
 	std::list<int>::iterator listBinarySearch(std::list<int>::iterator first, std::list<int>::iterator last, int value);
 
@@ -48,6 +48,9 @@ private:
 	void dequeMerge(std::deque<INT_DEQUE> &deque, int left, int mid, int right);
 	void dequeFordJohnsonMergeSort(std::deque<INT_DEQUE> &deque, int left, int right);
 	void dequeFordJohnsonInsertSort(std::deque<INT_DEQUE> &deque);
+	void dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_DEQUE> &pending, size_t total);
+	size_t setDequeMainChainAndPendingElements(std::deque<INT_DEQUE> &deque, std::deque<int> &mainChain);
+	std::deque<int>::iterator dequeBinarySearch(std::deque<int>::iterator first, std::deque<int>::iterator last, int value);
 
 	PmergeMe();
 

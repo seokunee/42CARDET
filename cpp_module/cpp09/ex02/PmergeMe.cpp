@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/06 13:49:48 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/07 01:55:07 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 	}
 }
 
-size_t PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain)
+size_t PmergeMe::setListMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain)
 {
 	size_t count = 0;
 	for (std::list<INT_LIST>::iterator it = list.begin(); it != list.end(); ++it)
@@ -300,7 +300,7 @@ void PmergeMe::list_sort()
 	}
 	listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
 	_list.clear();
-	size_t pendingSize = setMainChainAndPendingElements(list_tmp, _list);
+	size_t pendingSize = setListMainChainAndPendingElements(list_tmp, _list);
 	listFordJohnsonInsertSort(_list, list_tmp, pendingSize);
 }
 
@@ -381,7 +381,7 @@ void PmergeMe::dequeMerge(std::deque<INT_DEQUE> &deque, int left, int mid, int r
 	std::advance(it, left);
 	while (i < n1 && j < n2)
 	{
-		if (*(*it_l).begin() > *(*it_r).begin())
+		if (*(*it_l).begin() < *(*it_r).begin())
 		{
 			*it = *it_l;
 			++i;
@@ -425,65 +425,101 @@ void PmergeMe::dequeFordJohnsonMergeSort(std::deque<INT_DEQUE> &deque, int left,
 	}
 }
 
-void PmergeMe::dequeFordJohnsonInsertSort(std::deque<INT_DEQUE> &deque)
+std::deque<int>::iterator PmergeMe::dequeBinarySearch(std::deque<int>::iterator first, std::deque<int>::iterator last, int value)
 {
-	std::deque<INT_DEQUE>::iterator it = deque.begin();
+	if (first == last)
+		return last;
 
-	_deque.push_back((*it).back());
+	std::deque<int>::iterator mid = std::next(first, std::distance(first, last) / 2);
+
+	if (*mid == value)
+		return mid;
+	else if (*mid < value)
+		return dequeBinarySearch(std::next(mid), last, value);
+	else
+		return dequeBinarySearch(first, mid, value);
+}
+
+void PmergeMe::dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_DEQUE> &pending, size_t total)
+{
+	size_t j0 = 1;
+	size_t j1 = 1;
+	size_t jn = 3;
+	std::deque<int>::iterator i;
+	std::deque<INT_DEQUE>::iterator it = pending.begin();
+	std::deque<int>::iterator mi;
+	size_t pendingLen = pending.size();
+	std::deque<int>::iterator j;
 	if ((*it).size() == 2)
-		_deque.push_back((*it).front());
+	{
+		j = std::next((*it).begin(), 1);
+		main.insert(main.begin(), *j);
+		total--;
+	}
+	while (total > 0)
+	{
+		jn = j1 + 2 * j0;
+		if (jn > pendingLen)
+			jn = pendingLen;
+		it = pending.begin();
+		std::advance(it, jn - 1);
+		while (it != std::next(pending.begin(), j1 - 1))
+		{
+			if ((*it).size() != 2)
+			{
+				--it;
+				continue;
+			}
+			j = (*it).begin();
+			mi = dequeBinarySearch((main).begin(), (main).end(), *j);
+			std::advance(j, 1);
+			mi = dequeBinarySearch(main.begin(), mi, *j);
 
-	for (it = deque.end(); it != deque.begin(); --it)
-	{
-		if (it == deque.end())
-			continue;
-		if (it == deque.begin())
-			break;
-		if ((*it).size() == 1)
-			continue;
-		int insertNum = (*it).back();
-		std::deque<int>::reverse_iterator i;
-		for (i = _deque.rbegin(); i != _deque.rend(); ++i)
-		{
-			if (*i <= insertNum)
-			{
-				_deque.insert(i.base(), insertNum);
-				break;
-			}
+			main.insert(mi, *j);
+			total--;
+			--it;
 		}
-		if (i == _deque.rend())
-			_deque.push_front(insertNum);
+		j0 = j1;
+		j1 = jn;
 	}
-	for (it = deque.end(); it != deque.begin(); --it)
+}
+
+size_t PmergeMe::setDequeMainChainAndPendingElements(std::deque<INT_DEQUE> &deque, std::deque<int> &mainChain)
+{
+	size_t count = 0;
+	for (std::deque<INT_DEQUE>::iterator it = deque.begin(); it != deque.end(); ++it)
 	{
-		if (it == deque.end())
-			continue;
-		if (it == deque.begin())
-			break;
-		int insertNum = (*it).front();
-		std::deque<int>::reverse_iterator i;
-		for (i = _deque.rbegin(); i != _deque.rend(); ++i)
-		{
-			if (*i <= insertNum)
-			{
-				_deque.insert(i.base(), insertNum);
-				break;
-			}
-		}
-		if (i == _deque.rend())
-			_deque.push_front(insertNum);
+		std::deque<int>::iterator i = (*it).begin();
+		mainChain.push_back(*i);
+		if ((*it).size() == 2)
+			count++;
 	}
+	return count;
 }
 
 void PmergeMe::deque_sort()
 {
 	size_t first, second;
-	INT_DEQUE tmp;
-	INT_DEQUE::iterator it = _deque.begin();
+	std::deque<int> tmp;
+	std::deque<int>::iterator it = _deque.begin();
 	std::deque<INT_DEQUE> deque_tmp;
+	if (_deque.size() == 1)
+		return;
+	if (_deque.size() == 2)
+	{
+		first = *it;
+		std::advance(it, 1);
+		second = *it;
+		if (first > second)
+		{
+			*_deque.begin() = second;
+			*it = first;
+		}
+		return;
+	}
 	for (size_t i = 0; i < _deque.size(); i++)
 	{
-		if (i + 2 < _deque.size())
+		if (i + 2 <= _deque.size())
 		{
 			first = *it++;
 			second = *it++;
@@ -506,7 +542,8 @@ void PmergeMe::deque_sort()
 	}
 	dequeFordJohnsonMergeSort(deque_tmp, 0, deque_tmp.size() - 1);
 	_deque.clear();
-	dequeFordJohnsonInsertSort(deque_tmp);
+	size_t pendingSize = setDequeMainChainAndPendingElements(deque_tmp, _deque);
+	dequeFordJohnsonInsertSort(_deque, deque_tmp, pendingSize);
 }
 
 void PmergeMe::start()
@@ -518,16 +555,18 @@ void PmergeMe::start()
 	clock_t end = clock();
 	// printList(_list, "After");
 	printListUnderFive(_list, "After");
-	double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
-	std::cout << "Time to process a range of " << _list.size() << "  elements with std::list : " << elapsedTime << " us" << std::endl;
+	// std::cout << "list is sorted? : " << std::is_sorted(_list.begin(), _list.end()) << std::endl;
+	double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+	std::cout << "Time to process a range of " << _list.size() << "  elements with std::list : " << elapsedTime << " ms" << std::endl;
 
-	// printDeque(_deque, "Before");
 	// printDequeUnderFive(_deque, "Before");
+	// printDeque(_deque, "Before");
 	start = clock();
 	deque_sort();
 	end = clock();
 	// printDequeUnderFive(_deque, "After");
 	// printDeque(_deque, "After");
-	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
-	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " us" << std::endl;
+	// std::cout << "deque is sorted? : " << std::is_sorted(_deque.begin(), _deque.end()) << std::endl;
+	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " ms" << std::endl;
 }
