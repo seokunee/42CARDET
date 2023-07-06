@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/05 21:32:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:49:48 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,13 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 	std::list<INT_LIST>::iterator it = pending.begin();
 	std::list<int>::iterator mi;
 	size_t pendingLen = pending.size();
-	std::list<int>::iterator j = std::next((*it).begin(), 1);
-	main.insert(main.begin(), *j);
-	total--;
+	std::list<int>::iterator j;
+	if ((*it).size() == 2)
+	{
+		j = std::next((*it).begin(), 1);
+		main.insert(main.begin(), *j);
+		total--;
+	}
 	while (total > 0)
 	{
 		jn = j1 + 2 * j0;
@@ -227,6 +231,8 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 			mi = listBinarySearch((main).begin(), (main).end(), *j);
 			std::advance(j, 1);
 			mi = listBinarySearch(main.begin(), mi, *j);
+			// mi = listBinarySearch(main.begin(), (main).end(), *j);
+
 			main.insert(mi, *j);
 			total--;
 			--it;
@@ -246,6 +252,7 @@ size_t PmergeMe::setMainChainAndPendingElements(std::list<INT_LIST> &list, std::
 		if ((*it).size() == 2)
 			count++;
 	}
+	return count;
 }
 
 void PmergeMe::list_sort()
@@ -292,11 +299,8 @@ void PmergeMe::list_sort()
 		tmp.clear();
 	}
 	listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
-	// printlistlist(list_tmp);
 	_list.clear();
 	size_t pendingSize = setMainChainAndPendingElements(list_tmp, _list);
-	// printList(mainChain, "mainChain");
-	// printList(pendingElements, "pendingElements");
 	listFordJohnsonInsertSort(_list, list_tmp, pendingSize);
 }
 
