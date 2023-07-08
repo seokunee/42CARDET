@@ -6,23 +6,23 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#              #
-#    Updated: 2023/06/19 15:12:36 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/07/08 14:52:00 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.cpp Zombie.cpp ZombieHorde.cpp
 OBJS	= ${SRCS:.cpp=.o}
-CC		= c++
+CXX		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 NAME    = zombie
 
 all:		${NAME}
 
 .cpp.o:		${SRCS}
-			${CC} ${CXXFLAGS} -c $^ -o ${^:.cpp=.o}
+			${CXX} ${CXXFLAGS} -c $^ -o ${^:.cpp=.o}
 
 ${NAME}:	${OBJS}
-			$(CC) -o $(NAME) ${OBJS}
+			$(CXX) -o $(NAME) ${OBJS}
 
 clean:
 			rm -f ${OBJS}

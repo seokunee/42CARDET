@@ -6,23 +6,23 @@
 #    By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/18 19:56:05 by seokchoi          #+#    #+#              #
-#    Updated: 2023/06/26 16:17:15 by seokchoi         ###   ########.fr        #
+#    Updated: 2023/07/08 14:52:00 by seokchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.cpp PmergeMe.cpp
 OBJS	= ${SRCS:.cpp=.o}
-CC		= c++
+CXX		= c++
 CXXFLAGS= -Wall -Werror -Wextra -std=c++98
 NAME    = PmergeMe
 
 all:		${NAME}
 
 .cpp.o:		${SRCS}
-			${CC} ${CXXFLAGS} -c $^ -o ${^:.cpp=.o}
+			${CXX} ${CXXFLAGS} -c $^ -o ${^:.cpp=.o}
 
 ${NAME}:	${OBJS}
-			$(CC) -o $(NAME) ${OBJS}
+			$(CXX) -o $(NAME) ${OBJS}
 
 clean:
 			rm -f ${OBJS}
