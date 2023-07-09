@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:22:54 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/30 16:18:32 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:01:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,22 @@ public:
 
 	Array(const Array<T> &src) : _array(new T[src.size()]), _size(src.size())
 	{
-		if (this == &src)
-			return;
-		*this = src;
+		for (unsigned int i = 0; i < _size; i++)
+		{
+			_array[i] = src[i];
+		}
 	};
 
 	Array<T> &operator=(const Array<T> &src)
 	{
 		if (this == &src)
 			return (*this);
-		for (unsigned int i = 0; i < src.size(); i++)
+		delete[] _array;
+		_size = src.size();
+		_array = new T[_size];
+		for (unsigned int i = 0; i < _size; i++)
 		{
-			_array[i] = src[i];
+			_array[i] = src._array[i];
 		}
 		return (*this);
 	}
@@ -61,6 +65,13 @@ public:
 	};
 
 	T &operator[](const unsigned int n)
+	{
+		if (n >= _size)
+			throw(OutOfBound());
+		return _array[n];
+	};
+
+	const T &operator[](const unsigned int n) const
 	{
 		if (n >= _size)
 			throw(OutOfBound());
