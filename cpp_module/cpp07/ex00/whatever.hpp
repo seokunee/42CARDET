@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:22:54 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/04/15 19:07:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:42:12 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void swap(T &x, T &y)
 template <typename T>
 T &min(T &x, T &y)
 {
-	if (x < y)
+	if (x <= y)
 		return (x);
 	return (y);
 }
@@ -35,9 +35,9 @@ T &min(T &x, T &y)
 template <typename T>
 T &max(T &x, T &y)
 {
-	if (x <= y)
-		return (y);
-	return (x);
+	if (x >= y)
+		return (x);
+	return (y);
 }
 
 #endif
