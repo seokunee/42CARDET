@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:22:54 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/16 14:57:03 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:28:58 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 #include <iostream>
 
-template <typename T, typename Func>
-void iter(T *array, size_t len, Func &function)
+template <typename T>
+void iter(const T *array, const size_t len, void (*func)(const T &))
 {
 	for (size_t i = 0; i < len; i++)
 	{
-		function(array[i]);
+		func(array[i]);
 	}
 };
 

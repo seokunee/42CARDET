@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:42:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/16 15:04:10 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:29:08 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int main(void)
 	char c[6] = {'a', 'b', 'c', 'd', 'e', 'f'};
 
 	if (sizeof(array) > 0)
-		::iter(array, static_cast<size_t>(sizeof(array) / sizeof(array[0])), ::print<std::string>);
+		::iter(array, sizeof(array) / sizeof(array[0]), ::print);
 	if (sizeof(i) > 0)
-		::iter(i, static_cast<size_t>(sizeof(i) / sizeof(i[0])), ::print<int>);
+		::iter(i, sizeof(i) / sizeof(i[0]), ::print);
 	if (sizeof(d) > 0)
-		::iter(d, static_cast<size_t>(sizeof(d) / sizeof(d[0])), ::print<double>);
+		::iter(d, sizeof(d) / sizeof(d[0]), ::print);
 	if (sizeof(c) > 0)
-		::iter(c, static_cast<size_t>(sizeof(c) / sizeof(c[0])), ::print<char>);
+		::iter(c, sizeof(c) / sizeof(c[0]), ::print);
 	return 0;
 }
