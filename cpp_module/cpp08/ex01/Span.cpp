@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 17:28:42 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/21 16:29:00 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:54:26 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int Span::longestSpan()
 
 void Span::addNumberByRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
+	if (begin > end)
+		throw std::runtime_error("Range of iterator is invalid.");
 	if (std::distance(begin, end) > static_cast<int>(_span.capacity() - _span.size()))
 		throw SpanIsFull();
-	for (std::vector<int>::iterator it = begin; it != end; it++)
-		_span.push_back(*it);
+	_span.insert(_span.end(), begin, end);
 }
 
 const char *Span::SpanIsFull::what() const throw()
