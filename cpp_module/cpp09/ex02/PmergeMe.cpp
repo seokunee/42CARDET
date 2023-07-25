@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/07 01:55:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:09:11 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -569,4 +569,14 @@ void PmergeMe::start()
 	// std::cout << "deque is sorted? : " << std::is_sorted(_deque.begin(), _deque.end()) << std::endl;
 	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " ms" << std::endl;
+
+	std::list<INT_LIST> type_list;
+	start = clock();
+	con_sort(type_list, _list);
+	end = clock();
+	// printDequeUnderFive(_deque, "After");
+	// printDeque(_deque, "After");
+	// std::cout << "deque is sorted? : " << std::is_sorted(_deque.begin(), _deque.end()) << std::endl;
+	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::list : " << elapsedTime << " ms" << std::endl;
 }
