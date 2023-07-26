@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/26 19:37:06 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:57:40 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ private:
 	}
 
 	template <typename T>
-	void conFordJohnsonInsertSort(typename T::value_type &main, T &pending, size_t total) // 리스트, 더블리스트
+	void conFordJohnsonInsertSort(typename T::value_type &main, T &pending, size_t total)
 	{
 		size_t j0 = 1;
 		size_t j1 = 1;
@@ -212,7 +212,6 @@ private:
 				mi = conBinarySearch(main.begin(), main.end(), *j);
 				std::advance(j, 1);
 				mi = conBinarySearch(main.begin(), mi, *j);
-
 				main.insert(mi, *j);
 				total--;
 				--it;
