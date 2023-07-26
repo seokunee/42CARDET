@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/25 21:36:41 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:37:06 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,6 @@ private:
 	std::deque<int> _deque;
 	void setArray(int ac, char **av);
 	void checkArgument(std::string str);
-
-	// list
-	void printList(std::list<int> &list, std::string when);
-	void printListUnderFive(std::list<int> &list, std::string when);
-	void printlistlist(std::list<INT_LIST> &list);
-	void listMerge(std::list<INT_LIST> &list, int left, int mid, int right);
-	void listFordJohnsonMergeSort(std::list<INT_LIST> &list, int left, int right);
-	void listFordJohnsonInsertSort(std::list<INT_LIST> &list);
-	size_t setListMainChainAndPendingElements(std::list<INT_LIST> &list, std::list<int> &mainChain);
-	void listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIST> &pending, size_t total);
-	std::list<int>::iterator listBinarySearch(std::list<int>::iterator first, std::list<int>::iterator last, int value);
-
-	// deque
-	void printDeque(std::deque<int> &deque, std::string when);
-	void printDequeUnderFive(std::deque<int> &deque, std::string when);
-	void printdequedeque(std::deque<INT_DEQUE> &deque);
-	void dequeMerge(std::deque<INT_DEQUE> &deque, int left, int mid, int right);
-	void dequeFordJohnsonMergeSort(std::deque<INT_DEQUE> &deque, int left, int right);
-	void dequeFordJohnsonInsertSort(std::deque<INT_DEQUE> &deque);
-	void dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_DEQUE> &pending, size_t total);
-	size_t setDequeMainChainAndPendingElements(std::deque<INT_DEQUE> &deque, std::deque<int> &mainChain);
-	std::deque<int>::iterator dequeBinarySearch(std::deque<int>::iterator first, std::deque<int>::iterator last, int value);
-
 	PmergeMe();
 
 	template <typename T>
@@ -186,12 +163,12 @@ private:
 	}
 
 	template <typename T>
-	typename T::iterator conBinarySearch(typename T::iterator first, typename T::iterator last, int value)
+	T conBinarySearch(T first, T last, int value)
 	{
 		if (first == last)
 			return last;
 
-		typename T::iterator mid = std::next(first, std::distance(first, last) / 2);
+		T mid = std::next(first, std::distance(first, last) / 2);
 
 		if (*mid == value)
 			return mid;
@@ -207,7 +184,6 @@ private:
 		size_t j0 = 1;
 		size_t j1 = 1;
 		size_t jn = 3;
-		// typename T::iterator i;
 		typename T::iterator it = pending.begin();
 		typename T::value_type::iterator mi;
 		size_t pendingLen = pending.size();
@@ -233,10 +209,9 @@ private:
 					continue;
 				}
 				j = (*it).begin();
-				mi = conBinarySearch((main).begin(), (main).end(), *j);
+				mi = conBinarySearch(main.begin(), main.end(), *j);
 				std::advance(j, 1);
 				mi = conBinarySearch(main.begin(), mi, *j);
-				// mi = conBinarySearch(main.begin(), (main).end(), *j);
 
 				main.insert(mi, *j);
 				total--;
@@ -248,7 +223,7 @@ private:
 	}
 
 	template <typename T>
-	size_t setConMainChainAndPendingElements(T &con, typename T::value_type &mainChain) // 더블리스트 , 리스트
+	size_t setConMainChainAndPendingElements(T &con, typename T::value_type &mainChain)
 	{
 		size_t count = 0;
 		for (typename T::iterator it = con.begin(); it != con.end(); ++it)
@@ -261,20 +236,13 @@ private:
 		return count;
 	}
 
-	template <typename T, typename U>
-	void con_sort(T &con_type, U &con_value)
+	template <typename T>
+	void con_sort(T &con_type, typename T::value_type &con_value)
 	{
-		typedef typename T::value_type ValueType;
-		// typedef typename T::iterator IteratorType;
-
-		// T = std::list<std::list<int>>
-		// T::value_type = std::list<int> = ValueType
-		// tmp 의 타입 = std::list<int>
-		// T::iterator
 		(void)con_type;
 		size_t first, second;
-		U tmp;
-		typename U::iterator it = con_value.begin();
+		typename T::value_type tmp;
+		typename T::value_type::iterator it = con_value.begin();
 		T con_tmp;
 
 		if (con_value.size() == 1)
