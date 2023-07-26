@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 20:29:59 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:04:49 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,7 @@ bool BitcoinExchange::checkDate(std::string date)
 
 	std::stringstream ss(date);
 	if (std::getline(ss, str_year, '-'))
-	{
 		checkValue(str_year, year);
-		if (year < 2009 || year > 2022)
-			return false;
-	}
 	if (std::getline(ss, str_month, '-'))
 	{
 		checkValue(str_month, month);
