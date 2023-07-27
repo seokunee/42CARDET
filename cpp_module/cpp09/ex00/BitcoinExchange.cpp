@@ -6,14 +6,16 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/27 15:06:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:22:14 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <limits>
 
-BitcoinExchange::BitcoinExchange() {}
+BitcoinExchange::BitcoinExchange()
+{
+}
 BitcoinExchange::~BitcoinExchange() {}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
 {
@@ -73,31 +75,67 @@ std::string BitcoinExchange::trim(const std::string &str)
 	return str.substr(first, (last - first + 1));
 }
 
-void BitcoinExchange::checkDataCsvKey(std::string &key, std::string &prev_year, std::string &prev_mon, std::string &prev_date)
+void BitcoinExchange::checkDataCsvKey(std::string &key, int &prev_year, int &prev_mon, int &prev_date)
 {
 	if (!checkDate(key))
 		throw std::runtime_error("Error : Invalid csv file.");
 	std::stringstream ss(key);
 	std::string year, mon, date;
+	int int_year, int_mon, int_date;
+	std::string temp;
 
-	if (std::getline(ss, year, '-'))
-		key = temp;
-	if (std::getline(ss, mon, '-'))
+	if (std::getline(ss, temp, '-'))
+		year = temp;
+	if (std::getline(ss, temp, '-'))
+		mon = temp;
+	if (std::getline(ss, temp, '-'))
+		date = temp;
+	if (ss.fail() || !ss.eof())
+		throw std::runtime_error("Error : Invalid csv file.");
+	if (checkIntValue(year, int_year) != 0)
+		throw std::runtime_error("Error : Invalid csv file.");
+	if (checkIntValue(mon, int_mon) != 0)
+		throw std::runtime_error("Error : Invalid csv file.");
+	if (checkIntValue(date, int_date) != 0)
+		throw std::runtime_error("Error : Invalid csv file.");
+	// std::cout << prev_year << ", " << int_year << " | " << prev_date << ", " << int_date << " | " << prev_mon << " , " << int_mon << std::endl;
+	if (int_year >= prev_year)
+	{
+		if (int_year == prev_year)
+		{
+			if (int_mon >= prev_mon)
+			{
+				if (int_mon == prev_mon)
+				{
+					if (int_date <= prev_date)
+						throw std::runtime_error("Error : Invalid csv file.");
+				}
+			}
+			else
+				throw std::runtime_error("Error : Invalid csv file.");
+		}
+	}
+	else
+		throw std::runtime_error("Error : Invalid csv file.");
+	prev_year = int_year;
+	prev_mon = int_mon;
+	prev_date = int_date;
 }
 
-void BitcoinExchange::csvSplit(std::map<std::string, float> &dataBase, std::string &line, char delimiter)
+void BitcoinExchange::csvSplit(std::map<std::string, float> &dataBase, std::string &line, int &prev_year, int &prev_mon, int &prev_date)
 {
 	std::stringstream ss(line);
 	std::string temp;
 	std::string key;
-	std::string prev_year, prev_mon, prev_date;
 	float value = -1;
 
-	if (std::getline(ss, temp, delimiter))
+	if (std::getline(ss, temp, ','))
 		key = temp;
-	if (std::getline(ss, temp, delimiter))
+	if (std::getline(ss, temp, ','))
 		checkValue(temp, value);
 	if (ss.fail() || !ss.eof())
+		throw std::runtime_error("Error : Invalid csv file.");
+	if (value < 0)
 		throw std::runtime_error("Error : Invalid csv file.");
 	checkDataCsvKey(key, prev_year, prev_mon, prev_date);
 	dataBase[key] = value;
@@ -106,12 +144,20 @@ void BitcoinExchange::csvSplit(std::map<std::string, float> &dataBase, std::stri
 void BitcoinExchange::readFile(std::map<std::string, float> &dataBase)
 {
 	std::ifstream file("data.csv");
+	int prev_year = -1;
+	int prev_mon = -1;
+	int prev_date = -1;
 
 	if (file.is_open())
 	{
 		std::string line;
+		if (std::getline(file, line))
+		{
+			if (line != "date,exchange_rate")
+				throw std::runtime_error("Error : Invalid csv file.");
+		}
 		while (std::getline(file, line))
-			csvSplit(dataBase, line, ',');
+			csvSplit(dataBase, line, prev_year, prev_mon, prev_date);
 		file.close();
 	}
 	else
