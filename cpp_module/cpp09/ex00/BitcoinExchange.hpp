@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:57 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/23 19:11:59 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:48:34 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ private:
 	bool inputSplit(std::string &date, std::string &value, std::string &line, char delimiter);
 	bool checkDate(std::string date);
 	void checkInputFile(std::map<std::string, float> &dataBase, char *inputFileName);
+	void checkDataCsvKey(std::string &key, std::string &prev_year, std::string &prev_mon, std::string &prev_date);
+	FloatCheckType checkIntValue(std::string &value, int &i_value);
 
 public:
 	BitcoinExchange();

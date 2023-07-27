@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/26 20:04:49 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:06:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,18 @@ bool BitcoinExchange::checkFloatPoint(float f)
 	return true;
 }
 
+FloatCheckType BitcoinExchange::checkIntValue(std::string &value, int &i_value)
+{
+	std::stringstream ss(value);
+	ss >> i_value;
+
+	if (ss.fail() || !ss.eof())
+		return BADINPUT;
+	else if (i_value < 0)
+		return MINUS;
+	return PLUS;
+}
+
 FloatCheckType BitcoinExchange::checkValue(std::string &value, float &f_value)
 {
 	std::stringstream ss(value);
@@ -50,17 +62,44 @@ FloatCheckType BitcoinExchange::checkValue(std::string &value, float &f_value)
 	return PLUS;
 }
 
+std::string BitcoinExchange::trim(const std::string &str)
+{
+	std::size_t first = str.find_first_not_of(' ');
+	if (first == std::string::npos)
+	{
+		return "";
+	}
+	std::size_t last = str.find_last_not_of(' ');
+	return str.substr(first, (last - first + 1));
+}
+
+void BitcoinExchange::checkDataCsvKey(std::string &key, std::string &prev_year, std::string &prev_mon, std::string &prev_date)
+{
+	if (!checkDate(key))
+		throw std::runtime_error("Error : Invalid csv file.");
+	std::stringstream ss(key);
+	std::string year, mon, date;
+
+	if (std::getline(ss, year, '-'))
+		key = temp;
+	if (std::getline(ss, mon, '-'))
+}
+
 void BitcoinExchange::csvSplit(std::map<std::string, float> &dataBase, std::string &line, char delimiter)
 {
 	std::stringstream ss(line);
 	std::string temp;
 	std::string key;
+	std::string prev_year, prev_mon, prev_date;
 	float value = -1;
 
 	if (std::getline(ss, temp, delimiter))
 		key = temp;
 	if (std::getline(ss, temp, delimiter))
 		checkValue(temp, value);
+	if (ss.fail() || !ss.eof())
+		throw std::runtime_error("Error : Invalid csv file.");
+	checkDataCsvKey(key, prev_year, prev_mon, prev_date);
 	dataBase[key] = value;
 }
 
@@ -79,17 +118,6 @@ void BitcoinExchange::readFile(std::map<std::string, float> &dataBase)
 		throw std::runtime_error("Error: could not open file.");
 }
 
-std::string BitcoinExchange::trim(const std::string &str)
-{
-	std::size_t first = str.find_first_not_of(' ');
-	if (first == std::string::npos)
-	{
-		return "";
-	}
-	std::size_t last = str.find_last_not_of(' ');
-	return str.substr(first, (last - first + 1));
-}
-
 bool BitcoinExchange::inputSplit(std::string &date, std::string &value, std::string &line, char delimiter)
 {
 	std::stringstream ss(line);
@@ -106,21 +134,26 @@ bool BitcoinExchange::inputSplit(std::string &date, std::string &value, std::str
 
 bool BitcoinExchange::checkDate(std::string date)
 {
-	float year, month, day;
+	int year, month, day;
 	std::string str_year, str_month, str_day;
 
 	std::stringstream ss(date);
 	if (std::getline(ss, str_year, '-'))
-		checkValue(str_year, year);
+	{
+		if (checkIntValue(str_year, year) != 0)
+			return false;
+	}
 	if (std::getline(ss, str_month, '-'))
 	{
-		checkValue(str_month, month);
+		if (checkIntValue(str_month, month) != 0)
+			return false;
 		if (month < 1 || month > 12)
 			return false;
 	}
 	if (std::getline(ss, str_day, '-'))
 	{
-		checkValue(str_day, day);
+		if (checkIntValue(str_day, day) != 0)
+			return false;
 		if (month == 4 || month == 6 || month == 9 || month == 11)
 		{
 			if (day < 1 || day > 30)
