@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:55 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/27 19:09:12 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:23:04 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,16 @@ private:
 		if (first == last)
 			return last;
 
-		T mid = std::next(first, std::distance(first, last) / 2);
+		T mid = first;
+		std::advance(mid, std::distance(first, last) / 2);
 
 		if (*mid == value)
 			return mid;
 		else if (*mid < value)
-			return conBinarySearch(std::next(mid), last, value);
+		{
+			std::advance(mid, 1);
+			return conBinarySearch(mid, last, value);
+		}
 		else
 			return conBinarySearch(first, mid, value);
 	}
@@ -190,7 +194,8 @@ private:
 		typename T::value_type::iterator j;
 		if ((*it).size() == 2)
 		{
-			j = std::next((*it).begin(), 1);
+			j = (*it).begin();
+			std::advance(j, 1);
 			main.insert(main.begin(), *j);
 			total--;
 		}
@@ -201,7 +206,9 @@ private:
 				jn = pendingLen;
 			it = pending.begin();
 			std::advance(it, jn - 1);
-			while (it != std::next(pending.begin(), j1 - 1))
+			typename T::iterator cmp = pending.begin();
+			std::advance(cmp, j1 - 1);
+			while (it != cmp)
 			{
 				if ((*it).size() != 2)
 				{
