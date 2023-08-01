@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/08/01 16:44:05 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:06:13 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void PmergeMe::printListUnderFive(std::list<int> &list, std::string when)
 {
 	bool stop = false;
 	int count = 0;
-	std::cout << when << ":" << std::setw(10 - when.length());
+	if (when == "Before")
+		std::cout << when << "  : ";
+	else if (when == "After")
+		std::cout << when << "   : ";
 	if (list.size() > 5)
 		stop = true;
 	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
@@ -596,7 +599,7 @@ void PmergeMe::start()
 	clock_t end = clock();
 	// printList(_list, "After");
 	printListUnderFive(_list, "After");
-	std::cout << "list is sorted? : " << std::is_sorted(_list.begin(), _list.end()) << std::endl;
+	// std::cout << "list is sorted? : " << std::is_sorted(_list.begin(), _list.end()) << std::endl;
 	double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 	std::cout << "Time to process a range of " << _list.size() << "  elements with std::list : " << elapsedTime << " ms" << std::endl;
 
@@ -607,7 +610,7 @@ void PmergeMe::start()
 	end = clock();
 	// printDequeUnderFive(_deque, "After");
 	// printDeque(_deque, "After");
-	std::cout << "deque is sorted? : " << std::is_sorted(_deque.begin(), _deque.end()) << std::endl;
+	// std::cout << "deque is sorted? : " << std::is_sorted(_deque.begin(), _deque.end()) << std::endl;
 	elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 	std::cout << "Time to process a range of " << _deque.size() << "  elements with std::deque : " << elapsedTime << " ms" << std::endl;
 }
