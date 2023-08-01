@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/28 19:30:21 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:35:21 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void PmergeMe::checkArgument(std::string str)
 {
 	size_t j = 0;
 
-	while (str[j] == '+' || str[j] == '-')
-		j++;
 	for (size_t i = j; i < str.length(); i++)
 	{
-		if (!(std::isdigit(str[i])) && str[i] != '+')
+		if (!(std::isdigit(str[i])))
 			throw std::runtime_error("Error");
 	}
 }
@@ -208,7 +206,7 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 	size_t jn = 3;
 	std::list<int>::iterator i;
 	std::list<INT_LIST>::iterator it = pending.begin();
-		std::list<INT_LIST>::iterator cmp;
+	std::list<INT_LIST>::iterator cmp;
 
 	std::list<int>::iterator mi;
 	size_t pendingLen = pending.size();
