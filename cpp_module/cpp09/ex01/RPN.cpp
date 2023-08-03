@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:36:34 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/06/24 22:16:15 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:00:20 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ void RPN::calculator(std::string &str)
 	std::string::iterator it;
 	int first, second, result;
 	char oper;
-
+	bool checkExistNum = false;
+	for (it = str.begin(); it != str.end(); ++it)
+	{
+		if (*it >= '0' && *it <= '9')
+			checkExistNum = true;
+	}
+	if (!checkExistNum)
+		throw std::runtime_error("Error");
 	for (it = str.begin(); it != str.end(); ++it)
 	{
 		if ((*it >= '0' && *it <= '9') || *it == ' ')
@@ -65,7 +72,13 @@ void RPN::calculator(std::string &str)
 			if (oper == '*')
 				result = second * first;
 			else if (oper == '/')
+			{
+				if (first == 0)
+				{
+					throw std::runtime_error("Error");
+				}
 				result = second / first;
+			}
 			else if (oper == '+')
 				result = second + first;
 			else if (oper == '-')
@@ -86,6 +99,8 @@ void RPN::run(std::string polishMath)
 {
 	try
 	{
+		if (polishMath.empty())
+			throw std::runtime_error("Error");
 		calculator(polishMath);
 	}
 	catch (std::exception &err)

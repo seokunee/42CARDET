@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 03:14:10 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/14 01:11:33 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/07/23 18:10:14 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ public:
 	{
 		*this = src;
 	}
+
 	MutantStack &operator=(const MutantStack &src)
 	{
-		if (this != &src)
-			*this = src;
+		if (this == &src)
+			return *this;
+		this->c = src.c;
 		return *this;
 	}
 

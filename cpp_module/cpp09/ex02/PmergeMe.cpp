@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:56:45 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/07/07 01:55:07 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:06:13 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void PmergeMe::checkArgument(std::string str)
 {
 	size_t j = 0;
 
-	while (str[j] == '+' || str[j] == '-')
-		j++;
 	for (size_t i = j; i < str.length(); i++)
 	{
-		if (!(std::isdigit(str[i])) && str[i] != '+')
+		if (!(std::isdigit(str[i])))
 			throw std::runtime_error("Error");
 	}
 }
@@ -71,7 +69,10 @@ void PmergeMe::printListUnderFive(std::list<int> &list, std::string when)
 {
 	bool stop = false;
 	int count = 0;
-	std::cout << when << ":" << std::setw(10 - when.length());
+	if (when == "Before")
+		std::cout << when << "  : ";
+	else if (when == "After")
+		std::cout << when << "   : ";
 	if (list.size() > 5)
 		stop = true;
 	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
@@ -187,12 +188,16 @@ std::list<int>::iterator PmergeMe::listBinarySearch(std::list<int>::iterator fir
 	if (first == last)
 		return last;
 
-	std::list<int>::iterator mid = std::next(first, std::distance(first, last) / 2);
+	std::list<int>::iterator mid = first;
+	std::advance(mid, std::distance(first, last) / 2);
 
 	if (*mid == value)
 		return mid;
 	else if (*mid < value)
-		return listBinarySearch(std::next(mid), last, value);
+	{
+		std::advance(mid, 1);
+		return listBinarySearch(mid, last, value);
+	}
 	else
 		return listBinarySearch(first, mid, value);
 }
@@ -204,15 +209,16 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 	size_t jn = 3;
 	std::list<int>::iterator i;
 	std::list<INT_LIST>::iterator it = pending.begin();
+	std::list<INT_LIST>::iterator cmp;
+
 	std::list<int>::iterator mi;
-	size_t pendingLen = pending.size();
+	size_t pendingLen = total;
 	std::list<int>::iterator j;
-	if ((*it).size() == 2)
-	{
-		j = std::next((*it).begin(), 1);
-		main.insert(main.begin(), *j);
-		total--;
-	}
+
+	j = (*it).begin();
+	std::advance(j, 1);
+	main.insert(main.begin(), *j);
+	total--;
 	while (total > 0)
 	{
 		jn = j1 + 2 * j0;
@@ -220,25 +226,29 @@ void PmergeMe::listFordJohnsonInsertSort(std::list<int> &main, std::list<INT_LIS
 			jn = pendingLen;
 		it = pending.begin();
 		std::advance(it, jn - 1);
-		while (it != std::next(pending.begin(), j1 - 1))
+		cmp = pending.begin();
+		std::advance(cmp, j1 - 1);
+		while (it != cmp)
 		{
-			if ((*it).size() != 2)
-			{
-				--it;
-				continue;
-			}
 			j = (*it).begin();
 			mi = listBinarySearch((main).begin(), (main).end(), *j);
 			std::advance(j, 1);
 			mi = listBinarySearch(main.begin(), mi, *j);
-			// mi = listBinarySearch(main.begin(), (main).end(), *j);
-
 			main.insert(mi, *j);
 			total--;
 			--it;
 		}
 		j0 = j1;
 		j1 = jn;
+	}
+	cmp = pending.begin();
+	std::advance(cmp, pending.size() - 1);
+	if (*(cmp->begin()) == -1)
+	{
+		j = cmp->begin();
+		std::advance(j, 1);
+		mi = listBinarySearch((main).begin(), (main).end(), *j);
+		main.insert(mi, *j);
 	}
 }
 
@@ -248,9 +258,11 @@ size_t PmergeMe::setListMainChainAndPendingElements(std::list<INT_LIST> &list, s
 	for (std::list<INT_LIST>::iterator it = list.begin(); it != list.end(); ++it)
 	{
 		std::list<int>::iterator i = (*it).begin();
-		mainChain.push_back(*i);
-		if ((*it).size() == 2)
+		if (*i != -1)
+		{
+			mainChain.push_back(*i);
 			count++;
+		}
 	}
 	return count;
 }
@@ -261,6 +273,7 @@ void PmergeMe::list_sort()
 	std::list<int> tmp;
 	std::list<int>::iterator it = _list.begin();
 	std::list<INT_LIST> list_tmp;
+	std::list<INT_LIST>::iterator iit;
 	if (_list.size() == 1)
 		return;
 	if (_list.size() == 2)
@@ -294,11 +307,20 @@ void PmergeMe::list_sort()
 			i++;
 		}
 		else
+		{
+			tmp.push_back(-1);
 			tmp.push_back(*it++);
+		}
 		list_tmp.push_back(tmp);
 		tmp.clear();
 	}
-	listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
+
+	iit = list_tmp.begin();
+	std::advance(iit, list_tmp.size() - 1);
+	if (*(iit->begin()) != -1 || list_tmp.size() == 1)
+		listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 1);
+	else
+		listFordJohnsonMergeSort(list_tmp, 0, list_tmp.size() - 2);
 	_list.clear();
 	size_t pendingSize = setListMainChainAndPendingElements(list_tmp, _list);
 	listFordJohnsonInsertSort(_list, list_tmp, pendingSize);
@@ -430,12 +452,16 @@ std::deque<int>::iterator PmergeMe::dequeBinarySearch(std::deque<int>::iterator 
 	if (first == last)
 		return last;
 
-	std::deque<int>::iterator mid = std::next(first, std::distance(first, last) / 2);
+	std::deque<int>::iterator mid = first;
+	std::advance(mid, std::distance(first, last) / 2);
 
 	if (*mid == value)
 		return mid;
 	else if (*mid < value)
-		return dequeBinarySearch(std::next(mid), last, value);
+	{
+		std::advance(mid, 1);
+		return dequeBinarySearch(mid, last, value);
+	}
 	else
 		return dequeBinarySearch(first, mid, value);
 }
@@ -447,15 +473,15 @@ void PmergeMe::dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_
 	size_t jn = 3;
 	std::deque<int>::iterator i;
 	std::deque<INT_DEQUE>::iterator it = pending.begin();
+	std::deque<INT_DEQUE>::iterator cmp;
 	std::deque<int>::iterator mi;
-	size_t pendingLen = pending.size();
+	size_t pendingLen = total;
 	std::deque<int>::iterator j;
-	if ((*it).size() == 2)
-	{
-		j = std::next((*it).begin(), 1);
-		main.insert(main.begin(), *j);
-		total--;
-	}
+
+	j = (*it).begin();
+	std::advance(j, 1);
+	main.insert(main.begin(), *j);
+	total--;
 	while (total > 0)
 	{
 		jn = j1 + 2 * j0;
@@ -463,13 +489,10 @@ void PmergeMe::dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_
 			jn = pendingLen;
 		it = pending.begin();
 		std::advance(it, jn - 1);
-		while (it != std::next(pending.begin(), j1 - 1))
+		cmp = pending.begin();
+		std::advance(cmp, j1 - 1);
+		while (it != cmp)
 		{
-			if ((*it).size() != 2)
-			{
-				--it;
-				continue;
-			}
 			j = (*it).begin();
 			mi = dequeBinarySearch((main).begin(), (main).end(), *j);
 			std::advance(j, 1);
@@ -482,6 +505,15 @@ void PmergeMe::dequeFordJohnsonInsertSort(std::deque<int> &main, std::deque<INT_
 		j0 = j1;
 		j1 = jn;
 	}
+	cmp = pending.begin();
+	std::advance(cmp, pending.size() - 1);
+	if (*(cmp->begin()) == -1)
+	{
+		j = cmp->begin();
+		std::advance(j, 1);
+		mi = dequeBinarySearch((main).begin(), (main).end(), *j);
+		main.insert(mi, *j);
+	}
 }
 
 size_t PmergeMe::setDequeMainChainAndPendingElements(std::deque<INT_DEQUE> &deque, std::deque<int> &mainChain)
@@ -490,9 +522,11 @@ size_t PmergeMe::setDequeMainChainAndPendingElements(std::deque<INT_DEQUE> &dequ
 	for (std::deque<INT_DEQUE>::iterator it = deque.begin(); it != deque.end(); ++it)
 	{
 		std::deque<int>::iterator i = (*it).begin();
-		mainChain.push_back(*i);
-		if ((*it).size() == 2)
+		if (*i != -1)
+		{
+			mainChain.push_back(*i);
 			count++;
+		}
 	}
 	return count;
 }
@@ -503,6 +537,7 @@ void PmergeMe::deque_sort()
 	std::deque<int> tmp;
 	std::deque<int>::iterator it = _deque.begin();
 	std::deque<INT_DEQUE> deque_tmp;
+	std::deque<INT_DEQUE>::iterator iit;
 	if (_deque.size() == 1)
 		return;
 	if (_deque.size() == 2)
@@ -536,11 +571,20 @@ void PmergeMe::deque_sort()
 			i++;
 		}
 		else
+		{
+			tmp.push_back(-1);
 			tmp.push_back(*it++);
+		}
 		deque_tmp.push_back(tmp);
 		tmp.clear();
 	}
-	dequeFordJohnsonMergeSort(deque_tmp, 0, deque_tmp.size() - 1);
+
+	iit = deque_tmp.begin();
+	std::advance(iit, deque_tmp.size() - 1);
+	if (*(iit->begin()) != -1 || deque_tmp.size() == 1)
+		dequeFordJohnsonMergeSort(deque_tmp, 0, deque_tmp.size() - 1);
+	else
+		dequeFordJohnsonMergeSort(deque_tmp, 0, deque_tmp.size() - 2);
 	_deque.clear();
 	size_t pendingSize = setDequeMainChainAndPendingElements(deque_tmp, _deque);
 	dequeFordJohnsonInsertSort(_deque, deque_tmp, pendingSize);
