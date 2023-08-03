@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/09 22:02:40 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:11:50 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class HumanB {
 		HumanB(void);
 		~HumanB(void);
 		HumanB(std::string name);
-		void	setWeapon(Weapon *weapon);		
+		void	setWeapon(Weapon &weapon);		
 		void	attack(void);
 };
 

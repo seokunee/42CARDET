@@ -6,7 +6,7 @@
 /*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:36:16 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/09 22:06:28 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:10:05 by seokchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	HumanB::attack(void){
 	std::cout << name_ << " attacks with his " << weapon_->getType() << std::endl;
 }
 
-void	HumanB::setWeapon(Weapon *weapon){
-	weapon_ = weapon;
+void	HumanB::setWeapon(Weapon &weapon){
+	weapon_ = &weapon;
 }
