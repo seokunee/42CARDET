@@ -2,6 +2,8 @@
 #define ATARGET_HPP
 #include <iostream>
 
+class ASpell;
+
 class ATarget
 {
 private:
@@ -10,13 +12,17 @@ private:
 public:
 	ATarget();
 	virtual ~ATarget();
-	ATarget(const std::string &name, const std::string &effects);
+	ATarget(const std::string &type);
 	ATarget(const ATarget &src);
 	ATarget &operator=(const ATarget &src);
 
 	const std::string &getType() const;
 
 	virtual ATarget *clone() const = 0;
+
+	void getHitBySpell(const ASpell &aspell);
 };
+
+#include "ASpell.hpp"
 
 #endif

@@ -2,6 +2,7 @@
 #define ASPELL_HPP
 #include <iostream>
 
+class ATarget;
 class ASpell
 {
 private:
@@ -19,6 +20,10 @@ public:
 	const std::string &getEffects() const;
 
 	virtual ASpell *clone() const = 0;
+
+	void launch(const ATarget &atarget);
 };
+
+#include "ATarget.hpp"
 
 #endif
