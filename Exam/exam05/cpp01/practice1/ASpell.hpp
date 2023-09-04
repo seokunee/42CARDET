@@ -11,6 +11,14 @@ private:
 public:
 	ASpell();
 	virtual ~ASpell();
-}
+	ASpell(const std::string &name, const std::string &effects);
+	ASpell(const ASpell &src);
+	ASpell &operator=(const ASpell &src);
+
+	const std::string &getName() const;
+	const std::string &getEffects() const;
+
+	virtual ASpell *clone() const = 0;
+};
 
 #endif
