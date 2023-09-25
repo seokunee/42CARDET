@@ -22,6 +22,10 @@ public:
 
 	void setTitle(const std::string &title);
 	void introduce() const;
+
+	void learnSpell(ASpell *aspell);
+	void forgetSpell(std::string name);
+	void launchSpell(std::string name, const ATarget &atarget);
 };
 
 #endif
